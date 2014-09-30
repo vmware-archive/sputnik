@@ -8,8 +8,10 @@ html {
         meta(name: "viewport", content: "width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 
         script(src: "/components/angular/angular.js") {}
+        script(src: "/components/angular-resource/angular-resource.js") {}
         script(src: "/js/base.js") {}
         script(src: "/js/home/homeController.js") {}
+        script(src: "/js/messages/messageRepository.js") {}
         link(rel: "stylesheet", href: "/css/base.css")
     }
 
@@ -19,10 +21,26 @@ html {
             yield message
         }
 
-        div("ng-app": "HomeApp", "ng-controller": "HomeController") {
-            input("ng-model": "userInput")
-            span {
-                yield "{{ userInput }}"
+        div("ng-app": "homeApp", "ng-controller": "homeController") {
+            form("ng-submit": "createMessage()") {
+                input("ng-model": "newMessageTitle")
+                input("ng-model": "newMessageContent")
+                input("type": "Submit", "value": "Save")
+            }
+
+            table {
+                thead {
+                    tr {
+                        th {yield "title"}
+                        th {yield "content"}
+                    }
+                }
+                tbody {
+                    tr("ng-repeat": "message in messages") {
+                        td { yield "{{message.title}}" }
+                        td { yield "{{message.content}}" }
+                    }
+                }
             }
         }
 
