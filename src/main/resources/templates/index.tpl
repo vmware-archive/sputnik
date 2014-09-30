@@ -11,7 +11,9 @@ html {
         script(src: "/components/angular-resource/angular-resource.js") {}
         script(src: "/js/base.js") {}
         script(src: "/js/home/homeController.js") {}
-        script(src: "/js/messages/messageRepository.js") {}
+        script(src: "/js/home/messageRepository.js") {}
+        script(src: "/js/home/messageDirective.js") {}
+        script(src: "/js/home/messageController.js") {}
         link(rel: "stylesheet", href: "/css/base.css")
     }
 
@@ -33,13 +35,11 @@ html {
                     tr {
                         th {yield "title"}
                         th {yield "content"}
+                        th {}
                     }
                 }
                 tbody {
-                    tr("ng-repeat": "message in messages") {
-                        td { yield "{{message.title}}" }
-                        td { yield "{{message.content}}" }
-                    }
+                    tr("ng-repeat": "message in messages", "sputnik-message": "message", "callback": "removeMessage", "index": "\$index")
                 }
             }
         }

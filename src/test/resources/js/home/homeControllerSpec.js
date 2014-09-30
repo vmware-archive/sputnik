@@ -43,5 +43,15 @@ describe('homeController', function () {
 
             expect($scope.messages).toEqual(["message"]);
         });
-    })
+    });
+
+    describe("removeMessage", function () {
+        it('removes a message from the view', function () {
+            $scope.messages = ["hello", "goodbye", "so long"];
+
+            $scope.removeMessage(1);
+
+            expect($scope.messages).toEqual(["hello", "so long"]);
+        });
+    });
 });

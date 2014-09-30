@@ -1,3 +1,4 @@
 angular.module("homeServices", ['ngResource']);
 angular.module("homeControllers", ['homeServices']);
-angular.module("homeApp", ['homeControllers']);
+angular.module("homeDirectives", ['homeControllers']);
+angular.module("homeApp", ['homeControllers', 'homeDirectives']);

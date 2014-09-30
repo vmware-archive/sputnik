@@ -12,5 +12,9 @@ angular.module("homeControllers").controller("homeController", ['$scope', 'messa
         }).$promise.then(function (result) {
             $scope.messages.push(result);
         })
+    };
+
+    $scope.removeMessage = function (index) {
+        $scope.messages.splice(index, 1)
     }
 }]);
