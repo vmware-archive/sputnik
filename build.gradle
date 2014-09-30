@@ -58,6 +58,10 @@ dependencies {
     compile "org.codehaus.groovy:groovy:$groovyVersion"
     compile "org.codehaus.groovy:groovy-templates:$groovyVersion"
 
+    // Persistence
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile("com.h2database:h2")
+
     // Logging
     compile "org.slf4j:slf4j-api:1.7.7"
 
