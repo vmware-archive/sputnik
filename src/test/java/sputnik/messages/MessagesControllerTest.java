@@ -15,9 +15,11 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -68,6 +70,17 @@ public class MessagesControllerTest {
                 .andExpect(content().string("{\"id\":0,\"title\":\"hello\",\"content\":\"world\"}"));
 
         verify(messageRepository).save(messageCaptor.capture());
+    }
+
+    @Test
+    public void testDeleteMessage() throws Exception {
+        doNothing().when(messageRepository).delete(3L);
+
+        mockMvc.perform(delete("/messages/3"))
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(content().string(""));
+
+        verify(messageRepository).delete(3L);
     }
 
     @Test
