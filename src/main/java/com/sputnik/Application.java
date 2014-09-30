@@ -5,9 +5,9 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.*;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-@EnableWebMvc
-@ComponentScan(basePackages = { "com.sputnik" })
+@Configuration
 @EnableAutoConfiguration
+@ComponentScan
 public class Application {
 
     public static void main(String[] args) {
