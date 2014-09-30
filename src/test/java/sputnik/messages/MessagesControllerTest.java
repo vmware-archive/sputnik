@@ -84,14 +84,14 @@ public class MessagesControllerTest {
     }
 
     @Test
-    public void testListMessagesByTitle() throws Exception {
-        List<Message> someMessages = asList(new Message("hello", "world"));
+    public void getMessage() throws Exception {
+        Message message = new Message("hello", "world");
 
-        doReturn(someMessages).when(messageRepository).findByTitle("someTitle");
+        doReturn(message).when(messageRepository).findOne(5L);
 
-        mockMvc.perform(get("/messages/someTitle").accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/messages/5").accept(MediaType.APPLICATION_JSON))
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
-                .andExpect(content().string("[{\"id\":0,\"title\":\"hello\",\"content\":\"world\"}]"));
+                .andExpect(content().string("{\"id\":0,\"title\":\"hello\",\"content\":\"world\"}"));
 
     }
 }

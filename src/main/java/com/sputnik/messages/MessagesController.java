@@ -26,21 +26,21 @@ public class MessagesController {
         return savedMessage;
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/messages/{title}")
+    @RequestMapping(method = RequestMethod.GET, value = "/messages/{id}")
     public @ResponseBody
-    List<Message> getMessage(@PathVariable String title){
-        return messageRepository.findByTitle(title);
+    Message getMessage(@PathVariable Long id){
+        return messageRepository.findOne(id);
     }
 
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     @RequestMapping(method = RequestMethod.DELETE, value = "/messages/{id}")
-    public void getMessage(@PathVariable Long id){
+    public void deleteMessage(@PathVariable Long id){
         messageRepository.delete(id);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/messages")
     public @ResponseBody
-    Iterable<Message> getMessage(Model model){
+    Iterable<Message> getAllMessages(){
         return messageRepository.findAll();
     }
 }
