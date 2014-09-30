@@ -9,6 +9,7 @@ html {
 
         script(src: "/components/angular/angular.js") {}
         script(src: "/js/base.js") {}
+        script(src: "/js/home/homeController.js") {}
         link(rel: "stylesheet", href: "/css/base.css")
     }
 
