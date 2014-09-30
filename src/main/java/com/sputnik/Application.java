@@ -12,13 +12,8 @@ import org.springframework.context.annotation.*;
 @EnableAutoConfiguration
 @ComponentScan
 public class Application {
-    @Autowired
-    MessageRepository repository;
 
     public static void main(String[] args) {
         ApplicationContext ctx = SpringApplication.run(Application.class, args);
-        MessageRepository repository = ctx.getBean(MessageRepository.class);
-        repository.save(new Message("Hello", "Welcome to Sputnik"));
-
     }
 }
