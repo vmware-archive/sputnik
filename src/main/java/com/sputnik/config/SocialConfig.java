@@ -45,13 +45,6 @@ public class SocialConfig implements SocialConfigurer {
         return repository;
     }
 
-//    @Bean
-//    public ConnectController connectController(
-//            ConnectionFactoryLocator connectionFactoryLocator,
-//            ConnectionRepository connectionRepository) {
-//        return new ConnectController(connectionFactoryLocator, connectionRepository);
-//    }
-
     @Bean
     public ProviderSignInController providerSignInController(ConnectionFactoryLocator connectionFactoryLocator, UsersConnectionRepository usersConnectionRepository) {
         return new ProviderSignInController(connectionFactoryLocator, usersConnectionRepository, new SimpleSignInAdapter(new HttpSessionRequestCache()));

@@ -47,12 +47,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .deleteCookies("JSESSIONID")
                 .and()
                 .authorizeRequests()
-                .antMatchers("/favicon.ico", "/resources/**", "/connect/**", "/auth/**", "/signin/**", "/signup/**").permitAll()
+                .antMatchers("/favicon.ico", "/images/**", "/components/**", "/js/**", "/css/**", "/connect/**", "/auth/**", "/signin/**", "/signup/**").permitAll()
                 .antMatchers("/**").authenticated()
                 .and()
                 .rememberMe();
-//                .and()
-//                .apply(new SpringSocialConfigurer());
     }
 
     @Bean
@@ -65,9 +63,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return Encryptors.noOpText();
     }
 
-
-//    @Bean
-//    public SocialUserDetailsService socialUsersDetailService() {
-//        return new SimpleSocialUsersDetailService(userDetailsService());
-//    }
 }

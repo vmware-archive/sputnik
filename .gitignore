@@ -5,3 +5,4 @@ build
 out
 bower_components
 node_modules
+classes

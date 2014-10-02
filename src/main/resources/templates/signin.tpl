@@ -20,8 +20,7 @@ html {
     body(unresolved: true, "touch-action": "auto") {
 
         form("action": "/signin/strava", "method": "post") {
-            button("type": "submit") {
-                yield "sign in with strava"
+            button("type": "submit", "class": "login-strava") {
             }
         }
 

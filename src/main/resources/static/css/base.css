@@ -9,3 +9,12 @@ html,body {
 .clickable {
     cursor: pointer;
 }
+
+button.login-strava {
+    background-image: url('/images/LoginWithStrava.png');
+    width: 159px;
+    height: 31px;
+    border: none;
+    padding: 0;
+    border-radius: 4px;
+}
