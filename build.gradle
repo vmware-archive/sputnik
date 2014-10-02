@@ -48,6 +48,9 @@ war {
 repositories {
     mavenLocal()
     mavenCentral()
+    flatDir {
+        dirs 'libs'
+    }
 }
 
 dependencies {
@@ -62,6 +65,18 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-data-jpa"
     compile "com.h2database:h2"
     compile "postgresql:postgresql:9.0-801.jdbc4"
+
+    // Security
+    compile "org.springframework.security:spring-security-config"
+    compile "org.springframework.security:spring-security-taglibs"
+    compile "org.springframework.security:spring-security-web"
+
+    // Social
+    compile "org.springframework.social:spring-social-core:1.1.0.RELEASE"
+    compile "org.springframework.social:spring-social-web:1.1.0.RELEASE"
+    compile "org.springframework.social:spring-social-config:1.1.0.RELEASE"
+    compile "org.springframework.social:spring-social-security:1.1.0.RELEASE"
+    compile name: "spring-social-strava-1.0.0.BUILD-SNAPSHOT"
 
     // Logging
     compile "org.slf4j:slf4j-api:1.7.7"

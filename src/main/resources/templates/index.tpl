@@ -1,5 +1,3 @@
-import com.sputnik.home.HomeController
-
 yieldUnescaped "<!doctype html>"
 html {
     head {
@@ -19,6 +17,9 @@ html {
 
     body(unresolved: true, "touch-action": "auto") {
 
+        a("href": "/connect/strava") {
+            "Connect to Strava"
+        }
         h1 {
             yield message
         }
