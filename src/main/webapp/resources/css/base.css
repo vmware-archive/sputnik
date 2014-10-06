@@ -11,7 +11,7 @@ html,body {
 }
 
 button.login-strava {
-    background-image: url('/images/LoginWithStrava.png');
+    background-image: url('/resources/images/LoginWithStrava.png');
     width: 159px;
     height: 31px;
     border: none;

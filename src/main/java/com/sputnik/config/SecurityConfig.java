@@ -47,7 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .deleteCookies("JSESSIONID")
                 .and()
                 .authorizeRequests()
-                .antMatchers("/favicon.ico", "/images/**", "/components/**", "/js/**", "/css/**", "/connect/**", "/auth/**", "/signin/**", "/signup/**").permitAll()
+                .antMatchers("/resources/**", "/auth/**", "/signin/**").permitAll()
                 .antMatchers("/**").authenticated()
                 .and()
                 .rememberMe();

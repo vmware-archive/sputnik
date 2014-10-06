@@ -1,4 +1,4 @@
-describe('homeController', function () {
+describe('messageController', function () {
     var messageRepository, messageDeferred;
 
     beforeEach(module('homeControllers'));
