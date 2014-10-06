@@ -1,4 +1,4 @@
-angular.module("homeServices", ['ngResource']);
-angular.module("homeControllers", ['homeServices']);
-angular.module("homeDirectives", ['homeControllers']);
-angular.module("homeApp", ['homeControllers', 'homeDirectives']);
+angular.module("sputnikServices", ['ngResource']);
+angular.module("sputnikControllers", ['sputnikServices']);
+angular.module("sputnikDirectives", ['sputnikControllers']);
+angular.module("sputnikApp", ['sputnikControllers', 'sputnikDirectives']);

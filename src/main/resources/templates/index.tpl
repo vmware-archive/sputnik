@@ -10,10 +10,9 @@ html {
         script(src: "/resources/components/angular/angular.js") {}
         script(src: "/resources/components/angular-resource/angular-resource.js") {}
         script(src: "/resources/js/base.js") {}
-        script(src: "/resources/js/home/homeController.js") {}
-        script(src: "/resources/js/home/messageRepository.js") {}
-        script(src: "/resources/js/home/messageDirective.js") {}
-        script(src: "/resources/js/home/messageController.js") {}
+        script(src: "/resources/js/segmentEfforts/segmentEffortsController.js") {}
+        script(src: "/resources/js/segmentEfforts/segmentEffortsRepository.js") {}
+        script(src: "/resources/js/segmentEfforts/segmentEffortsDirective.js") {}
         link(rel: "stylesheet", href: "/resources/css/base.css")
     }
 
@@ -26,23 +25,22 @@ html {
             yield message
         }
 
-        div("ng-app": "homeApp", "ng-controller": "homeController") {
-            form("ng-submit": "createMessage()") {
-                input("ng-model": "newMessageTitle")
-                input("ng-model": "newMessageContent")
-                input("type": "Submit", "value": "Save")
-            }
+        div("ng-app": "sputnikApp", "ng-controller": "segmentEffortsController") {
 
             table {
                 thead {
                     tr {
-                        th {yield "title"}
-                        th {yield "content"}
-                        th {}
+                        th {yield "id"}
+                        th {yield "name"}
+                        th {yield "athleteId"}
+                        th {yield "distance"}
+                        th {yield "date"}
+                        th {yield "segmentId"}
+                        th {yield "elapsedTime"}
                     }
                 }
                 tbody {
-                    tr("ng-repeat": "message in messages", "sputnik-message": "message", "callback": "removeMessage", "index": "\$index")
+                    tr("ng-repeat": "segmentEffort in segmentEfforts", "sputnik-segment-effort": "segmentEffort")
                 }
             }
         }

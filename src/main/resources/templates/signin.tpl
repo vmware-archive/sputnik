@@ -10,10 +10,9 @@ html {
         script(src: "/resources/components/angular/angular.js") {}
         script(src: "/resources/components/angular-resource/angular-resource.js") {}
         script(src: "/resources/js/base.js") {}
-        script(src: "/resources/js/home/homeController.js") {}
-        script(src: "/resources/js/home/messageRepository.js") {}
-        script(src: "/resources/js/home/messageDirective.js") {}
-        script(src: "/resources/js/home/messageController.js") {}
+        script(src: "/resources/js/segmentEfforts/segmentEffortsController.js") {}
+        script(src: "/resources/js/segmentEfforts/segmentEffortsRepository.js") {}
+        script(src: "/resources/js/segmentEfforts/segmentEffortsDirective.js") {}
         link(rel: "stylesheet", href: "/resources/css/base.css")
     }
 

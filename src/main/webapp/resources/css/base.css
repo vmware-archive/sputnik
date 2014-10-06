@@ -12,9 +12,9 @@ html,body {
 
 button.login-strava {
     background-image: url('/resources/images/strava.png');
-    width: 159px;
-    height: 31px;
+    width: 312px;
+    height: 62px;
     border: none;
     padding: 0;
-    border-radius: 4px;
+    border-radius: 9px;
 }
