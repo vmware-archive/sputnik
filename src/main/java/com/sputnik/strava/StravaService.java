@@ -1,8 +1,10 @@
 package com.sputnik.strava;
 
+import com.sputnik.strava.profile.AthleteProfile;
 import com.sputnik.strava.segmenteffort.SegmentEffort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.strava.api.Strava;
+import org.springframework.social.strava.api.StravaAthleteProfile;
 import org.springframework.social.strava.api.StravaSegmentEffort;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,12 @@ public class StravaService {
         List<StravaSegmentEffort> stravaSegmentEfforts = strava.segmentEffortOperations().getSegmentEfforts("8269800", currentAthleteId);
 
         return stravaSegmentEfforts.stream().map(this::segmentEffortCreator).collect(Collectors.toList());
+    }
+
+    public AthleteProfile getAthleteProfile() {
+        StravaAthleteProfile stravaAthleteProfile = strava.athleteOperations().getAthleteProfile();
+
+        return new AthleteProfile(stravaAthleteProfile.getEmail(), stravaAthleteProfile.getName());
     }
 
     private SegmentEffort segmentEffortCreator(StravaSegmentEffort stravaSegmentEffort) {

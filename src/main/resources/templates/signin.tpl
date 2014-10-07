@@ -1,7 +1,7 @@
 package templates
 
 layout 'layout.tpl',
-        pageTitle: 'Sputnik - sign in',
+        pageTitle: 'Sputnik - welcome',
         signedIn: false,
         mainBody: contents {
             div(class: 'row') {

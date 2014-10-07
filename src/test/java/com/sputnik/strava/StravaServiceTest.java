@@ -1,5 +1,6 @@
 package com.sputnik.strava;
 
+import com.sputnik.strava.profile.AthleteProfile;
 import com.sputnik.strava.segmenteffort.SegmentEffort;
 import junit.framework.TestCase;
 import org.junit.Test;
@@ -57,5 +58,18 @@ public class StravaServiceTest extends TestCase {
         assertEquals("2006-04-21T13:20:40Z", returnedSegmentEffort.getDate());
         assertEquals(2, returnedSegmentEffort.getSegmentId());
         assertEquals(15, returnedSegmentEffort.getElapsedTime());
+    }
+
+    @Test
+    public void testGetAthleteProfile() throws Exception {
+        StravaAthleteProfile stravaAthleteProfile = new StravaAthleteProfile(8, "Fred", "Smith", "freddy@example.com");
+
+        doReturn(athleteOperations).when(strava).athleteOperations();
+        doReturn(stravaAthleteProfile).when(athleteOperations).getAthleteProfile();
+
+        AthleteProfile athleteProfile = stravaService.getAthleteProfile();
+
+        assertEquals("Fred Smith", athleteProfile.getName());
+        assertEquals("freddy@example.com", athleteProfile.getEmail());
     }
 }

@@ -13,6 +13,9 @@ html {
         script(src: "/resources/js/segmentEfforts/segmentEffortsController.js") {}
         script(src: "/resources/js/segmentEfforts/segmentEffortsRepository.js") {}
         script(src: "/resources/js/segmentEfforts/segmentEffortsDirective.js") {}
+        script(src: "/resources/js/profile/profileController.js") {}
+        script(src: "/resources/js/profile/profileRepository.js") {}
+
         link(rel: "stylesheet", href: "/resources/css/bootstrap.css")
         link(rel: "stylesheet", href: "/resources/css/base.css")
     }
