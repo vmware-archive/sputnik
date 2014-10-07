@@ -72,6 +72,26 @@ public class StravaServiceTest extends TestCase {
     }
 
     @Test
+    public void testGetSegmentEffortById() throws Exception {
+        StravaSegment segment = new StravaSegment(2);
+        StravaSegmentEffortAthlete athlete = new StravaSegmentEffortAthlete(9);
+        StravaSegmentEffort segmentEffort = new StravaSegmentEffort(8, "Pearl Street", athlete, 23.4F, "2006-04-21T13:20:40Z", segment, 15);
+
+        doReturn(segmentEffortOperations).when(strava).segmentEffortOperations();
+        doReturn(segmentEffort).when(segmentEffortOperations).getSegmentEffortById("1234567");
+
+        SegmentEffort returnedSegmentEffort = stravaService.getSegmentEffortById("1234567");
+
+        assertEquals(8, returnedSegmentEffort.getId());
+        assertEquals("Pearl Street", returnedSegmentEffort.getName());
+        assertEquals(9, returnedSegmentEffort.getAthleteId());
+        assertEquals(23.4, returnedSegmentEffort.getDistance(), .1);
+        assertEquals("2006-04-21T13:20:40Z", returnedSegmentEffort.getDate());
+        assertEquals(2, returnedSegmentEffort.getSegmentId());
+        assertEquals(15, returnedSegmentEffort.getElapsedTime());
+    }
+
+    @Test
     public void testGetAthleteProfile() throws Exception {
         StravaAthleteProfile stravaAthleteProfile = new StravaAthleteProfile(8, "Fred", "Smith", "freddy@example.com");
 

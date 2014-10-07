@@ -38,6 +38,10 @@ public class StravaService {
         return stravaSegmentEfforts.stream().map(this::segmentEffortCreator).collect(Collectors.toList());
     }
 
+    public SegmentEffort getSegmentEffortById(String id) {
+        StravaSegmentEffort segmentEffort = strava.segmentEffortOperations().getSegmentEffortById(id);
+        return segmentEffortCreator(segmentEffort);
+    }
 
     public AthleteProfile getAthleteProfile() {
         StravaAthleteProfile stravaAthleteProfile = strava.athleteOperations().getAthleteProfile();
