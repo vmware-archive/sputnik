@@ -33,6 +33,9 @@ public class SocialConfig implements SocialConfigurer {
     @Inject
     private DataSource dataSource;
 
+    @Inject
+    private SimpleConnectionSignUp simpleConnectionSignUp;
+
     @Override
     public void addConnectionFactories(ConnectionFactoryConfigurer cfConfig, Environment env) {
         cfConfig.addConnectionFactory(new StravaConnectionFactory(env.getProperty("stravaClientId"), env.getProperty("stravaClientSecret")));
@@ -46,7 +49,7 @@ public class SocialConfig implements SocialConfigurer {
     @Override
     public UsersConnectionRepository getUsersConnectionRepository(ConnectionFactoryLocator connectionFactoryLocator) {
         JdbcUsersConnectionRepository repository = new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator, Encryptors.noOpText());
-        repository.setConnectionSignUp(new SimpleConnectionSignUp());
+        repository.setConnectionSignUp(simpleConnectionSignUp);
         return repository;
     }
 

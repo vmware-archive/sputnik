@@ -2,7 +2,7 @@ create table messages (
   id serial primary key,
   title varchar(255),
   content varchar(255)
-)
+);
 
 create table UserConnection (userId varchar(255) not null,
     providerId varchar(255) not null,
@@ -17,3 +17,7 @@ create table UserConnection (userId varchar(255) not null,
     expireTime bigint,
     primary key (userId, providerId, providerUserId));
 create unique index UserConnectionRank on UserConnection(userId, providerId, rank);
+
+create table users (
+  id serial primary key
+);
