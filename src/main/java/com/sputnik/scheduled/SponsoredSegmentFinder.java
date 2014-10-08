@@ -35,7 +35,7 @@ public class SponsoredSegmentFinder {
     @Value("${superUserId}")
     String superUserId;
 
-    @Scheduled(cron = "0 22 * * *")
+    @Scheduled(cron = "0 22 * * * *")
 //    @Scheduled(fixedRate = 5000)
     public void retrieve() {
         JdbcUsersConnectionRepository jdbcRepository = new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator, Encryptors.noOpText());
