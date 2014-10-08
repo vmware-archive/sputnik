@@ -16,13 +16,17 @@ import java.util.stream.Collectors;
 @Service
 public class StravaService {
 
-    @Autowired
     private Strava strava;
 
     private String[] segmentIds;
 
+    @Autowired
+    public void setStrava(final Strava strava) {
+        this.strava = strava;
+    }
+
     @Value("${sponsoredSegments}")
-    void setSegmentIds(final String[] segmentIds) {
+    public void setSegmentIds(final String[] segmentIds) {
         this.segmentIds = segmentIds;
     }
 
@@ -41,6 +45,16 @@ public class StravaService {
     public SegmentEffort getSegmentEffortById(String id) {
         StravaSegmentEffort segmentEffort = strava.segmentEffortOperations().getSegmentEffortById(id);
         return segmentEffortCreator(segmentEffort);
+    }
+
+    public List<SegmentEffort> getAllSegmentEfforts(String startTime, String endTime) {
+        List<StravaSegmentEffort> stravaSegmentEfforts = new ArrayList<>();
+
+        for(String id : segmentIds) {
+            stravaSegmentEfforts.addAll(strava.segmentEffortOperations().getAllSegmentEfforts(id, startTime, endTime));
+        }
+
+        return stravaSegmentEfforts.stream().map(this::segmentEffortCreator).collect(Collectors.toList());
     }
 
     public AthleteProfile getAthleteProfile() {
