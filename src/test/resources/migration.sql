@@ -21,3 +21,5 @@ create unique index UserConnectionRank on UserConnection(userId, providerId, ran
 create table users (
   id serial primary key
 );
+
+alter table users add column email varchar(255);

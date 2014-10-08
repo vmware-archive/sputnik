@@ -6,6 +6,7 @@ import com.sputnik.persistence.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionSignUp;
+import org.springframework.social.connect.UserProfile;
 import org.springframework.stereotype.Component;
 
 /**
@@ -20,7 +21,8 @@ public final class SimpleConnectionSignUp implements ConnectionSignUp {
     private UserRepository userRepository;
 
     public String execute(Connection<?> connection) {
-        User user = userRepository.save(new User());
+        UserProfile profile = connection.fetchUserProfile();
+        User user = userRepository.save(new User(profile.getEmail()));
 
         return Long.toString(user.getId());
     }

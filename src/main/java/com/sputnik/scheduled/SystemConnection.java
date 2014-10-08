@@ -3,6 +3,7 @@ package com.sputnik.scheduled;
 
 import com.sputnik.strava.StravaService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.security.crypto.encrypt.Encryptors;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionFactoryLocator;
@@ -22,15 +23,18 @@ public class SystemConnection {
     @Inject
     private ConnectionFactoryLocator connectionFactoryLocator;
 
-    @Value("${superUserId}")
-    String superUserId;
+    @Inject
+    Environment env;
+
+    @Value("${systemUserId}")
+    String systemUserId;
 
     @Value("${sponsoredSegments}")
     String[] segmentIds;
 
     public StravaService getStravaService() {
         JdbcUsersConnectionRepository jdbcRepository = new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator, Encryptors.noOpText());
-        ConnectionRepository repository = jdbcRepository.createConnectionRepository(superUserId);
+        ConnectionRepository repository = jdbcRepository.createConnectionRepository(env.getProperty("systemUserId"));
         Connection<Strava> connection = repository.findPrimaryConnection(Strava.class);
 
         Strava strava = connection.getApi();
