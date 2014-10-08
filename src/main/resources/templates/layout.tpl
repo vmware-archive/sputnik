@@ -9,6 +9,7 @@ html {
 
         script(src: "/resources/components/angular/angular.js") {}
         script(src: "/resources/components/angular-resource/angular-resource.js") {}
+        script(src: "/resources/components/angular-route/angular-route.js") {}
         script(src: "/resources/js/base.js") {}
         script(src: "/resources/js/segmentEfforts/segmentEffortsController.js") {}
         script(src: "/resources/js/segmentEfforts/segmentEffortsRepository.js") {}
