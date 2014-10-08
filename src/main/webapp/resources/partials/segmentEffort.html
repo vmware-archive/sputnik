@@ -1,6 +1,29 @@
-<td>{{segmentEffort.name}}</td>
-<td>{{segmentEffort.athleteId}}</td>
-<td>{{segmentEffort.distance}}</td>
-<td>{{segmentEffort.date}}</td>
-<td>{{segmentEffort.segmentId}}</td>
-<td>{{segmentEffort.elapsedTime}}</td>
+<div class="row">
+    <div class="col-lg-12">
+        <a href="#/segmentEfforts" class="btn btn-default">back</a>
+
+        <div class="media">
+            <a class="pull-left">
+                <img class="media-object"
+                     src="https://maps.googleapis.com/maps/api/staticmap?size=300x300"
+                     alt="route map">
+            </a>
+
+            <div class="media-body">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4>{{segmentEffort.name}}</h4>
+                    </div>
+
+                    <ul class="list-group">
+                        <li class="list-group-item">Athlete Id: {{segmentEffort.athleteId}}</li>
+                        <li class="list-group-item">Distance: {{segmentEffort.distance}}m</li>
+                        <li class="list-group-item">Date: {{segmentEffort.date | date : 'short'}}</li>
+                        <li class="list-group-item">Segment Id: {{segmentEffort.segmentId}}</li>
+                        <li class="list-group-item">Elapsed Time: {{segmentEffort.elapsedTime}}s</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,7 +1,7 @@
-angular.module("sputnikControllers").controller("segmentEffortsController", ['$scope', 'segmentEffortsRepository', function ($scope, segmentEffortsRepository) {
+angular.module("sputnikControllers").controller("segmentEffortsController", ['$scope', 'segmentEffortsResource', function ($scope, segmentEffortsResource) {
     $scope.messages = [];
 
-    segmentEffortsRepository.query().$promise.then(function (result) {
+    segmentEffortsResource.query().$promise.then(function (result) {
         $scope.segmentEfforts = result;
     });
 }]);

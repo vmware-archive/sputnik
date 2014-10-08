@@ -1,14 +1,14 @@
 describe('segmentEffortsController', function () {
-    var segmentEffortsRepository, segmentEffortsDeferred;
+    var segmentEffortsResource, segmentEffortsDeferred;
 
     beforeEach(module('sputnikControllers'));
 
-    beforeEach(inject(function ($rootScope, $q, $controller, _segmentEffortsRepository_) {
+    beforeEach(inject(function ($rootScope, $q, $controller, _segmentEffortsResource_) {
         $scope = $rootScope.$new();
-        segmentEffortsRepository = _segmentEffortsRepository_;
+        segmentEffortsResource = _segmentEffortsResource_;
 
         segmentEffortsDeferred = $q.defer();
-        spyOn(segmentEffortsRepository, "query").and.returnValue({$promise: segmentEffortsDeferred.promise});
+        spyOn(segmentEffortsResource, "query").and.returnValue({$promise: segmentEffortsDeferred.promise});
 
         $controller('segmentEffortsController', {$scope: $scope});
     }));

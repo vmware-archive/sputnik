@@ -12,7 +12,8 @@ html {
         script(src: "/resources/components/angular-route/angular-route.js") {}
         script(src: "/resources/js/base.js") {}
         script(src: "/resources/js/segmentEfforts/segmentEffortsController.js") {}
-        script(src: "/resources/js/segmentEfforts/segmentEffortsRepository.js") {}
+        script(src: "/resources/js/segmentEfforts/segmentEffortController.js") {}
+        script(src: "/resources/js/segmentEfforts/segmentEffortsResource.js") {}
         script(src: "/resources/js/segmentEfforts/segmentEffortsDirective.js") {}
         script(src: "/resources/js/profile/profileController.js") {}
         script(src: "/resources/js/profile/profileRepository.js") {}
