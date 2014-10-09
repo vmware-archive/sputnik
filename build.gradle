@@ -78,6 +78,9 @@ dependencies {
     compile "org.springframework.social:spring-social-security:1.1.0.RELEASE"
     compile name: "spring-social-strava-1.0.0.BUILD-SNAPSHOT"
 
+    // Email
+    compile 'com.sendgrid:sendgrid-java:1.2.1'
+
     // Logging
     compile "org.slf4j:slf4j-api:1.7.7"
 

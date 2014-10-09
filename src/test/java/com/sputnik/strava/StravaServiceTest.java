@@ -43,7 +43,7 @@ public class StravaServiceTest extends TestCase {
         doReturn(567L).when(profile).getId();
 
         StravaSegment segment = new StravaSegment(2);
-        StravaSegmentEffortAthlete athlete = new StravaSegmentEffortAthlete(9);
+        StravaSegmentEffortAthlete athlete = new StravaSegmentEffortAthlete("9");
 
         StravaSegmentEffort segmentEffort = new StravaSegmentEffort(8, "Pearl Street", athlete, 23.4F, "2006-04-21T13:20:40Z", segment, 15);
         StravaSegmentEffort anotherSegmentEffort = new StravaSegmentEffort(8, "Spruce Street", athlete, 13.4F, "2006-05-21T13:20:40Z", segment, 25);
@@ -61,7 +61,7 @@ public class StravaServiceTest extends TestCase {
 
         assertEquals(8, returnedSegmentEffort.getId());
         assertEquals("Pearl Street", returnedSegmentEffort.getName());
-        assertEquals(9, returnedSegmentEffort.getAthleteId());
+        assertEquals("9", returnedSegmentEffort.getAthleteId());
         assertEquals(23.4, returnedSegmentEffort.getDistance(), .1);
         assertEquals("2006-04-21T13:20:40Z", returnedSegmentEffort.getDate());
         assertEquals(2, returnedSegmentEffort.getSegmentId());
@@ -74,7 +74,7 @@ public class StravaServiceTest extends TestCase {
     @Test
     public void testGetSegmentEffortById() throws Exception {
         StravaSegment segment = new StravaSegment(2);
-        StravaSegmentEffortAthlete athlete = new StravaSegmentEffortAthlete(9);
+        StravaSegmentEffortAthlete athlete = new StravaSegmentEffortAthlete("9");
         StravaSegmentEffort segmentEffort = new StravaSegmentEffort(8, "Pearl Street", athlete, 23.4F, "2006-04-21T13:20:40Z", segment, 15);
 
         doReturn(segmentEffortOperations).when(strava).segmentEffortOperations();
@@ -84,7 +84,7 @@ public class StravaServiceTest extends TestCase {
 
         assertEquals(8, returnedSegmentEffort.getId());
         assertEquals("Pearl Street", returnedSegmentEffort.getName());
-        assertEquals(9, returnedSegmentEffort.getAthleteId());
+        assertEquals("9", returnedSegmentEffort.getAthleteId());
         assertEquals(23.4, returnedSegmentEffort.getDistance(), .1);
         assertEquals("2006-04-21T13:20:40Z", returnedSegmentEffort.getDate());
         assertEquals(2, returnedSegmentEffort.getSegmentId());
@@ -96,7 +96,7 @@ public class StravaServiceTest extends TestCase {
         stravaService.setSegmentIds(segmentIds);
 
         StravaSegment segment = new StravaSegment(2);
-        StravaSegmentEffortAthlete athlete = new StravaSegmentEffortAthlete(9);
+        StravaSegmentEffortAthlete athlete = new StravaSegmentEffortAthlete("9");
 
         StravaSegmentEffort segmentEffort = new StravaSegmentEffort(8, "Pearl Street", athlete, 23.4F, "2006-04-21T13:20:40Z", segment, 15);
         StravaSegmentEffort anotherSegmentEffort = new StravaSegmentEffort(8, "Spruce Street", athlete, 13.4F, "2006-05-21T13:20:40Z", segment, 25);
@@ -114,7 +114,7 @@ public class StravaServiceTest extends TestCase {
 
         assertEquals(8, returnedSegmentEffort.getId());
         assertEquals("Pearl Street", returnedSegmentEffort.getName());
-        assertEquals(9, returnedSegmentEffort.getAthleteId());
+        assertEquals("9", returnedSegmentEffort.getAthleteId());
         assertEquals(23.4, returnedSegmentEffort.getDistance(), .1);
         assertEquals("2006-04-21T13:20:40Z", returnedSegmentEffort.getDate());
         assertEquals(2, returnedSegmentEffort.getSegmentId());

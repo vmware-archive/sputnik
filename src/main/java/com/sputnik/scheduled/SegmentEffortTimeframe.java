@@ -16,6 +16,10 @@ public class SegmentEffortTimeframe {
     private Instant now;
 
     public SegmentEffortTimeframe() {
+        setNow();
+    }
+
+    public void setNow() {
         this.now = Instant.now();
     }
 

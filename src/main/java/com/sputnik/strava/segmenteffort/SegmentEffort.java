@@ -3,13 +3,13 @@ package com.sputnik.strava.segmenteffort;
 public class SegmentEffort {
     private long id;
     private String name;
-    private long athleteId;
+    private String athleteId;
     private float distance;
     private String date;
     private long segmentId;
     private long elapsedTime;
 
-    public SegmentEffort(long id, String name, long athleteId, float distance, String date, long segmentId, long elapsedTime) {
+    public SegmentEffort(long id, String name, String athleteId, float distance, String date, long segmentId, long elapsedTime) {
         this.id = id;
         this.name = name;
         this.athleteId = athleteId;
@@ -27,7 +27,7 @@ public class SegmentEffort {
         return name;
     }
 
-    public long getAthleteId() {
+    public String getAthleteId() {
         return athleteId;
     }
 
