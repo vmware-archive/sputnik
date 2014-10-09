@@ -1,6 +1,7 @@
 package com.sputnik.strava;
 
 import com.sputnik.strava.profile.AthleteProfile;
+import com.sputnik.strava.segment.Segment;
 import com.sputnik.strava.segmenteffort.SegmentEffort;
 import junit.framework.TestCase;
 import org.junit.Test;
@@ -25,6 +26,9 @@ public class StravaServiceTest extends TestCase {
 
     @Mock
     SegmentEffortOperations segmentEffortOperations;
+
+    @Mock
+    SegmentOperations segmentOperations;
 
     @Mock
     StravaAthleteProfile profile;
@@ -135,5 +139,22 @@ public class StravaServiceTest extends TestCase {
 
         assertEquals("Fred Smith", athleteProfile.getName());
         assertEquals("freddy@example.com", athleteProfile.getEmail());
+    }
+
+    @Test
+    public void testGetSegmentById() throws Exception {
+        StravaMap map = new StravaMap("1234", "^&UY^&", 5);
+        StravaSegment segment = new StravaSegment(2, "Pearl Street", "foosball", 123.4F, map);
+        
+        doReturn(segmentOperations).when(strava).segmentOperations();
+        doReturn(segment).when(segmentOperations).getSegmentById("1234567");
+
+        Segment returnedSegment = stravaService.getSegmentById("1234567");
+
+        assertEquals(2, returnedSegment.getId());
+        assertEquals("Pearl Street", returnedSegment.getName());
+        assertEquals("foosball", returnedSegment.getActivityType());
+        assertEquals(123.4, returnedSegment.getDistance(), .1);
+        assertEquals("^&UY^&", returnedSegment.getMapPolyline());
     }
 }

@@ -1,11 +1,13 @@
 package com.sputnik.strava;
 
 import com.sputnik.strava.profile.AthleteProfile;
+import com.sputnik.strava.segment.Segment;
 import com.sputnik.strava.segmenteffort.SegmentEffort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.social.strava.api.Strava;
 import org.springframework.social.strava.api.StravaAthleteProfile;
+import org.springframework.social.strava.api.StravaSegment;
 import org.springframework.social.strava.api.StravaSegmentEffort;
 import org.springframework.stereotype.Service;
 
@@ -72,6 +74,17 @@ public class StravaService {
                 stravaSegmentEffort.getDate(),
                 stravaSegmentEffort.getSegment().getId(),
                 stravaSegmentEffort.getElapsedTime()
+        );
+    }
+
+    public Segment getSegmentById(String id) {
+        StravaSegment stravaSegment = strava.segmentOperations().getSegmentById(id);
+        return new Segment(
+                stravaSegment.getId(),
+                stravaSegment.getName(),
+                stravaSegment.getActivityType(),
+                stravaSegment.getDistance(),
+                stravaSegment.getMap().getPolyline()
         );
     }
 }
