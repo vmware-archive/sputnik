@@ -1,6 +1,6 @@
 <td><a ng-href="#/segmentEfforts/{{segmentEffort.id}}">{{segmentEffort.name}}</a></td>
 <td>{{segmentEffort.athleteId}}</td>
 <td>{{segmentEffort.distance}}</td>
-<td>{{segmentEffort.date}}</td>
+<td>{{segmentEffort.date | date : short}}</td>
 <td>{{segmentEffort.segmentId}}</td>
 <td>{{segmentEffort.elapsedTime}}</td>
