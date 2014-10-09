@@ -62,7 +62,13 @@ public class StravaService {
     public AthleteProfile getAthleteProfile() {
         StravaAthleteProfile stravaAthleteProfile = strava.athleteOperations().getAthleteProfile();
 
-        return new AthleteProfile(stravaAthleteProfile.getEmail(), stravaAthleteProfile.getName());
+        return athleteProfileCreator(stravaAthleteProfile);
+    }
+
+    public AthleteProfile getAthleteProfileById(String id) {
+        StravaAthleteProfile stravaAthleteProfile = strava.athleteOperations().getAthleteProfileById(id);
+
+        return athleteProfileCreator(stravaAthleteProfile);
     }
 
     private SegmentEffort segmentEffortCreator(StravaSegmentEffort stravaSegmentEffort) {
@@ -74,6 +80,15 @@ public class StravaService {
                 stravaSegmentEffort.getDate(),
                 stravaSegmentEffort.getSegment().getId(),
                 stravaSegmentEffort.getElapsedTime()
+        );
+    }
+
+    private AthleteProfile athleteProfileCreator(StravaAthleteProfile stravaAthleteProfile) {
+        return new AthleteProfile(
+                stravaAthleteProfile.getEmail(),
+                stravaAthleteProfile.getName(),
+                stravaAthleteProfile.getAvatarMedium(),
+                stravaAthleteProfile.getAvatarLarge()
         );
     }
 

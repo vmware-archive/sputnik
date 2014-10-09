@@ -130,7 +130,7 @@ public class StravaServiceTest extends TestCase {
 
     @Test
     public void testGetAthleteProfile() throws Exception {
-        StravaAthleteProfile stravaAthleteProfile = new StravaAthleteProfile(8, "Fred", "Smith", "freddy@example.com");
+        StravaAthleteProfile stravaAthleteProfile = new StravaAthleteProfile(8, "Fred", "Smith", "freddy@example.com", "example.com/medium.jpg", "example.com/large.jpg");
 
         doReturn(athleteOperations).when(strava).athleteOperations();
         doReturn(stravaAthleteProfile).when(athleteOperations).getAthleteProfile();
@@ -139,6 +139,8 @@ public class StravaServiceTest extends TestCase {
 
         assertEquals("Fred Smith", athleteProfile.getName());
         assertEquals("freddy@example.com", athleteProfile.getEmail());
+        assertEquals("example.com/medium.jpg", athleteProfile.getAvatarMedium());
+        assertEquals("example.com/large.jpg", athleteProfile.getAvatarLarge());
     }
 
     @Test
