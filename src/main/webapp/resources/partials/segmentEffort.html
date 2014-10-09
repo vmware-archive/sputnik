@@ -10,20 +10,26 @@
             <div class="col-md-4 text-center">
                 <a>
                     <img src="https://maps.googleapis.com/maps/api/staticmap?size=250x250"
-                         alt="route map">
+                         alt="route map"
+                         class="img-rounded">
                 </a>
             </div>
 
-            <div class="col-md-4">
-                <h4>{{segmentEffort.name}}</h4>
 
-                <ul class="list-group">
-                    <li class="list-group-item">Athlete Id: {{segmentEffort.athleteId}}</li>
-                    <li class="list-group-item">Distance: {{segmentEffort.distance}}m</li>
-                    <li class="list-group-item">Date: {{segmentEffort.date | date : 'short'}}</li>
-                    <li class="list-group-item">Segment Id: {{segmentEffort.segmentId}}</li>
-                    <li class="list-group-item">Elapsed Time: {{segmentEffort.elapsedTime}}s</li>
-                </ul>
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4>{{segmentEffort.name}}</h4>
+                    </div>
+
+                    <ul class="list-group">
+                        <li class="list-group-item">Athlete Id: {{segmentEffort.athleteId}}</li>
+                        <li class="list-group-item">Distance: {{segmentEffort.distance}}m</li>
+                        <li class="list-group-item">Date: {{segmentEffort.date | date : 'short'}}</li>
+                        <li class="list-group-item">Segment Id: {{segmentEffort.segmentId}}</li>
+                        <li class="list-group-item">Elapsed Time: {{segmentEffort.elapsedTime}}s</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
