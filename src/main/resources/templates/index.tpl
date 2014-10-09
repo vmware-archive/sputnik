@@ -5,8 +5,10 @@ layout 'layout.tpl',
         signedIn: true,
         mainBody: contents {
             div("ng-app": "sputnikApp") {
-                div("ng-controller": "profileController") {
-                    h1("Welcome {{profile.name}}")
+                div(class: 'row') {
+                    div(class: 'col-lg-6', "ng-controller": "profileController") {
+                        h1("Welcome {{profile.name}}")
+                    }
                 }
 
                 div("ng-view": true)

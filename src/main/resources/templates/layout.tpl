@@ -5,7 +5,7 @@ html {
     head {
         title(pageTitle)
         meta(charset: "utf-8")
-        meta(name: "viewport", content: "width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
+        meta(name: "viewport", content: "width=device-width, minimum-scale=1.0")
 
         script(src: "/resources/components/angular/angular.js") {}
         script(src: "/resources/components/angular-resource/angular-resource.js") {}
@@ -25,7 +25,7 @@ html {
     body {
         nav(class: 'navbar navbar-fixed-top navbar-inverse') {
             div(class: 'container') {
-                div(class: 'navbar-header') {
+                div(class: 'navbar-header hidden-xs hidden-s') {
                     a(href: '/', class: 'navbar-brand', 'Sputnik')
                 }
 

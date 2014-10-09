@@ -20,3 +20,7 @@ button.login-strava {
 .jumbotron {
     background: none;
 }
+
+.btn, img {
+    margin-bottom: 10px;
+}
