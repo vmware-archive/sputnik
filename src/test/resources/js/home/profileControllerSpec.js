@@ -1,5 +1,5 @@
 describe('profileController', function () {
-    var profileRepository, profileDeferred;
+    var $scope, profileRepository, profileDeferred;
 
     beforeEach(module('sputnikControllers'));
 
