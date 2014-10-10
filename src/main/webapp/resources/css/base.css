@@ -17,6 +17,28 @@ button.login-strava {
     background-color: #272822;
 }
 
+.navbar-nav > li > a {
+    display: inline-block;
+}
+
+.navbar a.dropdown-toggle {
+    cursor: pointer;
+}
+
+.navbar a.avatar-small {
+    padding: 5px 0 5px 10px;
+}
+
+.navbar .avatar-small img {
+    height: 40px;
+    width: 40px;
+    margin: 0;
+}
+
+.navbar .navbar-nav > .open > a, .navbar .navbar-nav > .open > a:hover, .navbar .navbar-nav > .open > a:focus {
+    background: none;
+}
+
 .jumbotron {
     background: none;
 }

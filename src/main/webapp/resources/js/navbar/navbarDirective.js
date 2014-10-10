@@ -1,6 +1,7 @@
 angular.module("sputnikDirectives").directive("sputnikNavbar", function () {
     return {
         templateUrl: 'resources/partials/navbar.html',
-        restrict: 'E'
+        restrict: 'E',
+        controller: "profileController"
     }
 });

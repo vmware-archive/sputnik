@@ -17,6 +17,8 @@
         "angular-resource": "~1.2.25",
         "angular-route": "~1.2.25",
         "karma-jasmine": "~0.2.2",
-        "karma": "~0.2.2"
+        "karma": "~0.2.2",
+        "jquery": "~1.11",
+        "bootstrap": "~3.2"
     }
 }

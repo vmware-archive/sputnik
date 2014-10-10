@@ -7,6 +7,8 @@ html {
         meta(charset: "utf-8")
         meta(name: "viewport", content: "width=device-width, minimum-scale=1.0")
 
+        script(src: "/resources/components/jquery/dist/jquery.js") {}
+        script(src: "/resources/components/bootstrap/dist/js/bootstrap.js") {}
         script(src: "/resources/components/angular/angular.js") {}
         script(src: "/resources/components/angular-resource/angular-resource.js") {}
         script(src: "/resources/components/angular-route/angular-route.js") {}
@@ -23,7 +25,7 @@ html {
         script(src: "/resources/js/athlete/athleteResource.js") {}
         script(src: "/resources/js/navbar/navbarDirective.js") {}
 
-        link(rel: "stylesheet", href: "/resources/css/bootstrap.css")
+        link(rel: "stylesheet", href: "/resources/components/bootstrap/dist/css/bootstrap.css")
         link(rel: "stylesheet", href: "/resources/css/base.css")
     }
 

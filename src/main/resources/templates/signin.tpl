@@ -7,7 +7,7 @@ html {
         meta(charset: "utf-8")
         meta(name: "viewport", content: "width=device-width, minimum-scale=1.0")
 
-        link(rel: "stylesheet", href: "/resources/css/bootstrap.css")
+        link(rel: "stylesheet", href: "/resources/components/bootstrap/dist/css/bootstrap.css")
         link(rel: "stylesheet", href: "/resources/css/base.css")
     }
 
