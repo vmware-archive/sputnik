@@ -1,16 +1,31 @@
 package templates
 
-layout 'layout.tpl',
-        pageTitle: 'Sputnik - sign in',
-        signedIn: true,
-        mainBody: contents {
-            div("ng-app": "sputnikApp") {
-                div(class: 'row') {
-                    div(class: 'col-lg-6', "ng-controller": "profileController") {
-                        h1("Welcome {{profile.name}}")
-                    }
-                }
+yieldUnescaped "<!doctype html>"
+html {
+    head {
+        title('Sputnik - welcome')
+        meta(charset: "utf-8")
+        meta(name: "viewport", content: "width=device-width, minimum-scale=1.0")
 
-                div("ng-view": true)
-            }
-        }
+        script(src: "/resources/components/angular/angular.js") {}
+        script(src: "/resources/components/angular-resource/angular-resource.js") {}
+        script(src: "/resources/components/angular-route/angular-route.js") {}
+        script(src: "/resources/js/base.js") {}
+        script(src: "/resources/js/segmentEfforts/segmentEffortsController.js") {}
+        script(src: "/resources/js/segmentEfforts/segmentEffortController.js") {}
+        script(src: "/resources/js/segmentEfforts/segmentEffortsResource.js") {}
+        script(src: "/resources/js/segmentEfforts/segmentResource.js") {}
+        script(src: "/resources/js/segmentEfforts/segmentEffortsDirective.js") {}
+        script(src: "/resources/js/profile/profileController.js") {}
+        script(src: "/resources/js/profile/profileRepository.js") {}
+        script(src: "/resources/js/maps/mapController.js") {}
+        script(src: "/resources/js/maps/mapDirective.js") {}
+        script(src: "/resources/js/athlete/athleteResource.js") {}
+        script(src: "/resources/js/navbar/navbarDirective.js") {}
+
+        link(rel: "stylesheet", href: "/resources/css/bootstrap.css")
+        link(rel: "stylesheet", href: "/resources/css/base.css")
+    }
+
+    body("ng-app": "sputnikApp", "ng-view": true)
+}
