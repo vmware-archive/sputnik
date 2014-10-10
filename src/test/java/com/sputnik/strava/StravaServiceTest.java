@@ -144,6 +144,19 @@ public class StravaServiceTest extends TestCase {
     }
 
     @Test
+    public void testGetAthleteProfileNoAvatar() throws Exception {
+        StravaAthleteProfile stravaAthleteProfile = new StravaAthleteProfile(8, "Fred", "Smith", "freddy@example.com", "avatar/athlete/medium.png", "avatar/athlete/large.png");
+
+        doReturn(athleteOperations).when(strava).athleteOperations();
+        doReturn(stravaAthleteProfile).when(athleteOperations).getAthleteProfile();
+
+        AthleteProfile athleteProfile = stravaService.getAthleteProfile();
+
+        assertEquals(null, athleteProfile.getAvatarMedium());
+        assertEquals(null, athleteProfile.getAvatarLarge());
+    }
+
+    @Test
     public void testGetSegmentById() throws Exception {
         StravaMap map = new StravaMap("1234", "^&UY^&", 5);
         StravaSegment segment = new StravaSegment(2, "Pearl Street", "foosball", 123.4F, map);

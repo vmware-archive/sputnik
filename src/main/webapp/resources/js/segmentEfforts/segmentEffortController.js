@@ -3,19 +3,10 @@ angular.module("sputnikControllers").controller("segmentEffortController", ['$sc
     var promise = segmentEffortsResource.get({segmentEffortId: $routeParams.segmentEffortId}).$promise;
 
     promise.then(assignSegmentEffort);
-    promise.then(findSegment);
     promise.then(findAthlete);
 
     function assignSegmentEffort(segmentEffort) {
         $scope.segmentEffort = segmentEffort;
-    }
-
-    function findSegment(segmentEffort) {
-        segmentResource.get({segmentId: segmentEffort.segmentId}).$promise.then(assignSegment);
-    }
-
-    function assignSegment(segment) {
-        $scope.segment = segment;
     }
 
     function findAthlete(segmentEffort) {

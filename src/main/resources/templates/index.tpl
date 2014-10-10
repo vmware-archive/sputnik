@@ -29,5 +29,8 @@ html {
         link(rel: "stylesheet", href: "/resources/css/base.css")
     }
 
-    body("ng-app": "sputnikApp", "ng-view": true)
+    body("ng-app": "sputnikApp") {
+        div("sputnik-navbar": null) {}
+        div("ng-view": true) {}
+    }
 }

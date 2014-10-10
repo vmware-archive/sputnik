@@ -1,34 +1,19 @@
-<sputnik-navbar></sputnik-navbar>
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
-            <div class="row">
-                <div class="col-md-4">
-                    <a href="#/segmentEfforts" class="btn btn-default">back</a>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-4 text-center">
-                    <sputnik-map polyline="segment.mapPolyline" size="250"></sputnik-map>
-                </div>
-
-
-                <div class="col-md-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4>{{segmentEffort.name}}</h4>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-4 col-lg-3 text-center">
+                            <sputnik-map segment-id="segmentEffort.segmentId" size="235"></sputnik-map>
                         </div>
-                        <div class="panel-body">
+                        <div class="col-md-6">
+                            <h3>{{segmentEffort.name}}</h3>
                             <h5>{{athlete.name}}</h5>
+                            <div>Distance: {{segmentEffort.distance}}m</div>
+                            <div>Date: {{segmentEffort.date | date : 'short'}}</div>
+                            <div>Elapsed Time: {{segmentEffort.elapsedTime}}s</div>
                         </div>
-
-                        <ul class="list-group">
-                            <li class="list-group-item">Distance: {{segmentEffort.distance}}m</li>
-                            <li class="list-group-item">Date: {{segmentEffort.date | date : 'short'}}</li>
-                            <li class="list-group-item">Segment Id: {{segmentEffort.segmentId}}</li>
-                            <li class="list-group-item">Elapsed Time: {{segmentEffort.elapsedTime}}s</li>
-                        </ul>
                     </div>
                 </div>
             </div>

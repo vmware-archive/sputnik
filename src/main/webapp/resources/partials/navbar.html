@@ -5,11 +5,12 @@
 
             <li class="dropdown">
                 <a class="avatar-small"><img ng-src="{{profile.avatarMedium}}"
-                                             ng-show="profile.avatarMedium !== undefined"
+                                             ng-show="profile.avatarMedium != undefined"
                                              alt="avatar"
                                              class="img-rounded"></a>
                 <a class="dropdown-toggle" data-toggle="dropdown">{{profile.name}}<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
+                    <li><a href="#/segmentEfforts">My efforts</a></li>
                     <li><a href="/signout">Logout</a></li>
                 </ul>
             </li>

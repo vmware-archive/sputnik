@@ -84,11 +84,14 @@ public class StravaService {
     }
 
     private AthleteProfile athleteProfileCreator(StravaAthleteProfile stravaAthleteProfile) {
+        String avatarMedium = (stravaAthleteProfile.getAvatarMedium().equals("avatar/athlete/medium.png")) ? null : stravaAthleteProfile.getAvatarMedium();
+        String avatarLarge = (stravaAthleteProfile.getAvatarLarge().equals("avatar/athlete/large.png")) ? null : stravaAthleteProfile.getAvatarLarge();
+        
         return new AthleteProfile(
                 stravaAthleteProfile.getEmail(),
                 stravaAthleteProfile.getName(),
-                stravaAthleteProfile.getAvatarMedium(),
-                stravaAthleteProfile.getAvatarLarge()
+                avatarMedium,
+                avatarLarge
         );
     }
 
