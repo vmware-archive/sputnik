@@ -17,9 +17,11 @@
                     <div class="panel-heading">
                         <h4>{{segmentEffort.name}}</h4>
                     </div>
+                    <div class="panel-body">
+                        <h5>{{athlete.name}}</h5>
+                    </div>
 
                     <ul class="list-group">
-                        <li class="list-group-item">Athlete Id: {{segmentEffort.athleteId}}</li>
                         <li class="list-group-item">Distance: {{segmentEffort.distance}}m</li>
                         <li class="list-group-item">Date: {{segmentEffort.date | date : 'short'}}</li>
                         <li class="list-group-item">Segment Id: {{segmentEffort.segmentId}}</li>

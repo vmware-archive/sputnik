@@ -20,6 +20,7 @@ html {
         script(src: "/resources/js/profile/profileRepository.js") {}
         script(src: "/resources/js/maps/mapController.js") {}
         script(src: "/resources/js/maps/mapDirective.js") {}
+        script(src: "/resources/js/athlete/athleteResource.js") {}
 
         link(rel: "stylesheet", href: "/resources/css/bootstrap.css")
         link(rel: "stylesheet", href: "/resources/css/base.css")

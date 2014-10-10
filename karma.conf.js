@@ -19,6 +19,7 @@ module.exports = function (config) {
             'src/main/webapp/resources/components/angular/angular.js',
             'src/main/webapp/resources/components/angular-resource/angular-resource.js',
             'src/main/webapp/resources/components/angular-mocks/angular-mocks.js',
+            'src/main/webapp/resources/js/base.js',
             'src/main/webapp/resources/js/**/*.js',
             'src/test/resources/js/**/*Spec.js'
         ],
