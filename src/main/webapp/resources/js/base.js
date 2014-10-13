@@ -6,19 +6,15 @@ var sputnikApp = angular.module("sputnikApp", ['ngRoute', 'sputnikControllers', 
 sputnikApp.config(['$routeProvider',
     function($routeProvider) {
         $routeProvider.
-            when('/segmentEfforts', {
-                templateUrl: 'resources/partials/segmentEfforts.html',
-                controller: 'segmentEffortsController'
-            }).
             when('/activities', {
                 templateUrl: 'resources/partials/activities.html',
                 controller: 'activitiesController'
             }).
-            when('/segmentEfforts/:segmentEffortId', {
-                templateUrl: 'resources/partials/segmentEffort.html',
-                controller: 'segmentEffortController'
+            when('/activities/:activityId', {
+                templateUrl: 'resources/partials/activity.html',
+                controller: 'activityController'
             }).
             otherwise({
-                redirectTo: '/segmentEfforts'
+                redirectTo: '/activities'
             });
     }]);

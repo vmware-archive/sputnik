@@ -1,41 +1,32 @@
 describe('segmentEffortController', function () {
-    var $scope, segmentEffortsResource, segmentEffortsDeferred, athleteResource, athleteDeferred;
+    var $scope, segmentResource, segmentDeferred;
 
     beforeEach(module('sputnikControllers'));
 
-    beforeEach(inject(function ($rootScope, $q, $controller, _segmentEffortsResource_, _athleteResource_) {
+    beforeEach(inject(function ($rootScope, $q, $controller, _segmentResource_) {
         $scope = $rootScope.$new();
-        segmentEffortsResource = _segmentEffortsResource_;
-        athleteResource = _athleteResource_;
+        segmentResource = _segmentResource_;
 
-        segmentEffortsDeferred = $q.defer();
-        athleteDeferred = $q.defer();
+        segmentDeferred = $q.defer();
+        $scope.segmentEffort = {};
 
-        spyOn(segmentEffortsResource, "get").and.returnValue({$promise: segmentEffortsDeferred.promise});
-        spyOn(athleteResource, "get").and.returnValue({$promise: athleteDeferred.promise});
+        spyOn(segmentResource, "get").and.returnValue({$promise: segmentDeferred.promise});
 
         $controller('segmentEffortController', {
             $scope: $scope,
-            $routeParams: {segmentEffortId: '17'},
-            segmentEffortsResource: segmentEffortsResource,
-            athleteResource: athleteResource
+            segmentResource: segmentResource
         });
     }));
 
-    it('sets segmentEffort', function () {
-        segmentEffortsDeferred.resolve({segmentId: '12345'});
-
+    it('sets imageSource', function () {
         $scope.$apply();
-        expect($scope.segmentEffort).toEqual({segmentId: '12345'});
-        expect(segmentEffortsResource.get).toHaveBeenCalledWith({segmentEffortId: '17'});
-    });
+        expect($scope.segment).toEqual(undefined);
 
-    it('sets athlete', function () {
-        segmentEffortsDeferred.resolve({segmentId: '12345', athleteId: '9876', other: "attribute"});
-        athleteDeferred.resolve({name: 'Fred'});
+        $scope.segmentEffort = {segmentId: "17"};
+        segmentDeferred.resolve("segment");
         $scope.$apply();
 
-        expect($scope.athlete).toEqual({name: 'Fred'});
-        expect(athleteResource.get).toHaveBeenCalledWith({athleteId: '9876'});
+        expect(segmentResource.get).toHaveBeenCalledWith({segmentId: '17'});
+        expect($scope.segment).toEqual("segment");
     });
 });

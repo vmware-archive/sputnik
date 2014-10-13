@@ -1,19 +1,14 @@
-angular.module("sputnikControllers").controller("segmentEffortController", ['$scope', '$routeParams', 'segmentResource', 'segmentEffortsResource', 'athleteResource', function ($scope, $routeParams, segmentResource, segmentEffortsResource, athleteResource) {
+angular.module("sputnikControllers").controller("segmentEffortController", ['$scope', 'segmentResource', function ($scope, segmentResource) {
 
-    var promise = segmentEffortsResource.get({segmentEffortId: $routeParams.segmentEffortId}).$promise;
+    $scope.$watch('segmentEffort.segmentId', fetchSegment);
 
-    promise.then(assignSegmentEffort);
-    promise.then(findAthlete);
-
-    function assignSegmentEffort(segmentEffort) {
-        $scope.segmentEffort = segmentEffort;
+    function fetchSegment() {
+        if($scope.segmentEffort.segmentId !== undefined) {
+            segmentResource.get({segmentId: $scope.segmentEffort.segmentId}).$promise.then(assignSegment);
+        }
     }
 
-    function findAthlete(segmentEffort) {
-        athleteResource.get({athleteId: segmentEffort.athleteId}).$promise.then(assignAthlete);
-    }
-
-    function assignAthlete(athlete) {
-        $scope.athlete = athlete;
+    function assignSegment(segment) {
+        $scope.segment = segment;
     }
 }]);

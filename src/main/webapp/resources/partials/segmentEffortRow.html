@@ -2,11 +2,10 @@
     <div class="panel-body">
         <div class="media">
             <a class="pull-left" href="#">
-                <sputnik-map segment-id="segmentEffort.segmentId" size="64"></sputnik-map>
+                <sputnik-map polyline="segment.mapPolyline" size="64"></sputnik-map>
             </a>
             <div class="media-body">
-                <h3 class="media-heading"><a ng-href="#/segmentEfforts/{{segmentEffort.id}}">{{segmentEffort.name}}</a></h3>
-                <span>{{segmentEffort.date | date : 'short'}}</span>
+                <h3 class="media-heading">{{segmentEffort.name}}</h3>
             </div>
         </div>
     </div>

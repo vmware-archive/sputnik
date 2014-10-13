@@ -4,6 +4,7 @@ angular.module("sputnikDirectives").directive("sputnikSegmentEffort", function (
         restrict: 'A',
         scope: {
             segmentEffort: "=sputnikSegmentEffort"
-        }
+        },
+        controller: "segmentEffortController"
     }
 });
