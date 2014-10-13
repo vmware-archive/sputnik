@@ -123,6 +123,7 @@ public class StravaService {
                 stravaActivity.getElapsedTime(),
                 stravaActivity.getDate(),
                 stravaActivity.getMap().getPolyline(),
+                stravaActivity.getMap().getSummaryPolyline(),
                 segmentEfforts
         );
     }

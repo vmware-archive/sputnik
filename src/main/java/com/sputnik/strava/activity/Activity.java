@@ -13,9 +13,10 @@ public class Activity {
     private long elapsedTime;
     private String date;
     private String mapPolyline;
+    private String mapSummaryPolyline;
     private List<SegmentEffort> segmentEfforts;
 
-    public Activity(long id, String name, String type, String description, float distance, long elapsedTime, String date, String mapPolyline, List<SegmentEffort> segmentEfforts) {
+    public Activity(long id, String name, String type, String description, float distance, long elapsedTime, String date, String mapPolyline, String mapSummaryPolyline, List<SegmentEffort> segmentEfforts) {
         this.id = id;
         this.name = name;
         this.type = type;
@@ -24,6 +25,7 @@ public class Activity {
         this.elapsedTime = elapsedTime;
         this.date = date;
         this.mapPolyline = mapPolyline;
+        this.mapSummaryPolyline = mapSummaryPolyline;
         this.segmentEfforts = segmentEfforts;
     }
 
@@ -57,6 +59,10 @@ public class Activity {
 
     public String getMapPolyline() {
         return mapPolyline;
+    }
+
+    public String getMapSummaryPolyline() {
+        return mapSummaryPolyline;
     }
 
     public List<SegmentEffort> getSegmentEfforts() {

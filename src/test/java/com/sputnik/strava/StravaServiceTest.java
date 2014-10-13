@@ -162,7 +162,7 @@ public class StravaServiceTest extends TestCase {
 
     @Test
     public void testGetSegmentById() throws Exception {
-        StravaMap map = new StravaMap("1234", "^&UY^&", 5);
+        StravaMap map = new StravaMap("1234", "^&UY^&", "ABC", 5);
         StravaSegment segment = new StravaSegment(2, "Pearl Street", "foosball", 123.4F, map);
         
         doReturn(segmentOperations).when(strava).segmentOperations();
@@ -180,7 +180,7 @@ public class StravaServiceTest extends TestCase {
 
     @Test
     public void testGetActivities() throws Exception {
-        StravaMap map = new StravaMap("1234", "^&UY^&", 5);
+        StravaMap map = new StravaMap("1234", "^&UY^&", "ABC", 5);
 
         StravaSegment segment = new StravaSegment(2);
         StravaSegmentEffortAthlete athlete = new StravaSegmentEffortAthlete("9");
@@ -205,6 +205,7 @@ public class StravaServiceTest extends TestCase {
         assertEquals(23, activity.getElapsedTime());
         assertEquals("2006-04-21T13:20:40Z", activity.getDate());
         assertEquals("^&UY^&", activity.getMapPolyline());
+        assertEquals("ABC", activity.getMapSummaryPolyline());
 
         assertEquals(1, activity.getSegmentEfforts().size());
 
@@ -216,7 +217,7 @@ public class StravaServiceTest extends TestCase {
 
     @Test
     public void testGetActivityById() throws Exception {
-        StravaMap map = new StravaMap("1234", "^&UY^&", 5);
+        StravaMap map = new StravaMap("1234", "^&UY^&", "ABC", 5);
 
         StravaSegment segment = new StravaSegment(2);
         StravaSegmentEffortAthlete athlete = new StravaSegmentEffortAthlete("9");
@@ -238,6 +239,7 @@ public class StravaServiceTest extends TestCase {
         assertEquals(23, returnedActivity.getElapsedTime());
         assertEquals("2006-04-21T13:20:40Z", returnedActivity.getDate());
         assertEquals("^&UY^&", returnedActivity.getMapPolyline());
+        assertEquals("ABC", returnedActivity.getMapSummaryPolyline());
 
         assertEquals(1, returnedActivity.getSegmentEfforts().size());
 
