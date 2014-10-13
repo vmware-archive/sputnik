@@ -1,14 +1,12 @@
 package com.sputnik.strava;
 
+import com.sputnik.strava.activity.Activity;
 import com.sputnik.strava.profile.AthleteProfile;
 import com.sputnik.strava.segment.Segment;
 import com.sputnik.strava.segmenteffort.SegmentEffort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.social.strava.api.Strava;
-import org.springframework.social.strava.api.StravaAthleteProfile;
-import org.springframework.social.strava.api.StravaSegment;
-import org.springframework.social.strava.api.StravaSegmentEffort;
+import org.springframework.social.strava.api.*;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -41,7 +39,7 @@ public class StravaService {
             stravaSegmentEfforts.addAll(strava.segmentEffortOperations().getSegmentEfforts(id, currentAthleteId));
         }
 
-        return stravaSegmentEfforts.stream().map(this::segmentEffortCreator).collect(Collectors.toList());
+        return segmentEffortListCreator(stravaSegmentEfforts);
     }
 
     public SegmentEffort getSegmentEffortById(String id) {
@@ -56,7 +54,7 @@ public class StravaService {
             stravaSegmentEfforts.addAll(strava.segmentEffortOperations().getAllSegmentEfforts(id, startTime, endTime));
         }
 
-        return stravaSegmentEfforts.stream().map(this::segmentEffortCreator).collect(Collectors.toList());
+        return segmentEffortListCreator(stravaSegmentEfforts);
     }
 
     public AthleteProfile getAthleteProfile() {
@@ -71,6 +69,36 @@ public class StravaService {
         return athleteProfileCreator(stravaAthleteProfile);
     }
 
+    public Segment getSegmentById(String id) {
+        StravaSegment stravaSegment = strava.segmentOperations().getSegmentById(id);
+        return new Segment(
+                stravaSegment.getId(),
+                stravaSegment.getName(),
+                stravaSegment.getActivityType(),
+                stravaSegment.getDistance(),
+                stravaSegment.getMap().getPolyline()
+        );
+    }
+
+    public List<Activity> getActivities() {
+        List<StravaActivity> stravaActivities = strava.activityOperations().getAllActivities();
+
+        return stravaActivities.stream().map(this::activityCreator).collect(Collectors.toList());
+    }
+
+    public Activity getActivityById(String id) {
+        StravaActivity stravaActivity = strava.activityOperations().getActivityById(id);
+
+        return activityCreator(stravaActivity);
+    }
+
+    private List<SegmentEffort> segmentEffortListCreator(List<StravaSegmentEffort> stravaSegmentEfforts) {
+        if(stravaSegmentEfforts == null) {
+            return new ArrayList<>();
+        }
+        return stravaSegmentEfforts.stream().map(this::segmentEffortCreator).collect(Collectors.toList());
+    }
+
     private SegmentEffort segmentEffortCreator(StravaSegmentEffort stravaSegmentEffort) {
         return new SegmentEffort(
                 stravaSegmentEffort.getId(),
@@ -83,6 +111,22 @@ public class StravaService {
         );
     }
 
+    private Activity activityCreator(StravaActivity stravaActivity) {
+        List<SegmentEffort> segmentEfforts = segmentEffortListCreator(stravaActivity.getSegmentEfforts());
+
+        return new Activity(
+                stravaActivity.getId(),
+                stravaActivity.getName(),
+                stravaActivity.getType(),
+                stravaActivity.getDescription(),
+                stravaActivity.getDistance(),
+                stravaActivity.getElapsedTime(),
+                stravaActivity.getDate(),
+                stravaActivity.getMap().getPolyline(),
+                segmentEfforts
+        );
+    }
+
     private AthleteProfile athleteProfileCreator(StravaAthleteProfile stravaAthleteProfile) {
         String avatarMedium = (stravaAthleteProfile.getAvatarMedium().equals("avatar/athlete/medium.png")) ? null : stravaAthleteProfile.getAvatarMedium();
         String avatarLarge = (stravaAthleteProfile.getAvatarLarge().equals("avatar/athlete/large.png")) ? null : stravaAthleteProfile.getAvatarLarge();
@@ -92,17 +136,6 @@ public class StravaService {
                 stravaAthleteProfile.getName(),
                 avatarMedium,
                 avatarLarge
-        );
-    }
-
-    public Segment getSegmentById(String id) {
-        StravaSegment stravaSegment = strava.segmentOperations().getSegmentById(id);
-        return new Segment(
-                stravaSegment.getId(),
-                stravaSegment.getName(),
-                stravaSegment.getActivityType(),
-                stravaSegment.getDistance(),
-                stravaSegment.getMap().getPolyline()
         );
     }
 }

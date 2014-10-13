@@ -1,5 +1,6 @@
 package com.sputnik.strava;
 
+import com.sputnik.strava.activity.Activity;
 import com.sputnik.strava.profile.AthleteProfile;
 import com.sputnik.strava.segment.Segment;
 import com.sputnik.strava.segmenteffort.SegmentEffort;
@@ -32,6 +33,9 @@ public class StravaServiceTest extends TestCase {
 
     @Mock
     StravaAthleteProfile profile;
+
+    @Mock
+    ActivityOperations activityOperations;
 
     @InjectMocks
     StravaService stravaService;
@@ -171,5 +175,74 @@ public class StravaServiceTest extends TestCase {
         assertEquals("foosball", returnedSegment.getActivityType());
         assertEquals(123.4, returnedSegment.getDistance(), .1);
         assertEquals("^&UY^&", returnedSegment.getMapPolyline());
+    }
+
+
+    @Test
+    public void testGetActivities() throws Exception {
+        StravaMap map = new StravaMap("1234", "^&UY^&", 5);
+
+        StravaSegment segment = new StravaSegment(2);
+        StravaSegmentEffortAthlete athlete = new StravaSegmentEffortAthlete("9");
+
+        StravaSegmentEffort segmentEffort = new StravaSegmentEffort(8, "Pearl Street", athlete, 23.4F, "2006-04-21T13:20:40Z", segment, 15);
+
+        List<StravaActivity> activities = asList(new StravaActivity(1, "Pearl Street Climb", "Ride", "Best climb ever", 1.0F, 23, "2006-04-21T13:20:40Z", map, asList(segmentEffort)));
+
+        doReturn(activityOperations).when(strava).activityOperations();
+        doReturn(activities).when(activityOperations).getAllActivities();
+
+        List<Activity> allActivities = stravaService.getActivities();
+
+        assertEquals(1, allActivities.size());
+        Activity activity = allActivities.get(0);
+
+        assertEquals(1, activity.getId());
+        assertEquals("Pearl Street Climb", activity.getName());
+        assertEquals("Ride", activity.getType());
+        assertEquals("Best climb ever", activity.getDescription());
+        assertEquals(1.0F, activity.getDistance(), .1);
+        assertEquals(23, activity.getElapsedTime());
+        assertEquals("2006-04-21T13:20:40Z", activity.getDate());
+        assertEquals("^&UY^&", activity.getMapPolyline());
+
+        assertEquals(1, activity.getSegmentEfforts().size());
+
+        SegmentEffort returnedSegmentEffort = activity.getSegmentEfforts().get(0);
+
+        assertEquals(8, returnedSegmentEffort.getId());
+    }
+
+
+    @Test
+    public void testGetActivityById() throws Exception {
+        StravaMap map = new StravaMap("1234", "^&UY^&", 5);
+
+        StravaSegment segment = new StravaSegment(2);
+        StravaSegmentEffortAthlete athlete = new StravaSegmentEffortAthlete("9");
+
+        StravaSegmentEffort segmentEffort = new StravaSegmentEffort(8, "Pearl Street", athlete, 23.4F, "2006-04-21T13:20:40Z", segment, 15);
+
+        StravaActivity activity = new StravaActivity(1, "Pearl Street Climb", "Ride", "Best climb ever", 1.0F, 23, "2006-04-21T13:20:40Z", map, asList(segmentEffort));
+
+        doReturn(activityOperations).when(strava).activityOperations();
+        doReturn(activity).when(activityOperations).getActivityById("7");
+
+        Activity returnedActivity = stravaService.getActivityById("7");
+
+        assertEquals(1, returnedActivity.getId());
+        assertEquals("Pearl Street Climb", returnedActivity.getName());
+        assertEquals("Ride", returnedActivity.getType());
+        assertEquals("Best climb ever", returnedActivity.getDescription());
+        assertEquals(1.0F, returnedActivity.getDistance(), .1);
+        assertEquals(23, returnedActivity.getElapsedTime());
+        assertEquals("2006-04-21T13:20:40Z", returnedActivity.getDate());
+        assertEquals("^&UY^&", returnedActivity.getMapPolyline());
+
+        assertEquals(1, returnedActivity.getSegmentEfforts().size());
+
+        SegmentEffort returnedSegmentEffort = returnedActivity.getSegmentEfforts().get(0);
+
+        assertEquals(8, returnedSegmentEffort.getId());
     }
 }
