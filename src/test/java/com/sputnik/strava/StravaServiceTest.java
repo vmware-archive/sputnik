@@ -1,6 +1,5 @@
 package com.sputnik.strava;
 
-import com.sputnik.strava.activity.Activity;
 import com.sputnik.strava.activity.ActivityConverter;
 import com.sputnik.strava.profile.AthleteProfile;
 import com.sputnik.strava.profile.AthleteProfileConverter;
@@ -169,35 +168,5 @@ public class StravaServiceTest extends TestCase {
         Segment returnedSegment = stravaService.getSegmentById("1234567");
 
         assertEquals(segment, returnedSegment);
-    }
-
-
-    @Test
-    public void testGetActivities() throws Exception {
-        List<Activity> activities = asList(mock(Activity.class));
-        List<StravaActivity> stravaActivities = asList(mock(StravaActivity.class));
-
-        doReturn(activityOperations).when(strava).activityOperations();
-        doReturn(stravaActivities).when(activityOperations).getAllActivities();
-        doReturn(activities).when(activityConverter).convertList(stravaActivities);
-
-        List<Activity> allActivities = stravaService.getActivities();
-
-        assertEquals(activities, allActivities);
-    }
-
-
-    @Test
-    public void testGetActivityById() throws Exception {
-        Activity activity = mock(Activity.class);
-        StravaActivity stravaActivity = mock(StravaActivity.class);
-
-        doReturn(activityOperations).when(strava).activityOperations();
-        doReturn(stravaActivity).when(activityOperations).getActivityById("7");
-        doReturn(activity).when(activityConverter).convert(stravaActivity);
-
-        Activity returnedActivity = stravaService.getActivityById("7");
-
-        assertEquals(activity, returnedActivity);
     }
 }

@@ -1,6 +1,5 @@
 package com.sputnik.strava.activity;
 
-import com.sputnik.strava.StravaService;
 import com.sputnik.strava.segmenteffort.SegmentEffort;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class ActivitiesControllerTest {
     @Mock
-    StravaService stravaService;
+    ActivityService activityService;
 
     MockMvc mockMvc;
 
@@ -44,7 +43,7 @@ public class ActivitiesControllerTest {
         List<SegmentEffort> segmentEfforts = asList(new SegmentEffort(123, "Pearl Street", "456", 2.3F, "2006-04-21T13:20:40Z", 789, 10));
         List<Activity> activities = asList(new Activity(123, "Pearl Street", "Ride", "Cool ride", 23.4F, 15, "2006-04-21T13:20:40Z", "^&UIHT^&", "(*&",  segmentEfforts));
 
-        doReturn(activities).when(stravaService).getActivities();
+        doReturn(activities).when(activityService).getActivities();
 
         mockMvc.perform(get("/strava/activities"))
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -58,7 +57,7 @@ public class ActivitiesControllerTest {
         List<SegmentEffort> segmentEfforts = asList(new SegmentEffort(123, "Pearl Street", "456", 2.3F, "2006-04-21T13:20:40Z", 789, 10));
         Activity activity = new Activity(123, "Pearl Street", "Ride", "Cool ride", 23.4F, 15, "2006-04-21T13:20:40Z", "^&UIHT^&", "(*&", segmentEfforts);
 
-        doReturn(activity).when(stravaService).getActivityById("7");
+        doReturn(activity).when(activityService).getActivityById("7");
 
         mockMvc.perform(get("/strava/activities/7"))
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
