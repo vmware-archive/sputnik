@@ -1,4 +1,4 @@
-package com.sputnik.strava.profile;
+package com.sputnik.strava.athleteprofile;
 
 import junit.framework.TestCase;
 import org.junit.Test;

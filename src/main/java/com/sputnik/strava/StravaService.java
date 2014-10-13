@@ -1,14 +1,11 @@
 package com.sputnik.strava;
 
-import com.sputnik.strava.profile.AthleteProfile;
-import com.sputnik.strava.profile.AthleteProfileConverter;
 import com.sputnik.strava.segment.SegmentConverter;
 import com.sputnik.strava.segmenteffort.SegmentEffort;
 import com.sputnik.strava.segmenteffort.SegmentEffortConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.social.strava.api.Strava;
-import org.springframework.social.strava.api.StravaAthleteProfile;
 import org.springframework.social.strava.api.StravaSegmentEffort;
 import org.springframework.stereotype.Service;
 
@@ -21,9 +18,6 @@ public class StravaService {
     private Strava strava;
 
     private String[] segmentIds;
-
-    @Autowired
-    AthleteProfileConverter athleteProfileConverter;
 
     @Autowired
     SegmentConverter segmentConverter;
@@ -66,17 +60,5 @@ public class StravaService {
         }
 
         return segmentEffortConverter.convertList(stravaSegmentEfforts);
-    }
-
-    public AthleteProfile getAthleteProfile() {
-        StravaAthleteProfile stravaAthleteProfile = strava.athleteOperations().getAthleteProfile();
-
-        return athleteProfileConverter.convert(stravaAthleteProfile);
-    }
-
-    public AthleteProfile getAthleteProfileById(String id) {
-        StravaAthleteProfile stravaAthleteProfile = strava.athleteOperations().getAthleteProfileById(id);
-
-        return athleteProfileConverter.convert(stravaAthleteProfile);
     }
 }

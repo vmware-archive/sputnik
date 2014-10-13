@@ -1,6 +1,5 @@
-package com.sputnik.strava.profile;
+package com.sputnik.strava.athleteprofile;
 
-import com.sputnik.strava.StravaService;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -14,14 +13,14 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class ProfileControllerTest {
+public class AthletesControllerTest {
     @Mock
-    StravaService stravaService;
+    AthleteProfileService athleteProfileService;
 
     MockMvc mockMvc;
 
     @InjectMocks
-    ProfileController controller;
+    AthletesController controller;
 
     @Before
     public void setup() {
@@ -31,7 +30,7 @@ public class ProfileControllerTest {
 
     @Test
     public void testLoad() throws Exception {
-        mockMvc.perform(get("/strava/profile"))
+        mockMvc.perform(get("/strava/athletes/1234"))
                 .andExpect(status().isOk());
     }
 
@@ -40,9 +39,9 @@ public class ProfileControllerTest {
 
         AthleteProfile profile = new AthleteProfile("freddy@example.com", "Fred Derf", "medium.jpg", "large.jpg");
 
-        doReturn(profile).when(stravaService).getAthleteProfile();
+        doReturn(profile).when(athleteProfileService).getAthleteProfileById("1234");
 
-        mockMvc.perform(get("/strava/profile"))
+        mockMvc.perform(get("/strava/athletes/1234"))
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
                 .andExpect(content().string("{\"email\":\"freddy@example.com\",\"name\":\"Fred Derf\",\"avatarMedium\":\"medium.jpg\",\"avatarLarge\":\"large.jpg\"}"));
     }

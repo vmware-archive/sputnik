@@ -1,7 +1,5 @@
 package com.sputnik.strava;
 
-import com.sputnik.strava.profile.AthleteProfile;
-import com.sputnik.strava.profile.AthleteProfileConverter;
 import com.sputnik.strava.segmenteffort.SegmentEffort;
 import com.sputnik.strava.segmenteffort.SegmentEffortConverter;
 import junit.framework.TestCase;
@@ -28,9 +26,6 @@ public class StravaServiceTest extends TestCase {
 
     @Mock
     SegmentEffortOperations segmentEffortOperations;
-
-    @Mock
-    AthleteProfileConverter athleteProfileConverter;
 
     @Mock
     SegmentEffortConverter segmentEffortConverter;
@@ -111,33 +106,5 @@ public class StravaServiceTest extends TestCase {
 
         verify(segmentEffortOperations).getAllSegmentEfforts("8269800", "2006-04-21T13:20:40Z", "2006-04-22T13:20:40Z");
         verify(segmentEffortOperations).getAllSegmentEfforts("4784391", "2006-04-21T13:20:40Z", "2006-04-22T13:20:40Z");
-    }
-
-    @Test
-    public void testGetAthleteProfile() throws Exception {
-        StravaAthleteProfile stravaAthleteProfile = mock(StravaAthleteProfile.class);
-        AthleteProfile athleteProfile = mock(AthleteProfile.class);
-
-        doReturn(athleteOperations).when(strava).athleteOperations();
-        doReturn(stravaAthleteProfile).when(athleteOperations).getAthleteProfile();
-        doReturn(athleteProfile).when(athleteProfileConverter).convert(stravaAthleteProfile);
-
-        AthleteProfile returnedAthleteProfile = stravaService.getAthleteProfile();
-
-        assertEquals(athleteProfile, returnedAthleteProfile);
-    }
-
-    @Test
-    public void testGetAthleteProfileById() throws Exception {
-        StravaAthleteProfile stravaAthleteProfile = mock(StravaAthleteProfile.class);
-        AthleteProfile athleteProfile = mock(AthleteProfile.class);
-
-        doReturn(athleteOperations).when(strava).athleteOperations();
-        doReturn(stravaAthleteProfile).when(athleteOperations).getAthleteProfileById("17");
-        doReturn(athleteProfile).when(athleteProfileConverter).convert(stravaAthleteProfile);
-
-        AthleteProfile returnedAthleteProfile = stravaService.getAthleteProfileById("17");
-
-        assertEquals(athleteProfile, returnedAthleteProfile);
     }
 }

@@ -1,4 +1,4 @@
-package com.sputnik.strava.profile;
+package com.sputnik.strava.athleteprofile;
 
 public class AthleteProfile {
     private String email;

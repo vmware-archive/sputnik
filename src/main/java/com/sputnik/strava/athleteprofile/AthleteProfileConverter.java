@@ -1,4 +1,4 @@
-package com.sputnik.strava.profile;
+package com.sputnik.strava.athleteprofile;
 
 import com.sputnik.strava.StravaConverter;
 import org.springframework.social.strava.api.StravaAthleteProfile;
