@@ -1,31 +1,31 @@
 package com.sputnik.strava.segmenteffort;
 
+import com.sputnik.campaign.SegmentEntity;
+import com.sputnik.campaign.SegmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.social.strava.api.Strava;
 import org.springframework.social.strava.api.StravaSegmentEffort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class SegmentEffortService {
 
     private Strava strava;
-
-    private String[] segmentIds;
-
     private SegmentEffortConverter segmentEffortConverter;
+    private SegmentRepository segmentRepository;
 
     @Autowired
     public void setStrava(final Strava strava) {
         this.strava = strava;
     }
 
-    @Value("${sponsoredSegments}")
-    public void setSegmentIds(final String[] segmentIds) {
-        this.segmentIds = segmentIds;
+    @Autowired
+    public void setSegmentRepository(final SegmentRepository segmentRepository) {
+        this.segmentRepository = segmentRepository;
     }
 
     @Autowired
@@ -38,7 +38,7 @@ public class SegmentEffortService {
 
         List<StravaSegmentEffort> stravaSegmentEfforts = new ArrayList<>();
 
-        for(String id : segmentIds) {
+        for(String id : segmentIds()) {
             stravaSegmentEfforts.addAll(strava.segmentEffortOperations().getSegmentEfforts(id, currentAthleteId));
         }
 
@@ -53,10 +53,19 @@ public class SegmentEffortService {
     public List<SegmentEffort> getAllSegmentEfforts(String startTime, String endTime) {
         List<StravaSegmentEffort> stravaSegmentEfforts = new ArrayList<>();
 
-        for(String id : segmentIds) {
+        for(String id : segmentIds()) {
             stravaSegmentEfforts.addAll(strava.segmentEffortOperations().getAllSegmentEfforts(id, startTime, endTime));
         }
 
         return segmentEffortConverter.convertList(stravaSegmentEfforts);
+    }
+
+    private List<String> segmentIds() {
+        List<SegmentEntity> segmentEntities = segmentRepository.findWithCampaign();
+
+        List<String> segmentIds = segmentEntities.stream().map(s -> String.valueOf(s.getRemoteid())).collect(Collectors.toList());
+        segmentIds.forEach(System.out::println);
+
+        return segmentIds;
     }
 }

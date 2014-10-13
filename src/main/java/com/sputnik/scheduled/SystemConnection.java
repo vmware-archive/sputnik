@@ -1,6 +1,7 @@
 package com.sputnik.scheduled;
 
 
+import com.sputnik.campaign.SegmentRepository;
 import com.sputnik.strava.segmenteffort.SegmentEffortConverter;
 import com.sputnik.strava.segmenteffort.SegmentEffortService;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,11 +28,11 @@ public class SystemConnection {
     @Inject
     Environment env;
 
+    @Inject
+    SegmentRepository segmentRepository;
+
     @Value("${systemUserId}")
     String systemUserId;
-
-    @Value("${sponsoredSegments}")
-    String[] segmentIds;
 
     public SegmentEffortService getSegmentEffortService() {
         JdbcUsersConnectionRepository jdbcRepository = new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator, Encryptors.noOpText());
@@ -43,7 +44,7 @@ public class SystemConnection {
         SegmentEffortService segmentEffortService = new SegmentEffortService();
 
         segmentEffortService.setStrava(strava);
-        segmentEffortService.setSegmentIds(segmentIds);
+        segmentEffortService.setSegmentRepository(segmentRepository);
         segmentEffortService.setSegmentEffortConverter(new SegmentEffortConverter());
 
         return segmentEffortService;

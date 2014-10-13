@@ -17,7 +17,7 @@ public class Campaign implements Serializable{
     @JoinTable(name="campaignsegments",
             joinColumns=@JoinColumn(name="campaignid"),
             inverseJoinColumns=@JoinColumn(name="segmentid"))
-    Collection<Segment> segments;
+    Collection<SegmentEntity> segmentEntities;
 
 
     @Column

@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface CampaignRepository extends JpaRepository<Campaign, Long> {
 
-    @Query("select distinct c from Campaign c INNER JOIN c.segments s WHERE s.remoteid IN (:segmentIds)")
+    @Query("select distinct c from Campaign c INNER JOIN c.segmentEntities s WHERE s.remoteid IN (:segmentIds)")
     public Iterable<Campaign> findForSegmentIds(@Param("segmentIds") List<Long> segmentIds);
 
 }

@@ -6,7 +6,7 @@ import java.util.Collection;
 
 @Entity
 @Table(name = "segments")
-public class Segment implements Serializable {
+public class SegmentEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,11 +22,11 @@ public class Segment implements Serializable {
     @Column
     private long remoteid;
 
-    public Segment(long remoteid) {
+    public SegmentEntity(long remoteid) {
         this.remoteid = remoteid;
     }
 
-    public Segment() {
+    public SegmentEntity() {
     }
 
     public long getId() {

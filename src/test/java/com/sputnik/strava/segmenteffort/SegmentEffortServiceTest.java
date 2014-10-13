@@ -1,5 +1,7 @@
 package com.sputnik.strava.segmenteffort;
 
+import com.sputnik.campaign.SegmentEntity;
+import com.sputnik.campaign.SegmentRepository;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,13 +30,18 @@ public class SegmentEffortServiceTest extends TestCase {
     @Mock
     SegmentEffortConverter segmentEffortConverter;
 
+    @Mock
+    SegmentRepository segmentRepository;
+
     @InjectMocks
     SegmentEffortService segmentEffortService;
 
     @Test
     public void testGetSegmentEfforts() throws Exception {
-        String[] segmentIds = {"8269800", "4784391"};
-        segmentEffortService.setSegmentIds(segmentIds);
+        SegmentEntity segmentEntity = new SegmentEntity(8269800);
+        SegmentEntity secondSegmentEntity = new SegmentEntity(4784391);
+
+        doReturn(asList(segmentEntity, secondSegmentEntity)).when(segmentRepository).findWithCampaign();
 
         StravaAthleteProfile stravaAthleteProfile = mock(StravaAthleteProfile.class);
 
@@ -78,8 +85,10 @@ public class SegmentEffortServiceTest extends TestCase {
 
     @Test
     public void testGetAllSegmentEfforts() throws Exception {
-        String[] segmentIds = {"8269800", "4784391"};
-        segmentEffortService.setSegmentIds(segmentIds);
+        SegmentEntity segmentEntity = new SegmentEntity(8269800);
+        SegmentEntity secondSegmentEntity = new SegmentEntity(4784391);
+
+        doReturn(asList(segmentEntity, secondSegmentEntity)).when(segmentRepository).findWithCampaign();
 
         StravaAthleteProfile stravaAthleteProfile = mock(StravaAthleteProfile.class);
 
