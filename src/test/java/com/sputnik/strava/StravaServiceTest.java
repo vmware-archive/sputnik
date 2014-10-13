@@ -1,10 +1,7 @@
 package com.sputnik.strava;
 
-import com.sputnik.strava.activity.ActivityConverter;
 import com.sputnik.strava.profile.AthleteProfile;
 import com.sputnik.strava.profile.AthleteProfileConverter;
-import com.sputnik.strava.segment.Segment;
-import com.sputnik.strava.segment.SegmentConverter;
 import com.sputnik.strava.segmenteffort.SegmentEffort;
 import com.sputnik.strava.segmenteffort.SegmentEffortConverter;
 import junit.framework.TestCase;
@@ -33,19 +30,7 @@ public class StravaServiceTest extends TestCase {
     SegmentEffortOperations segmentEffortOperations;
 
     @Mock
-    SegmentOperations segmentOperations;
-
-    @Mock
-    ActivityOperations activityOperations;
-
-    @Mock
-    ActivityConverter activityConverter;
-
-    @Mock
     AthleteProfileConverter athleteProfileConverter;
-
-    @Mock
-    SegmentConverter segmentConverter;
 
     @Mock
     SegmentEffortConverter segmentEffortConverter;
@@ -154,19 +139,5 @@ public class StravaServiceTest extends TestCase {
         AthleteProfile returnedAthleteProfile = stravaService.getAthleteProfileById("17");
 
         assertEquals(athleteProfile, returnedAthleteProfile);
-    }
-
-    @Test
-    public void testGetSegmentById() throws Exception {
-        Segment segment = mock(Segment.class);
-        StravaSegment stravaSegment = mock(StravaSegment.class);
-
-        doReturn(segmentOperations).when(strava).segmentOperations();
-        doReturn(stravaSegment).when(segmentOperations).getSegmentById("1234567");
-        doReturn(segment).when(segmentConverter).convert(stravaSegment);
-
-        Segment returnedSegment = stravaService.getSegmentById("1234567");
-
-        assertEquals(segment, returnedSegment);
     }
 }

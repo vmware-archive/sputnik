@@ -1,6 +1,5 @@
 package com.sputnik.strava.segment;
 
-import com.sputnik.strava.StravaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,12 +11,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class SegmentController {
 
     @Autowired
-    private StravaService stravaService;
+    private SegmentService segmentService;
 
     @RequestMapping(method = RequestMethod.GET, value = "/strava/segments/{id}")
     public
     @ResponseBody
     Segment getSegmentById(@PathVariable String id) {
-        return stravaService.getSegmentById(id);
+        return segmentService.getSegmentById(id);
     }
 }

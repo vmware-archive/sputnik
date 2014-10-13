@@ -1,6 +1,5 @@
 package com.sputnik.strava.segment;
 
-import com.sputnik.strava.StravaService;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -16,7 +15,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class SegmentControllerTest {
     @Mock
-    StravaService stravaService;
+    SegmentService segmentService;
 
     MockMvc mockMvc;
 
@@ -39,7 +38,7 @@ public class SegmentControllerTest {
     public void testGetSegment() throws Exception {
         Segment segment = new Segment(4, "Pearl Street", "foosball", 123.4F, "}{POIU()P{L:");
 
-        doReturn(segment).when(stravaService).getSegmentById("1234567");
+        doReturn(segment).when(segmentService).getSegmentById("1234567");
 
         mockMvc.perform(get("/strava/segments/1234567"))
                 .andExpect(status().isOk())
