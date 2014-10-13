@@ -1,8 +1,5 @@
-package com.sputnik.strava;
+package com.sputnik.strava.segmenteffort;
 
-import com.sputnik.strava.segment.SegmentConverter;
-import com.sputnik.strava.segmenteffort.SegmentEffort;
-import com.sputnik.strava.segmenteffort.SegmentEffortConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.social.strava.api.Strava;
@@ -13,17 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class StravaService {
+public class SegmentEffortService {
 
     private Strava strava;
 
     private String[] segmentIds;
 
-    @Autowired
-    SegmentConverter segmentConverter;
-
-    @Autowired
-    SegmentEffortConverter segmentEffortConverter;
+    private SegmentEffortConverter segmentEffortConverter;
 
     @Autowired
     public void setStrava(final Strava strava) {
@@ -33,6 +26,11 @@ public class StravaService {
     @Value("${sponsoredSegments}")
     public void setSegmentIds(final String[] segmentIds) {
         this.segmentIds = segmentIds;
+    }
+
+    @Autowired
+    public void setSegmentEffortConverter(SegmentEffortConverter segmentEffortConverter) {
+        this.segmentEffortConverter = segmentEffortConverter;
     }
 
     public List<SegmentEffort> getSegmentEfforts() {

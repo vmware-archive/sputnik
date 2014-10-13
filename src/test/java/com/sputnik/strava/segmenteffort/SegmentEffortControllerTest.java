@@ -1,6 +1,5 @@
 package com.sputnik.strava.segmenteffort;
 
-import com.sputnik.strava.StravaService;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -19,7 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class SegmentEffortControllerTest {
     @Mock
-    StravaService stravaService;
+    SegmentEffortService segmentEffortService;
 
     MockMvc mockMvc;
 
@@ -42,7 +41,7 @@ public class SegmentEffortControllerTest {
     public void testListSegmentEfforts() throws Exception {
         List<SegmentEffort> allSegmentEfforts = asList(new SegmentEffort(123, "Pearl Street", "456", 2.3F, "2006-04-21T13:20:40Z", 789, 10));
 
-        doReturn(allSegmentEfforts).when(stravaService).getSegmentEfforts();
+        doReturn(allSegmentEfforts).when(segmentEffortService).getSegmentEfforts();
 
         mockMvc.perform(get("/strava/segment_efforts"))
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -53,7 +52,7 @@ public class SegmentEffortControllerTest {
     public void testGetSegmentEffort() throws Exception {
         SegmentEffort segmentEffort = new SegmentEffort(123, "Pearl Street", "456", 2.3F, "2006-04-21T13:20:40Z", 789, 10);
 
-        doReturn(segmentEffort).when(stravaService).getSegmentEffortById("1234567");
+        doReturn(segmentEffort).when(segmentEffortService).getSegmentEffortById("1234567");
 
         mockMvc.perform(get("/strava/segment_efforts/1234567"))
                 .andExpect(status().isOk())

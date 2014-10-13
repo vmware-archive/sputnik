@@ -1,7 +1,8 @@
 package com.sputnik.scheduled;
 
 
-import com.sputnik.strava.StravaService;
+import com.sputnik.strava.segmenteffort.SegmentEffortConverter;
+import com.sputnik.strava.segmenteffort.SegmentEffortService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.security.crypto.encrypt.Encryptors;
@@ -32,18 +33,19 @@ public class SystemConnection {
     @Value("${sponsoredSegments}")
     String[] segmentIds;
 
-    public StravaService getStravaService() {
+    public SegmentEffortService getSegmentEffortService() {
         JdbcUsersConnectionRepository jdbcRepository = new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator, Encryptors.noOpText());
         ConnectionRepository repository = jdbcRepository.createConnectionRepository(env.getProperty("systemUserId"));
         Connection<Strava> connection = repository.findPrimaryConnection(Strava.class);
 
         Strava strava = connection.getApi();
 
-        StravaService stravaService = new StravaService();
+        SegmentEffortService segmentEffortService = new SegmentEffortService();
 
-        stravaService.setStrava(strava);
-        stravaService.setSegmentIds(segmentIds);
+        segmentEffortService.setStrava(strava);
+        segmentEffortService.setSegmentIds(segmentIds);
+        segmentEffortService.setSegmentEffortConverter(new SegmentEffortConverter());
 
-        return stravaService;
+        return segmentEffortService;
     }
 }

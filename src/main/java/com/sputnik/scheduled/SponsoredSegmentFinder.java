@@ -1,8 +1,8 @@
 package com.sputnik.scheduled;
 
 import com.sputnik.notification.NotificationService;
-import com.sputnik.strava.StravaService;
 import com.sputnik.strava.segmenteffort.SegmentEffort;
+import com.sputnik.strava.segmenteffort.SegmentEffortService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -29,9 +29,9 @@ public class SponsoredSegmentFinder {
 //    @Scheduled(fixedRate = 120000)
     public void retrieve() {
         segmentEffortTimeframe.setNow();
-        StravaService stravaService = systemConnection.getStravaService();
+        SegmentEffortService segmentEffortService = systemConnection.getSegmentEffortService();
 
-        List<SegmentEffort> allSegmentEfforts = stravaService.getAllSegmentEfforts(
+        List<SegmentEffort> allSegmentEfforts = segmentEffortService.getAllSegmentEfforts(
                 segmentEffortTimeframe.getStartTime(),
                 segmentEffortTimeframe.getEndTime()
         );

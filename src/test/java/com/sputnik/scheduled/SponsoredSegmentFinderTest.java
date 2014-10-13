@@ -1,8 +1,8 @@
 package com.sputnik.scheduled;
 
 import com.sputnik.notification.NotificationService;
-import com.sputnik.strava.StravaService;
 import com.sputnik.strava.segmenteffort.SegmentEffort;
+import com.sputnik.strava.segmenteffort.SegmentEffortService;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,7 +21,7 @@ import static org.mockito.Mockito.verify;
 public class SponsoredSegmentFinderTest extends TestCase {
 
     @Mock
-    StravaService stravaService;
+    SegmentEffortService segmentEffortService;
     @Mock
     SystemConnection systemConnection;
     @Mock
@@ -40,11 +40,11 @@ public class SponsoredSegmentFinderTest extends TestCase {
     public void testRetrieve() throws Exception {
         Map<String, String> userInfoMap = new HashMap<>();
 
-        doReturn(stravaService).when(systemConnection).getStravaService();
+        doReturn(segmentEffortService).when(systemConnection).getSegmentEffortService();
         doReturn("start").when(segmentEffortTimeframe).getStartTime();
         doReturn("end").when(segmentEffortTimeframe).getEndTime();
 
-        doReturn(allSegmentEfforts).when(stravaService).getAllSegmentEfforts("start", "end");
+        doReturn(allSegmentEfforts).when(segmentEffortService).getAllSegmentEfforts("start", "end");
         doReturn(userInfoMap).when(providerUserEmailRepository).findAll();
 
         sponsoredSegmentFinder.retrieve();
