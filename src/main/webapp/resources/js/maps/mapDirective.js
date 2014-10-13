@@ -3,7 +3,7 @@ angular.module("sputnikDirectives").directive("sputnikMap", function () {
         templateUrl: 'resources/partials/map.html',
         restrict: 'E',
         scope: {
-            segmentId: "=",
+            polyline: "=",
             size: "@"
         },
         controller: 'mapController'

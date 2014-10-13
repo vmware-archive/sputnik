@@ -3,8 +3,7 @@ angular.module("sputnikDirectives").directive("sputnikSegmentEffort", function (
         templateUrl: 'resources/partials/segmentEffortRow.html',
         restrict: 'A',
         scope: {
-            segmentEffort: "=sputnikSegmentEffort",
-            callback: "="
+            segmentEffort: "=sputnikSegmentEffort"
         }
     }
 });

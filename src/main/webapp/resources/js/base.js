@@ -10,6 +10,10 @@ sputnikApp.config(['$routeProvider',
                 templateUrl: 'resources/partials/segmentEfforts.html',
                 controller: 'segmentEffortsController'
             }).
+            when('/activities', {
+                templateUrl: 'resources/partials/activities.html',
+                controller: 'activitiesController'
+            }).
             when('/segmentEfforts/:segmentEffortId', {
                 templateUrl: 'resources/partials/segmentEffort.html',
                 controller: 'segmentEffortController'

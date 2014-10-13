@@ -1,0 +1,14 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="media">
+            <a class="pull-left" href="#">
+                <sputnik-map polyline="activity.mapSummaryPolyline" size="64"></sputnik-map>
+            </a>
+            <div class="media-body">
+                <h3 class="media-heading"><a ng-href="#/activities/{{activity.id}}">{{activity.name}}</a></h3>
+                <span>{{activity.date | date : 'short'}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+
