@@ -21,7 +21,7 @@ public class EmailBuilder {
         email.setFrom(emailFromAddress);
         email.setSubject("Your ride on " + effort.getName());
         email.setHtml(
-                "Visit sputnik to <a href=\"" + baseUrl + "/#/segmentEfforts/" + String.valueOf(effort.getId()) + "\">donate</a>."
+                "Visit sputnik to <a href=\"" + baseUrl + "/#/activities/" + String.valueOf(effort.getActivityId()) + "\">donate</a>."
         );
 
         return email;

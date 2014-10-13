@@ -64,7 +64,6 @@ public class SegmentEffortService {
         List<SegmentEntity> segmentEntities = segmentRepository.findWithCampaign();
 
         List<String> segmentIds = segmentEntities.stream().map(s -> String.valueOf(s.getRemoteid())).collect(Collectors.toList());
-        segmentIds.forEach(System.out::println);
 
         return segmentIds;
     }

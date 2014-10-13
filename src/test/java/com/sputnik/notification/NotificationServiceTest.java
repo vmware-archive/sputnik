@@ -40,17 +40,18 @@ public class NotificationServiceTest extends TestCase {
         userInfoMap.put("7890", "sample@exmaple.com");
 
         SegmentEffort testEffort = new SegmentEffort(123, "Pearl Street", "1234", 2.3F, "2006-04-21T13:20:40Z", 789, 10, 1);
-        SegmentEffort sampleEffort = new SegmentEffort(123, "Pearl Street", "7890", 2.3F, "2006-04-21T13:20:40Z", 789, 10, 2);
-        SegmentEffort notOurUserEffort = new SegmentEffort(123, "Pearl Street", "456", 2.3F, "2006-04-21T13:20:40Z", 789, 10, 3);
+        SegmentEffort sampleEffort = new SegmentEffort(124, "Pearl Street", "7890", 2.3F, "2006-04-21T13:20:40Z", 789, 10, 2);
+        SegmentEffort sameActivityEffort = new SegmentEffort(125, "Pearl Street", "7890", 2.3F, "2006-04-21T13:20:40Z", 789, 10, 2);
+        SegmentEffort notOurUserEffort = new SegmentEffort(126, "Pearl Street", "456", 2.3F, "2006-04-21T13:20:40Z", 789, 10, 3);
 
         List<SegmentEffort> allSegmentEfforts = new ArrayList<>();
         allSegmentEfforts.add(testEffort);
         allSegmentEfforts.add(sampleEffort);
+        allSegmentEfforts.add(sameActivityEffort);
         allSegmentEfforts.add(notOurUserEffort);
 
         Email testEmail = new Email();
         Email sampleEmail = new Email();
-        Email notOurUserEmail = new Email();
 
         doReturn(testEmail).when(emailBuilder).buildFor("test@exmaple.com", testEffort, "www.example.com");
         doReturn(sampleEmail).when(emailBuilder).buildFor("sample@exmaple.com", sampleEffort, "www.example.com");
@@ -59,7 +60,6 @@ public class NotificationServiceTest extends TestCase {
 
         verify(emailService).send(testEmail);
         verify(emailService).send(sampleEmail);
-        verify(emailService, never()).send(notOurUserEmail);
-
+        verifyNoMoreInteractions(emailService);
     }
 }

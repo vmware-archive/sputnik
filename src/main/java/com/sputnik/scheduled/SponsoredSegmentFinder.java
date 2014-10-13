@@ -25,7 +25,7 @@ public class SponsoredSegmentFinder {
     @Autowired
     NotificationService notificationService;
 
-    @Scheduled(cron = "0 0 22 * * *")
+    @Scheduled(cron = "0 0 23 * * *")
 //    @Scheduled(fixedRate = 120000)
     public void retrieve() {
         segmentEffortTimeframe.setNow();

@@ -29,6 +29,6 @@ public class EmailBuilderTest extends TestCase {
         assertEquals(athleteEmail, Arrays.asList(email.getTos()).get(0));
         assertEquals("sputnik@example.com", email.getFrom());
         assertEquals("Your ride on Pearl Street", email.getSubject());
-        assertEquals("Visit sputnik to <a href=\"www.example.com/#/segmentEfforts/123\">donate</a>.", email.getHtml());
+        assertEquals("Visit sputnik to <a href=\"www.example.com/#/activities/4\">donate</a>.", email.getHtml());
     }
 }
