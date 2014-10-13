@@ -1,8 +1,10 @@
 package com.sputnik.strava.activity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sputnik.strava.segmenteffort.SegmentEffort;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Activity {
     private long id;
@@ -67,5 +69,10 @@ public class Activity {
 
     public List<SegmentEffort> getSegmentEfforts() {
         return segmentEfforts;
+    }
+
+    @JsonIgnore
+    public List<Long> getSegmentIds() {
+        return segmentEfforts.stream().map(SegmentEffort::getSegmentId).collect(Collectors.toList());
     }
 }

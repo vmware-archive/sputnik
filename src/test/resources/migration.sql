@@ -23,3 +23,20 @@ create table users (
 );
 
 alter table users add column email varchar(255);
+
+create table campaigns (
+  id serial primary key,
+  title varchar(255),
+  description varchar(255)
+);
+
+create table segments (
+  id serial primary key,
+  remoteId int not null
+);
+
+create table campaignSegments (
+  campaignId int not null,
+  segmentId int not null,
+  primary key (campaignId, segmentId)
+);
