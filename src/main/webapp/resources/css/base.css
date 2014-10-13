@@ -83,6 +83,12 @@ button.login-strava-small {
     margin-bottom: 10px;
 }
 
+.panel {
+    transition: opacity .25s linear;
+    -moz-transition: opacity .25s linear;
+    -webkit-transition: opacity .25s linear;
+}
+
 .fade {
     opacity: .5;
 }
