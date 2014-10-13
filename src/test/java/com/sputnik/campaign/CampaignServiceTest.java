@@ -9,11 +9,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.Arrays.asList;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CampaignServiceTest extends TestCase {
@@ -50,5 +50,21 @@ public class CampaignServiceTest extends TestCase {
         Iterable<Campaign> returnedCampaigns = campaignService.findForActivityId("17");
 
         assertEquals(campaigns, returnedCampaigns);
+    }
+
+    @Test
+    public void testFindForActivityIdNoSegments() throws Exception {
+        Activity activity = mock(Activity.class);
+        doReturn(activity).when(activityService).getActivityById("17");
+
+        List<Long> segmentIds = new ArrayList<>();
+        doReturn(segmentIds).when(activity).getSegmentIds();
+
+        Iterable<Campaign> returnedCampaigns = campaignService.findForActivityId("17");
+
+        List<Long> emptyList = new ArrayList<>();
+
+        verifyZeroInteractions(campaignRepository);
+        assertEquals(emptyList, returnedCampaigns);
     }
 }

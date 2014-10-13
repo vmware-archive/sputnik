@@ -16,6 +16,7 @@ html {
         script(src: "/resources/js/segmentEfforts/segmentEffortController.js") {}
         script(src: "/resources/js/segmentEfforts/segmentEffortsResource.js") {}
         script(src: "/resources/js/activity/activityController.js") {}
+        script(src: "/resources/js/activity/activityRowController.js") {}
         script(src: "/resources/js/activity/activitiesController.js") {}
         script(src: "/resources/js/activity/activitiesDirective.js") {}
         script(src: "/resources/js/activity/activitiesResource.js") {}
@@ -27,6 +28,7 @@ html {
         script(src: "/resources/js/maps/mapDirective.js") {}
         script(src: "/resources/js/athlete/athleteResource.js") {}
         script(src: "/resources/js/navbar/navbarDirective.js") {}
+        script(src: "/resources/js/campaigns/campaignsResource.js") {}
 
         link(rel: "stylesheet", href: "/resources/components/bootstrap/dist/css/bootstrap.css")
         link(rel: "stylesheet", href: "/resources/css/base.css")

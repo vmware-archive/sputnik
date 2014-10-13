@@ -4,6 +4,7 @@ angular.module("sputnikDirectives").directive("sputnikActivity", function () {
         restrict: 'A',
         scope: {
             activity: "=sputnikActivity"
-        }
+        },
+        controller: "activityRowController"
     }
 });

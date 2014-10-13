@@ -82,3 +82,7 @@ button.login-strava-small {
 .btn, img {
     margin-bottom: 10px;
 }
+
+.fade {
+    opacity: .5;
+}

@@ -5,6 +5,9 @@ import com.sputnik.strava.activity.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class CampaignService {
 
@@ -21,7 +24,13 @@ public class CampaignService {
     public Iterable<Campaign> findForActivityId(String activityId) {
         Activity activity = activityService.getActivityById(activityId);
 
-        return campaignRepository.findForSegmentIds(activity.getSegmentIds());
+        List<Long> segmentIds = activity.getSegmentIds();
+
+        if(segmentIds.isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        return campaignRepository.findForSegmentIds(segmentIds);
     }
 
 }
