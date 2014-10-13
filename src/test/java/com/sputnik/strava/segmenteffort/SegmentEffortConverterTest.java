@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.social.strava.api.StravaActivity;
 import org.springframework.social.strava.api.StravaSegment;
 import org.springframework.social.strava.api.StravaSegmentEffort;
 import org.springframework.social.strava.api.StravaSegmentEffortAthlete;
@@ -16,9 +17,10 @@ public class SegmentEffortConverterTest extends TestCase {
 
     @Test
     public void testConvert() throws Exception {
+        StravaActivity stravaActivity = new StravaActivity(17);
         StravaSegment stravaSegment = new StravaSegment(2);
         StravaSegmentEffortAthlete stravaAthlete = new StravaSegmentEffortAthlete("9");
-        StravaSegmentEffort segmentEffort = new StravaSegmentEffort(8, "Pearl Street", stravaAthlete, 23.4F, "2006-04-21T13:20:40Z", stravaSegment, 15);
+        StravaSegmentEffort segmentEffort = new StravaSegmentEffort(8, "Pearl Street", stravaAthlete, 23.4F, "2006-04-21T13:20:40Z", stravaSegment, 15, stravaActivity);
 
         SegmentEffort convertedSegmentEffort = segmentEffortConverter.convert(segmentEffort);
 
@@ -29,5 +31,6 @@ public class SegmentEffortConverterTest extends TestCase {
         assertEquals("2006-04-21T13:20:40Z", convertedSegmentEffort.getDate());
         assertEquals(2, convertedSegmentEffort.getSegmentId());
         assertEquals(15, convertedSegmentEffort.getElapsedTime());
+        assertEquals(17, convertedSegmentEffort.getActivityId());
     }
 }

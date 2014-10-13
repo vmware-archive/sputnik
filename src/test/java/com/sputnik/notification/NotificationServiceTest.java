@@ -39,9 +39,9 @@ public class NotificationServiceTest extends TestCase {
         userInfoMap.put("1234", "test@exmaple.com");
         userInfoMap.put("7890", "sample@exmaple.com");
 
-        SegmentEffort testEffort = new SegmentEffort(123, "Pearl Street", "1234", 2.3F, "2006-04-21T13:20:40Z", 789, 10);
-        SegmentEffort sampleEffort = new SegmentEffort(123, "Pearl Street", "7890", 2.3F, "2006-04-21T13:20:40Z", 789, 10);
-        SegmentEffort notOurUserEffort = new SegmentEffort(123, "Pearl Street", "456", 2.3F, "2006-04-21T13:20:40Z", 789, 10);
+        SegmentEffort testEffort = new SegmentEffort(123, "Pearl Street", "1234", 2.3F, "2006-04-21T13:20:40Z", 789, 10, 1);
+        SegmentEffort sampleEffort = new SegmentEffort(123, "Pearl Street", "7890", 2.3F, "2006-04-21T13:20:40Z", 789, 10, 2);
+        SegmentEffort notOurUserEffort = new SegmentEffort(123, "Pearl Street", "456", 2.3F, "2006-04-21T13:20:40Z", 789, 10, 3);
 
         List<SegmentEffort> allSegmentEfforts = new ArrayList<>();
         allSegmentEfforts.add(testEffort);

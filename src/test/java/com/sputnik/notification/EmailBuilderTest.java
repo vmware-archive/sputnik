@@ -18,7 +18,7 @@ public class EmailBuilderTest extends TestCase {
 
     @Test
     public void testBuildFor() throws Exception {
-        SegmentEffort segmentEffort = new SegmentEffort(123, "Pearl Street", "1234", 2.3F, "2006-04-21T13:20:40Z", 789, 10);
+        SegmentEffort segmentEffort = new SegmentEffort(123, "Pearl Street", "1234", 2.3F, "2006-04-21T13:20:40Z", 789, 10, 4);
         String athleteEmail = "test@example.com";
         String baseUrl = "www.example.com";
 

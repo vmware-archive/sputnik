@@ -15,7 +15,8 @@ public class SegmentEffortConverter extends StravaConverter<StravaSegmentEffort,
                 stravaSegmentEffort.getDistance(),
                 stravaSegmentEffort.getDate(),
                 stravaSegmentEffort.getSegment().getId(),
-                stravaSegmentEffort.getElapsedTime()
+                stravaSegmentEffort.getElapsedTime(),
+                stravaSegmentEffort.getActivity().getId()
         );
     }
 }

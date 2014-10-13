@@ -10,9 +10,9 @@ import static java.util.Arrays.asList;
 public class ActivityTest extends TestCase {
 
     public void testGetSegmentIds() throws Exception {
-        SegmentEffort firstSegmentEffort = new SegmentEffort(1, "Pearl Street", "34", 34F, "Tuesday", 123, 5L);
-        SegmentEffort secondSegmentEffort = new SegmentEffort(1, "Pearl Street", "34", 34F, "Tuesday", 456, 5L);
-        SegmentEffort thirdSegmentEffort = new SegmentEffort(1, "Pearl Street", "34", 34F, "Tuesday", 789, 5L);
+        SegmentEffort firstSegmentEffort = new SegmentEffort(1, "Pearl Street", "34", 34F, "Tuesday", 123, 5L, 4);
+        SegmentEffort secondSegmentEffort = new SegmentEffort(1, "Pearl Street", "34", 34F, "Tuesday", 456, 5L, 4);
+        SegmentEffort thirdSegmentEffort = new SegmentEffort(1, "Pearl Street", "34", 34F, "Tuesday", 789, 5L, 4);
 
         List<SegmentEffort> segmentEfforts = asList(firstSegmentEffort, secondSegmentEffort, thirdSegmentEffort);
 

@@ -37,9 +37,12 @@ public class ActivityConverterTest extends TestCase {
         StravaSegment segment = new StravaSegment(2);
         StravaSegmentEffortAthlete athlete = new StravaSegmentEffortAthlete("9");
 
-        StravaSegmentEffort segmentEffort = new StravaSegmentEffort(8, "Pearl Street", athlete, 23.4F, "2006-04-21T13:20:40Z", segment, 15);
+        StravaActivity dummyActivity = mock(StravaActivity.class);
+
+        StravaSegmentEffort segmentEffort = new StravaSegmentEffort(8, "Pearl Street", athlete, 23.4F, "2006-04-21T13:20:40Z", segment, 15, dummyActivity);
 
         StravaActivity activity = new StravaActivity(1, "Pearl Street Climb", "Ride", "Best climb ever", 1.0F, 23, "2006-04-21T13:20:40Z", map, asList(segmentEffort));
+
 
         Activity convertedActivity = activityConverter.convert(activity);
 
@@ -66,7 +69,8 @@ public class ActivityConverterTest extends TestCase {
         StravaSegment segment = new StravaSegment(2);
         StravaSegmentEffortAthlete athlete = new StravaSegmentEffortAthlete("9");
 
-        StravaSegmentEffort segmentEffort = new StravaSegmentEffort(8, "Pearl Street", athlete, 23.4F, "2006-04-21T13:20:40Z", segment, 15);
+        StravaActivity dummyActivity = mock(StravaActivity.class);
+        StravaSegmentEffort segmentEffort = new StravaSegmentEffort(8, "Pearl Street", athlete, 23.4F, "2006-04-21T13:20:40Z", segment, 15, dummyActivity);
 
         List<StravaActivity> activities = new ArrayList<>();
 
