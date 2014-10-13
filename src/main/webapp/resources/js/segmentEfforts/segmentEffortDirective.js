@@ -1,6 +1,6 @@
 angular.module("sputnikDirectives").directive("sputnikSegmentEffort", function () {
     return {
-        templateUrl: 'resources/partials/segmentEffortRow.html',
+        templateUrl: 'resources/partials/segmentEffort.html',
         restrict: 'A',
         scope: {
             segmentEffort: "=sputnikSegmentEffort"

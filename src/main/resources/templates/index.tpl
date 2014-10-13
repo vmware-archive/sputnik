@@ -20,7 +20,7 @@ html {
         script(src: "/resources/js/activity/activitiesDirective.js") {}
         script(src: "/resources/js/activity/activitiesResource.js") {}
         script(src: "/resources/js/segmentEfforts/segmentResource.js") {}
-        script(src: "/resources/js/segmentEfforts/segmentEffortsDirective.js") {}
+        script(src: "/resources/js/segmentEfforts/segmentEffortDirective.js") {}
         script(src: "/resources/js/profile/profileController.js") {}
         script(src: "/resources/js/profile/profileRepository.js") {}
         script(src: "/resources/js/maps/mapController.js") {}
