@@ -48,7 +48,7 @@ public class CampaignsControllerTest {
 
         mockMvc.perform(get("/campaigns"))
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
-                .andExpect(content().string("[{\"id\":0,\"title\":\"Lyons\",\"description\":\"Flood recovery\"}]"));
+                .andExpect(content().string("[{\"id\":0,\"segmentEntities\":null,\"title\":\"Lyons\",\"description\":\"Flood recovery\"}]"));
     }
 
     @Test
@@ -59,6 +59,6 @@ public class CampaignsControllerTest {
 
         mockMvc.perform(get("/campaigns?activityId=4"))
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
-                .andExpect(content().string("[{\"id\":0,\"title\":\"Lyons\",\"description\":\"Flood recovery\"}]"));
+                .andExpect(content().string("[{\"id\":0,\"segmentEntities\":null,\"title\":\"Lyons\",\"description\":\"Flood recovery\"}]"));
     }
 }
