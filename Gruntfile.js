@@ -14,6 +14,10 @@ module.exports = function(grunt) {
                         'src/main/webapp/js/**/*.js'
                     ]
                 }
+            },
+            options: {
+                sourceMap: true,
+                sourceMapIncludeSources: true
             }
         },
         cssmin: {
