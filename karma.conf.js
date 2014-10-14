@@ -15,12 +15,12 @@ module.exports = function (config) {
 
         // list of files / patterns to load in the browser
         files: [
-            'src/main/webapp/resources/components/angular/angular.js',
-            'src/main/webapp/resources/components/angular/angular.js',
-            'src/main/webapp/resources/components/angular-resource/angular-resource.js',
-            'src/main/webapp/resources/components/angular-mocks/angular-mocks.js',
-            'src/main/webapp/resources/js/base.js',
-            'src/main/webapp/resources/js/**/*.js',
+            'src/main/webapp/components/angular/angular.js',
+            'src/main/webapp/components/angular/angular.js',
+            'src/main/webapp/components/angular-resource/angular-resource.js',
+            'src/main/webapp/components/angular-mocks/angular-mocks.js',
+            'src/main/webapp/js/base.js',
+            'src/main/webapp/js/**/*.js',
             'src/test/resources/js/**/*Spec.js'
         ],
 

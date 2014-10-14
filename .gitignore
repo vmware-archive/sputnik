@@ -6,3 +6,6 @@ out
 bower_components
 node_modules
 classes
+src/main/webapp/resources/js/sputnik.min.js
+src/main/webapp/resources/css/sputnik.css
+.env
