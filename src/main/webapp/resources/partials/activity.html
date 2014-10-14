@@ -25,9 +25,5 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-sm-10 col-md-8 col-lg-6">
-            <div ng-repeat="segmentEffort in activity.segmentEfforts | orderBy: 'date'" sputnik-segment-effort="segmentEffort"></div>
-        </div>
-    </div>
+    <sputnik-segment-efforts segment-efforts="activity.segmentEfforts" campaigns="campaigns"></sputnik-segment-efforts>
 </div>

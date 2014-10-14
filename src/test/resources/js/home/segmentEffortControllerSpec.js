@@ -8,7 +8,7 @@ describe('segmentEffortController', function () {
         segmentResource = _segmentResource_;
 
         segmentDeferred = $q.defer();
-        $scope.segmentEffort = {};
+        $scope.segmentEffort = {segmentId: 17};
 
         spyOn(segmentResource, "get").and.returnValue({$promise: segmentDeferred.promise});
 
@@ -19,14 +19,10 @@ describe('segmentEffortController', function () {
     }));
 
     it('sets imageSource', function () {
-        $scope.$apply();
-        expect($scope.segment).toEqual(undefined);
-
-        $scope.segmentEffort = {segmentId: "17"};
         segmentDeferred.resolve("segment");
         $scope.$apply();
 
-        expect(segmentResource.get).toHaveBeenCalledWith({segmentId: '17'});
+        expect(segmentResource.get).toHaveBeenCalledWith({segmentId: 17});
         expect($scope.segment).toEqual("segment");
     });
 });

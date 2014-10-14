@@ -1,11 +1,14 @@
 <div class="panel panel-default">
     <div class="panel-body">
         <div class="media">
-            <a class="pull-left" href="#">
+            <a class="pull-left">
                 <sputnik-map polyline="segment.mapPolyline" size="64"></sputnik-map>
             </a>
             <div class="media-body">
-                <h3 class="media-heading">{{segmentEffort.name}}</h3>
+                <h4 class="media-heading">{{segmentEffort.name}}</h4>
+                <span ng-repeat="campaign in segmentEffort.campaigns">
+                    <a class="btn btn-success btn-sm">{{campaign.title}}</a>
+                </span>
             </div>
         </div>
     </div>

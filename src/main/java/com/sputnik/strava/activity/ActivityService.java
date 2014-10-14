@@ -21,7 +21,7 @@ public class ActivityService {
     }
 
     public List<Activity> getActivities() {
-        List<StravaActivity> stravaActivities = strava.activityOperations().getAllActivities();
+        List<StravaActivity> stravaActivities = strava.activityOperations().getAllActivities(10);
 
         return activityConverter.convertList(stravaActivities);
     }

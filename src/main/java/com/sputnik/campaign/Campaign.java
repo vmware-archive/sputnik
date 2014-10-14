@@ -45,4 +45,8 @@ public class Campaign implements Serializable{
     public String getDescription() {
         return description;
     }
+
+    public Collection<SegmentEntity> getSegmentEntities() {
+        return segmentEntities;
+    }
 }

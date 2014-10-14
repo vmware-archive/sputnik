@@ -36,7 +36,7 @@ public class ActivityServiceTest extends TestCase {
         List<StravaActivity> stravaActivities = asList(mock(StravaActivity.class));
 
         doReturn(activityOperations).when(strava).activityOperations();
-        doReturn(stravaActivities).when(activityOperations).getAllActivities();
+        doReturn(stravaActivities).when(activityOperations).getAllActivities(10);
         doReturn(activities).when(activityConverter).convertList(stravaActivities);
 
         List<Activity> allActivities = activityService.getActivities();
