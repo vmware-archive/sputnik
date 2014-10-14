@@ -1,5 +1,5 @@
 angular.module("sputnikServices", ['ngResource']);
-angular.module("sputnikControllers", ['sputnikServices']);
+angular.module("sputnikControllers", ['sputnikServices', 'constants']);
 angular.module("sputnikDirectives", ['sputnikControllers']);
 var sputnikApp = angular.module("sputnikApp", ['ngRoute', 'sputnikControllers', 'sputnikDirectives']);
 

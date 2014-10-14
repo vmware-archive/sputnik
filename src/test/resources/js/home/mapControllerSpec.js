@@ -8,7 +8,10 @@ describe('mapController', function () {
 
         $scope.size = "150";
 
-        $controller('mapController', {$scope: $scope});
+        $controller('mapController', {
+            $scope: $scope,
+            mapsApiKey: "123ABC"
+        });
     }));
 
     it('sets imageSource', function () {
@@ -17,6 +20,6 @@ describe('mapController', function () {
 
         $scope.polyline = "^%&YUITG";
         $scope.$apply();
-        expect($scope.imageSource).toEqual("https://maps.googleapis.com/maps/api/staticmap?size=150x150&path=weight:3%7Ccolor:red%7Cenc:^%&YUITG");
+        expect($scope.imageSource).toEqual("https://maps.googleapis.com/maps/api/staticmap?size=150x150&path=weight:3%7Ccolor:red%7Cenc:^%&YUITG&key=123ABC");
     });
 });

@@ -10,6 +10,7 @@ module.exports = function(grunt) {
                         'src/main/webapp/components/angular/angular.js',
                         'src/main/webapp/components/angular-resource/angular-resource.js',
                         'src/main/webapp/components/angular-route/angular-route.js',
+                        'src/main/webapp/js/constants.js',
                         'src/main/webapp/js/base.js',
                         'src/main/webapp/js/**/*.js'
                     ]
@@ -33,7 +34,7 @@ module.exports = function(grunt) {
         watch: {
             scripts: {
                 files: ['src/main/webapp/**/*.js'],
-                tasks: ['uglify', 'notify:completed'],
+                tasks: ['ngconstant', 'uglify', 'notify:completed'],
                 options: {
                     spawn: false
                 }
@@ -53,6 +54,17 @@ module.exports = function(grunt) {
                     message: 'Resources are up to date.'
                 }
             }
+        },
+        ngconstant: {
+            dist: {
+                options: {
+                    dest: 'src/main/webapp/js/constants.js',
+                    name: 'constants'
+                },
+                constants: {
+                    mapsApiKey: process.env.MAPS_API_KEY
+                }
+            }
         }
     });
 
@@ -61,7 +73,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-notify');
+    grunt.loadNpmTasks('grunt-ng-constant');
 
     // Default task(s).
-    grunt.registerTask('default', ['uglify', 'cssmin']);
+    grunt.registerTask('default', ['ngconstant', 'uglify', 'cssmin']);
 };
