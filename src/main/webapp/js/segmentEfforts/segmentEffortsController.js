@@ -1,4 +1,4 @@
-angular.module("sputnikControllers").controller("segmentEffortsController", ['$scope', 'segmentResource', function ($scope) {
+angular.module("sputnikControllers").controller("segmentEffortsController", ['$scope', function ($scope) {
     $scope.filteredSegmentEfforts = [];
 
     $scope.$watchCollection('[campaigns, segmentEfforts]', assignCampaigns);
