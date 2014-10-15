@@ -1,0 +1,70 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="row" ng-if="successMessage !== undefined">
+                <div class="col-lg-12">
+                    <div class="alert alert-success" role="alert">{{successMessage}}</div>
+                </div>
+            </div>
+            <div class="row" ng-if="errorMessage !== undefined">
+                <div class="col-lg-12">
+                    <div class="alert alert-danger" role="alert">{{errorMessage}}</div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h2>Donate to {{campaign.title}}</h2>
+                    <h4>{{campaign.description}}</h4>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form ng-submit="donate()">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="amount">Amount</label>
+                                    <div class="money">
+                                    <input ng-model="donation.amount" id="amount" name="amount" type="number"
+                                           min="1" required class="form-control money">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="cardNumber">Card Number</label>
+                                    <input ng-model="donation.cardNumber" id="cardNumber" name="cardNumber"
+                                           required class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="cardExpirationMonth">Exp. Month</label>
+                                    <input ng-model="donation.cardExpirationMonth" id="cardExpirationMonth"
+                                           required name="cardExpirationMonth" type="number" min="1" max="12" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="cardExpirationYear">Exp. Year</label>
+                                    <input ng-model="donation.cardExpirationYear" id="cardExpirationYear"
+                                           required name="cardExpirationYear" type="number" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input type="submit" value="Donate" class="btn btn-success">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

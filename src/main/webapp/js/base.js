@@ -13,6 +13,9 @@ sputnikApp.config(['$routeProvider',
             when('/activities/:activityId', {
                 templateUrl: 'resources/partials/activity.html',
                 controller: 'activityController'
+            }).when('/campaigns/:campaignId', {
+                templateUrl: 'resources/partials/campaign.html',
+                controller: 'campaignController'
             }).
             otherwise({
                 redirectTo: '/activities'

@@ -1,3 +1,5 @@
 angular.module("sputnikServices").factory('campaignsResource', ['$resource', function ($resource) {
-    return $resource('/campaigns');
+    return $resource('/campaigns/:campaignId/:action', {campaignId:'@id'},
+        {'donate': {method: 'POST', params: {action: 'donate'}}}
+    );
 }]);

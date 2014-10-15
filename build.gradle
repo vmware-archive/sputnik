@@ -84,6 +84,9 @@ dependencies {
     // Logging
     compile "org.slf4j:slf4j-api:1.7.7"
 
+    // Payments
+    compile "com.stripe:stripe-java:1.19.1"
+
     // Testing
     testCompile "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
     testCompile "junit:junit:4.11"

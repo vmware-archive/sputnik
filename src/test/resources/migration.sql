@@ -1,9 +1,3 @@
-create table messages (
-  id serial primary key,
-  title varchar(255),
-  content varchar(255)
-);
-
 create table UserConnection (userId varchar(255) not null,
     providerId varchar(255) not null,
     providerUserId varchar(255),
@@ -39,4 +33,12 @@ create table campaignSegments (
   campaignId int not null,
   segmentId int not null,
   primary key (campaignId, segmentId)
+);
+
+create table donations (
+  id serial primary key,
+  amount int not null,
+  userId int not null,
+  campaignId int not null,
+  remoteId varchar(255) not null
 );

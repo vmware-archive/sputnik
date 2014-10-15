@@ -67,4 +67,12 @@ public class CampaignServiceTest extends TestCase {
         verifyZeroInteractions(campaignRepository);
         assertEquals(emptyList, returnedCampaigns);
     }
+
+    @Test
+    public void testFindById() throws Exception {
+        Campaign campaign = mock(Campaign.class);
+        doReturn(campaign).when(campaignRepository).findOne(8L);
+
+        assertEquals(campaign, campaignService.findById(8L));
+    }
 }

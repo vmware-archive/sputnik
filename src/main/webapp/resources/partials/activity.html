@@ -16,7 +16,7 @@
                         <div class="col-sm-3">
                             <h3>Campaigns</h3>
                             <div ng-repeat="campaign in campaigns">
-                                <a class="btn btn-success btn-lg">{{campaign.title}}</a>
+                                <a class="btn btn-success btn-lg" ng-href="/#/campaigns/{{campaign.id}}">{{campaign.title}}</a>
                             </div>
                         </div>
                     </div>

@@ -87,3 +87,44 @@ button.login-strava-small {
 .fade {
     opacity: .5;
 }
+
+.alert {
+    color: white;
+    border: none;
+}
+
+.alert-danger {
+    background: rgba(153,48,49,0.8);
+}
+
+.alert-success {
+    background: rgba(46,102,44,0.8);;
+}
+
+input.form-control {
+    border: 1px solid white;
+    background: none;
+    box-shadow: none;
+    color: white;
+    font-size: 22px;
+    height: 46px;
+}
+
+.money {
+    border: 1px solid white;
+    border-radius: 4px;
+    position: relative;
+}
+
+.money:before {
+    position: absolute;
+    font-size: 22px;
+    top: 8px;
+    left: 12px;
+    content: '$';
+}
+
+.money input {
+    border: none;
+    padding-left: 27px;
+}

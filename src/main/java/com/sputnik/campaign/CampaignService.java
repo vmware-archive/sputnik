@@ -33,4 +33,7 @@ public class CampaignService {
         return campaignRepository.findForSegmentIds(segmentIds);
     }
 
+    public Campaign findById(long id) {
+        return campaignRepository.findOne(id);
+    }
 }
