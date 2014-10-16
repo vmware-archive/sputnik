@@ -1,5 +1,6 @@
 package com.sputnik.config;
 
+import com.sputnik.admin.AuthorizationService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -35,6 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .deleteCookies("JSESSIONID")
                 .and()
                 .authorizeRequests()
+                .antMatchers("/admin/**").hasAuthority(AuthorizationService.getAdminRole())
                 .antMatchers("/resources/**", "/auth/**", "/signin/**").permitAll()
                 .antMatchers("/**").authenticated()
                 .and()

@@ -23,13 +23,7 @@ html {
                 div(class: 'col-md-8 col-md-offset-2 text-center') {
                     div(class: 'panel panel-default intro') {
                         div(class: 'panel-body') {
-                            h1('Welcome to Sputnik')
-
-                            form("action": "/signin/strava", "method": "post") {
-                                input("type": "hidden", "name": "${_csrf.parameterName}", "value":"${_csrf.token}") {}
-                                button("type": "submit", "class": "login-strava-large hidden-xs") {}
-                                button("type": "submit", "class": "login-strava-small visible-xs-inline-block") {}
-                            }
+                            h1('Admin')
                         }
                     }
                 }

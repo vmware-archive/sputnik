@@ -42,3 +42,5 @@ create table donations (
   campaignId int not null,
   remoteId varchar(255) not null
 );
+
+alter table users add column admin boolean default false;

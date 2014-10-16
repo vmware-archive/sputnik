@@ -13,8 +13,13 @@ public class User {
 
     private String email;
 
+    private boolean admin;
+
     public User(String email) {
         this.email = email;
+    }
+
+    public User() {
     }
 
     public String getEmail() {
@@ -23,5 +28,9 @@ public class User {
 
     public long getId() {
         return id;
+    }
+
+    public boolean getAdmin() {
+        return admin;
     }
 }

@@ -1,5 +1,6 @@
 package com.sputnik.config;
 
+import com.sputnik.admin.AuthorizationService;
 import com.sputnik.signin.SimpleSignInAdapter;
 import com.sputnik.user.SimpleConnectionSignUp;
 import org.springframework.context.annotation.Bean;
@@ -36,6 +37,9 @@ public class SocialConfig implements SocialConfigurer {
     @Inject
     private SimpleConnectionSignUp simpleConnectionSignUp;
 
+    @Inject
+    private AuthorizationService authorizationService;
+
     @Override
     public void addConnectionFactories(ConnectionFactoryConfigurer cfConfig, Environment env) {
         cfConfig.addConnectionFactory(new StravaConnectionFactory(env.getProperty("stravaClientId"), env.getProperty("stravaClientSecret")));
@@ -55,7 +59,7 @@ public class SocialConfig implements SocialConfigurer {
 
     @Bean
     public ProviderSignInController providerSignInController(ConnectionFactoryLocator connectionFactoryLocator, UsersConnectionRepository usersConnectionRepository) {
-        return new ProviderSignInController(connectionFactoryLocator, usersConnectionRepository, new SimpleSignInAdapter(new HttpSessionRequestCache()));
+        return new ProviderSignInController(connectionFactoryLocator, usersConnectionRepository, new SimpleSignInAdapter(new HttpSessionRequestCache(), authorizationService));
     }
 
     @Bean
