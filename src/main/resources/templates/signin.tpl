@@ -34,6 +34,7 @@ html {
                             h1('Welcome to Sputnik')
 
                             form("action": "/signin/strava", "method": "post") {
+                                input("type": "hidden", "name": "${_csrf.parameterName}", "value":"${_csrf.token}") {}
                                 button("type": "submit", "class": "login-strava-large hidden-xs") {}
                                 button("type": "submit", "class": "login-strava-small visible-xs-inline-block") {}
                             }

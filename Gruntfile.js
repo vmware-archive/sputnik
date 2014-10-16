@@ -10,6 +10,7 @@ module.exports = function(grunt) {
                         'src/main/webapp/components/angular/angular.js',
                         'src/main/webapp/components/angular-resource/angular-resource.js',
                         'src/main/webapp/components/angular-route/angular-route.js',
+                        'src/main/webapp/generated/spring-security-csrf-token-interceptor.js',
                         'src/main/webapp/js/constants.js',
                         'src/main/webapp/js/base.js',
                         'src/main/webapp/js/**/*.js'
@@ -34,14 +35,14 @@ module.exports = function(grunt) {
         watch: {
             scripts: {
                 files: ['src/main/webapp/**/*.js'],
-                tasks: ['ngconstant', 'uglify', 'notify:completed'],
+                tasks: ['js'],
                 options: {
                     spawn: false
                 }
             },
             style: {
                 files: ['src/main/webapp/**/*.css'],
-                tasks: ['cssmin', 'notify:completed'],
+                tasks: ['css'],
                 options: {
                     spawn: false
                 }
@@ -65,6 +66,16 @@ module.exports = function(grunt) {
                     mapsApiKey: process.env.MAPS_API_KEY
                 }
             }
+        },
+        ngAnnotate: {
+            options: {
+                singleQuotes: true
+            },
+            'csrf-interceptor': {
+                files: {
+                    'src/main/webapp/generated/spring-security-csrf-token-interceptor.js': ['src/main/webapp/components/spring-security-csrf-token-interceptor/src/spring-security-csrf-token-interceptor.js']
+                }
+            }
         }
     });
 
@@ -74,7 +85,11 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-notify');
     grunt.loadNpmTasks('grunt-ng-constant');
+    grunt.loadNpmTasks('grunt-ng-annotate');
+
+    grunt.registerTask('js', ['ngAnnotate:csrf-interceptor', 'ngconstant', 'uglify', 'notify:completed']);
+    grunt.registerTask('css', ['cssmin', 'notify:completed']);
 
     // Default task(s).
-    grunt.registerTask('default', ['ngconstant', 'uglify', 'cssmin']);
+    grunt.registerTask('default', ['js', 'css']);
 };

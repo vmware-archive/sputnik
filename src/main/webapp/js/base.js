@@ -1,7 +1,12 @@
 angular.module("sputnikServices", ['ngResource']);
 angular.module("sputnikControllers", ['sputnikServices', 'constants']);
 angular.module("sputnikDirectives", ['sputnikControllers']);
-var sputnikApp = angular.module("sputnikApp", ['ngRoute', 'sputnikControllers', 'sputnikDirectives']);
+var sputnikApp = angular.module("sputnikApp", [
+    'spring-security-csrf-token-interceptor',
+    'ngRoute',
+    'sputnikControllers',
+    'sputnikDirectives'
+]);
 
 sputnikApp.config(['$routeProvider',
     function($routeProvider) {
