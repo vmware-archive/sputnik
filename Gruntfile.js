@@ -91,5 +91,5 @@ module.exports = function(grunt) {
     grunt.registerTask('css', ['cssmin', 'notify:completed']);
 
     // Default task(s).
-    grunt.registerTask('default', ['js', 'css']);
+    grunt.registerTask('default', ['ngAnnotate:csrf-interceptor', 'ngconstant', 'uglify', 'cssmin', 'notify:completed']);
 };
