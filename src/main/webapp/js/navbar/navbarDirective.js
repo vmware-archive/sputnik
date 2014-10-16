@@ -1,7 +1,7 @@
-angular.module("sputnikDirectives").directive("sputnikNavbar", function () {
+angular.module("navbar").directive("sputnikNavbar", function () {
     return {
         templateUrl: 'resources/partials/navbar.html',
         restrict: 'A',
-        controller: "profileController"
+        controller: "navbarController"
     }
 });

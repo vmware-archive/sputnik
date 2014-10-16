@@ -1,20 +1,37 @@
 module.exports = function(grunt) {
 
+    var jsLibraries = [
+        'src/main/webapp/components/jquery/dist/jquery.js',
+        'src/main/webapp/components/bootstrap/dist/js/bootstrap.js',
+        'src/main/webapp/components/angular/angular.js',
+        'src/main/webapp/components/angular-resource/angular-resource.js',
+        'src/main/webapp/components/angular-route/angular-route.js',
+        'src/main/webapp/generated/spring-security-csrf-token-interceptor.js',
+        'src/main/webapp/js/constants.js'
+    ];
+
     grunt.initConfig({
         uglify: {
-            my_target: {
+            sputnik: {
                 files: {
-                    'src/main/webapp/resources/js/sputnik.min.js': [
-                        'src/main/webapp/components/jquery/dist/jquery.js',
-                        'src/main/webapp/components/bootstrap/dist/js/bootstrap.js',
-                        'src/main/webapp/components/angular/angular.js',
-                        'src/main/webapp/components/angular-resource/angular-resource.js',
-                        'src/main/webapp/components/angular-route/angular-route.js',
-                        'src/main/webapp/generated/spring-security-csrf-token-interceptor.js',
-                        'src/main/webapp/js/constants.js',
+                    'src/main/webapp/resources/js/sputnik.min.js': jsLibraries.concat([
                         'src/main/webapp/js/base.js',
-                        'src/main/webapp/js/**/*.js'
-                    ]
+                        'src/main/webapp/js/**/*.js',
+                        '!src/main/webapp/js/admin.js',
+                        '!src/main/webapp/js/admin/*'
+
+                    ])
+                }
+            },
+            admin: {
+                files: {
+                    'src/main/webapp/resources/js/admin.min.js': jsLibraries.concat([
+                        'src/main/webapp/js/admin.js',
+                        'src/main/webapp/js/navbar/navbarDirective.js',
+                        'src/main/webapp/js/navbar/navbarController.js',
+                        'src/main/webapp/js/profile/profileRepository.js',
+                        'src/main/webapp/js/admin/*'
+                    ])
                 }
             },
             options: {
@@ -87,9 +104,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-ng-constant');
     grunt.loadNpmTasks('grunt-ng-annotate');
 
-    grunt.registerTask('js', ['ngAnnotate:csrf-interceptor', 'ngconstant', 'uglify', 'notify:completed']);
+    grunt.registerTask('js', ['ngAnnotate:csrf-interceptor', 'ngconstant', 'uglify:sputnik', 'uglify:admin', 'notify:completed']);
     grunt.registerTask('css', ['cssmin', 'notify:completed']);
 
     // Default task(s).
-    grunt.registerTask('default', ['ngAnnotate:csrf-interceptor', 'ngconstant', 'uglify', 'cssmin', 'notify:completed']);
+    grunt.registerTask('default', ['ngAnnotate:csrf-interceptor', 'ngconstant', 'uglify:sputnik', 'uglify:admin', 'cssmin', 'notify:completed']);
 };

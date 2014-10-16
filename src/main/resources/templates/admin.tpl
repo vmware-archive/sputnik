@@ -3,31 +3,25 @@ package templates
 yieldUnescaped "<!doctype html>"
 html {
     head {
-        title("Sputnik - sign in")
+        title("Sputnik - admin")
         meta(charset: "utf-8")
         meta(name: "viewport", content: "width=device-width, minimum-scale=1.0")
 
+        script(src: "/resources/js/admin.min.js") {}
         link(rel: "stylesheet", href: "/resources/css/sputnik.css")
     }
 
-    body {
-        nav(class: 'navbar navbar-fixed-top navbar-inverse') {
-            div(class: 'container') {
-                div(class: 'navbar-header hidden-xs hidden-s') {
-                    a(href: '/', class: 'navbar-brand', 'Sputnik')
+    body("ng-app": "adminApp") {
+        div("sputnik-navbar": null) {}
+
+        div("class": "container") {
+            div("class": "row") {
+                div("ng-controller": "campaignsController", "class": "col-lg-6") {
+                    "admin-campaign-panel"("ng-repeat": "campaign in campaigns", "campaign": "campaign") {}
                 }
             }
         }
-        div(class: 'container') {
-            div(class: 'row') {
-                div(class: 'col-md-8 col-md-offset-2 text-center') {
-                    div(class: 'panel panel-default intro') {
-                        div(class: 'panel-body') {
-                            h1('Admin')
-                        }
-                    }
-                }
-            }
-        }
+
+
     }
 }

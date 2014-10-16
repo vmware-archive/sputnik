@@ -1,4 +1,4 @@
-angular.module("sputnikControllers").controller("profileController", ['$scope', 'profileRepository', '$http', '$window', function ($scope, profileRepository, $http, $window) {
+angular.module("navbar").controller("navbarController", ['$scope', 'profileRepository', '$http', '$window', function ($scope, profileRepository, $http, $window) {
     profileRepository.get().$promise.then(setProfile);
 
     $scope.signout = function () {

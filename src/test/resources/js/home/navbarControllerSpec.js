@@ -1,7 +1,7 @@
-describe('profileController', function () {
+describe('navbarController', function () {
     var $scope, profileRepository, profileDeferred, signoutDeferred, $http, $window;
 
-    beforeEach(module('sputnikControllers'));
+    beforeEach(module('navbar'));
 
     beforeEach(inject(function ($rootScope, $q, _$http_, $controller, _profileRepository_) {
         $scope = $rootScope.$new();
@@ -15,7 +15,7 @@ describe('profileController', function () {
         spyOn(profileRepository, "get").and.returnValue({$promise: profileDeferred.promise});
         spyOn($http, "post").and.returnValue(signoutDeferred.promise);
 
-        $controller('profileController', {
+        $controller('navbarController', {
             $scope: $scope,
             $http: $http,
             $window: $window,
