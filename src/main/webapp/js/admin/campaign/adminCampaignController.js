@@ -1,4 +1,4 @@
-angular.module("adminControllers").controller("adminCampaignController", ['$scope', 'campaignsResource', function ($scope, campaignsResource) {
+angular.module("adminControllers").controller("adminCampaignController", ['$scope', 'adminCampaignsResource', function ($scope, adminCampaignsResource) {
     var uneditedCampaign = {};
 
     $scope.editing = false;
@@ -14,7 +14,7 @@ angular.module("adminControllers").controller("adminCampaignController", ['$scop
     };
 
     $scope.saveCampaign = function () {
-        campaignsResource.update($scope.campaign).$promise.then(setCampaign);
+        adminCampaignsResource.update($scope.campaign).$promise.then(setCampaign);
     };
 
     function setCampaign(response) {

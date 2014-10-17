@@ -1,21 +1,21 @@
 describe('adminCampaignsController', function () {
-    var $scope, campaignsResource, campaignsDeferred, campaignSaveDeferred;
+    var $scope, adminCampaignsResource, campaignsDeferred, campaignSaveDeferred;
 
     beforeEach(module('adminControllers'));
 
-    beforeEach(inject(function ($rootScope, $q, $controller, _campaignsResource_) {
+    beforeEach(inject(function ($rootScope, $q, $controller, _adminCampaignsResource_) {
         $scope = $rootScope.$new();
-        campaignsResource = _campaignsResource_;
+        adminCampaignsResource = _adminCampaignsResource_;
 
         campaignsDeferred = $q.defer();
         campaignSaveDeferred = $q.defer();
 
-        spyOn(campaignsResource, "query").and.returnValue({$promise: campaignsDeferred.promise});
-        spyOn(campaignsResource, "save").and.returnValue({$promise: campaignSaveDeferred.promise});
+        spyOn(adminCampaignsResource, "query").and.returnValue({$promise: campaignsDeferred.promise});
+        spyOn(adminCampaignsResource, "save").and.returnValue({$promise: campaignSaveDeferred.promise});
 
         $controller('adminCampaignsController', {
             $scope: $scope,
-            campaignsResource: campaignsResource
+            adminCampaignsResource: adminCampaignsResource
         });
     }));
 
@@ -38,7 +38,7 @@ describe('adminCampaignsController', function () {
 
             $scope.createCampaign();
 
-            expect(campaignsResource.save).toHaveBeenCalledWith({
+            expect(adminCampaignsResource.save).toHaveBeenCalledWith({
                 title: "Lyons",
                 description: "Flood"
             });

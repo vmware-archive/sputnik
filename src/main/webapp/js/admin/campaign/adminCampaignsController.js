@@ -1,10 +1,10 @@
-angular.module("adminControllers").controller("adminCampaignsController", ['$scope', 'campaignsResource', function ($scope, campaignsResource) {
+angular.module("adminControllers").controller("adminCampaignsController", ['$scope', 'adminCampaignsResource', function ($scope, adminCampaignsResource) {
     resetNewCampaign();
 
-    campaignsResource.query().$promise.then(setCampaigns);
+    adminCampaignsResource.query().$promise.then(setCampaigns);
 
     $scope.createCampaign = function () {
-        campaignsResource.save($scope.newCampaign).$promise.then(addCampaign);
+        adminCampaignsResource.save($scope.newCampaign).$promise.then(addCampaign);
     };
 
     function setCampaigns(campaigns) {

@@ -1,19 +1,19 @@
 describe('adminCampaignsController', function () {
-    var $scope, campaignsResource, campaignSaveDeferred;
+    var $scope, adminCampaignsResource, campaignSaveDeferred;
 
     beforeEach(module('adminControllers'));
 
-    beforeEach(inject(function ($rootScope, $q, $controller, _campaignsResource_) {
+    beforeEach(inject(function ($rootScope, $q, $controller, _adminCampaignsResource_) {
         $scope = $rootScope.$new();
-        campaignsResource = _campaignsResource_;
+        adminCampaignsResource = _adminCampaignsResource_;
 
         campaignSaveDeferred = $q.defer();
 
-        spyOn(campaignsResource, "update").and.returnValue({$promise: campaignSaveDeferred.promise});
+        spyOn(adminCampaignsResource, "update").and.returnValue({$promise: campaignSaveDeferred.promise});
 
         $controller('adminCampaignController', {
             $scope: $scope,
-            campaignsResource: campaignsResource
+            adminCampaignsResource: adminCampaignsResource
         });
     }));
 
@@ -48,7 +48,7 @@ describe('adminCampaignsController', function () {
 
             $scope.saveCampaign();
 
-            expect(campaignsResource.update).toHaveBeenCalledWith({
+            expect(adminCampaignsResource.update).toHaveBeenCalledWith({
                 id: 7,
                 title: "Lyons",
                 description: "Flood"
