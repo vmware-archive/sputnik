@@ -40,4 +40,12 @@ public class CampaignService {
     public Campaign create(Campaign campaign) {
         return campaignRepository.save(campaign);
     }
+
+    public Campaign update(long id, Campaign campaign) {
+        if(!campaignRepository.exists(id) || id != campaign.getId()) {
+            return null;
+        }
+
+        return campaignRepository.save(campaign);
+    }
 }

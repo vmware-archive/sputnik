@@ -1,6 +1,24 @@
 <div class="panel panel-default">
-    <div class="panel-body">
+    <div class="panel-body" ng-hide="editing">
         <h3 class="media-heading">{{campaign.title}}</h3>
+
         <p>{{campaign.description}}</p>
+        <button class="btn btn-primary" ng-click="startEditing()">Edit</button>
+    </div>
+    <div class="panel-body" ng-show="editing">
+        <form ng-submit="saveCampaign()">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" id="title" ng-model="campaign.title" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" ng-model="campaign.description" class="form-control"/>
+            </div>
+
+            <button type="button" class="btn btn-danger" ng-click="cancelEditing()">Cancel</button>
+            <input type="submit" value="save" class="btn btn-success"/>
+
+        </form>
     </div>
 </div>

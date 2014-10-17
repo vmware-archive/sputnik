@@ -16,11 +16,13 @@ import java.util.List;
 import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -58,7 +60,7 @@ public class AdminCampaignsControllerTest {
     }
 
     @Test
-    public void testDonateToCampaign() throws Exception {
+    public void testCreateCampaign() throws Exception {
         Campaign campaign = new Campaign("Boulder", "Flood damage");
 
         doReturn(campaign).when(campaignService).create(any(Campaign.class));
@@ -75,6 +77,31 @@ public class AdminCampaignsControllerTest {
 
         Campaign capturedCampaign = campaignCaptor.getValue();
 
+        assertEquals("Longmont", capturedCampaign.getTitle());
+        assertEquals("Damage", capturedCampaign.getDescription());
+    }
+
+    @Test
+    public void testUpdateCampaign() throws Exception {
+        Campaign campaign = new Campaign("Boulder", "Flood damage");
+
+        doReturn(campaign).when(campaignService).update(anyLong(), any(Campaign.class));
+
+        mockMvc.perform(patch("/admin/campaigns/7")
+                .content("{\"title\": \"Longmont\", \"description\": \"Damage\"}")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isAccepted())
+                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andExpect(content().string("{\"id\":0,\"segmentEntities\":null,\"title\":\"Boulder\",\"description\":\"Flood damage\"}"));
+
+        ArgumentCaptor<Campaign> campaignCaptor = ArgumentCaptor.forClass(Campaign.class);
+        ArgumentCaptor<Long> idCaptor = ArgumentCaptor.forClass(Long.class);
+        verify(campaignService).update(idCaptor.capture(), campaignCaptor.capture());
+
+        Campaign capturedCampaign = campaignCaptor.getValue();
+        Long capturedId = idCaptor.getValue();
+
+        assertEquals(new Long(7), capturedId);
         assertEquals("Longmont", capturedCampaign.getTitle());
         assertEquals("Damage", capturedCampaign.getDescription());
     }

@@ -34,4 +34,20 @@ public class AdminCampaignsController {
 
         return new ResponseEntity<>(createdCampaign, HttpStatus.CREATED);
     }
+
+    @RequestMapping(method = RequestMethod.PATCH, value = "/admin/campaigns/{id}")
+    public
+    @ResponseBody
+    ResponseEntity<Campaign> donateToCampaign(
+            @PathVariable long id,
+            @RequestBody(required=true) Campaign campaign
+    ) {
+        Campaign updatedCampaign = campaignService.update(id, campaign);
+
+        if(updatedCampaign == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<>(updatedCampaign, HttpStatus.ACCEPTED);
+    }
 }

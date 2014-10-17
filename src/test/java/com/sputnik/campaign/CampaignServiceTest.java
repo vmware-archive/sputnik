@@ -84,4 +84,16 @@ public class CampaignServiceTest extends TestCase {
 
         assertEquals(returnedCampaign, campaignService.create(campaign));
     }
+
+    @Test
+    public void testUpdate() throws Exception {
+        Campaign campaign = mock(Campaign.class);
+        doReturn(7L).when(campaign).getId();
+        Campaign returnedCampaign = mock(Campaign.class);
+
+        doReturn(returnedCampaign).when(campaignRepository).save(campaign);
+        doReturn(true).when(campaignRepository).exists(7L);
+
+        assertEquals(returnedCampaign, campaignService.update(7L, campaign));
+    }
 }

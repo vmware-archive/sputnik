@@ -1,5 +1,5 @@
 describe('adminCampaignsController', function () {
-    var $scope, campaignsResource, campaignsDeferred, campaignSaveDeferred;
+    var $scope, campaignsResource, campaignSaveDeferred;
 
     beforeEach(module('adminControllers'));
 
@@ -7,57 +7,67 @@ describe('adminCampaignsController', function () {
         $scope = $rootScope.$new();
         campaignsResource = _campaignsResource_;
 
-        campaignsDeferred = $q.defer();
         campaignSaveDeferred = $q.defer();
 
-        spyOn(campaignsResource, "query").and.returnValue({$promise: campaignsDeferred.promise});
-        spyOn(campaignsResource, "save").and.returnValue({$promise: campaignSaveDeferred.promise});
+        spyOn(campaignsResource, "update").and.returnValue({$promise: campaignSaveDeferred.promise});
 
-        $controller('adminCampaignsController', {
+        $controller('adminCampaignController', {
             $scope: $scope,
             campaignsResource: campaignsResource
         });
     }));
 
-    it('sets the campaigns', function () {
-        campaignsDeferred.resolve(["campaign"]);
-
-        $scope.$apply();
-
-        expect($scope.campaigns).toEqual(["campaign"]);
+    describe("startEditing", function () {
+        it('starts Editing', function () {
+            $scope.campaign = {id: 8, title: "Lyons", description: "Flood", segmentEntities: ["1"]};
+            expect($scope.editing).toEqual(false);
+            $scope.startEditing();
+            expect($scope.editing).toEqual(true);
+        });
     });
 
-    describe("createCampaign", function () {
-       it('creates a campaign', function () {
-           expect($scope.newCampaign).toEqual({});
-           $scope.newCampaign = {
-               title: "Lyons",
-               description: "Flood"
-           };
+    describe("cancelEditing", function () {
+        it('stops Editing and resets the campaign', function () {
+            $scope.campaign = {id: 8, title: "Lyons", description: "Flood", segmentEntities: ["1"]};
+            $scope.startEditing();
+            expect($scope.editing).toEqual(true);
+            $scope.campaign = {id: 9, title: "Lyons CO", description: "Wind", segmentEntities: ["2"]};
+            $scope.cancelEditing();
+            expect($scope.editing).toEqual(false);
+            $scope.campaign = {id: 8, title: "Lyons", description: "Flood", segmentEntities: ["1"]};
+        });
+    });
 
+    describe("saveCampaign", function () {
+        it('saves a campaign', function () {
+            $scope.campaign = {
+                id: 7,
+                title: "Lyons",
+                description: "Flood"
+            };
 
-           $scope.createCampaign();
+            $scope.saveCampaign();
 
-           expect(campaignsResource.save).toHaveBeenCalledWith({
-               title: "Lyons",
-               description: "Flood"
-           });
-       });
+            expect(campaignsResource.update).toHaveBeenCalledWith({
+                id: 7,
+                title: "Lyons",
+                description: "Flood"
+            });
+        });
 
-       it('adds the campaign to campaigns', function () {
-           $scope.newCampaign = {
-               title: "Lyons",
-               description: "Flood"
-           };
-           $scope.campaigns = [];
+        it('reloads the campaign', function () {
+            $scope.campaign = {
+                id: 7,
+                title: "Lyons",
+                description: "Flood"
+            };
 
-           $scope.createCampaign();
+            $scope.saveCampaign();
 
-           campaignSaveDeferred.resolve("campaign");
-           $scope.$apply();
+            campaignSaveDeferred.resolve({id: 8, title: "Lyons", description: "Flood", segmentEntities: ["1"], status: 201});
+            $scope.$apply();
 
-           expect($scope.campaigns).toEqual(["campaign"]);
-           expect($scope.newCampaign).toEqual({});
-       });
+            expect($scope.campaign).toEqual({id: 8, title: "Lyons", description: "Flood", segmentEntities: ["1"]});
+        });
     });
 });

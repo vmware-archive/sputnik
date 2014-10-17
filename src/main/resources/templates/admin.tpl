@@ -30,7 +30,7 @@ html {
                                     label("for": "description") { yield "Description" }
                                     textarea("id": "description", "name": "description", "ng-model": "newCampaign.description", "class": "form-control") {}
                                 }
-                                input("type": "submit", "value": "Create Campaign", "class": "btn btn-primary")
+                                input("type": "submit", "value": "Create Campaign", "class": "btn btn-success")
                             }
                         }
                     }

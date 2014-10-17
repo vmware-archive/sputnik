@@ -4,6 +4,7 @@ angular.module("navbar").directive("adminCampaignPanel", function () {
         restrict: 'E',
         scope: {
             campaign: "="
-        }
+        },
+        controller: "adminCampaignController"
     }
 });
