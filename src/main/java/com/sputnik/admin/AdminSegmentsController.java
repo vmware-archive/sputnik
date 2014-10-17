@@ -36,7 +36,9 @@ public class AdminSegmentsController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/admin/segments/{id}")
-    public void deleteSegment(
+    public
+    @ResponseBody
+    void deleteSegment(
             @PathVariable long id
     ) {
         segmentService.delete(id);

@@ -3,7 +3,9 @@ angular.module("navbar").directive("adminSegmentPanel", function () {
         templateUrl: 'resources/partials/admin/adminSegmentPanel.html',
         restrict: 'E',
         scope: {
-            segment: "="
+            segment: "=",
+            deleteCallback: "=",
+            deleteCallbackArgument: "="
         },
         controller: 'adminSegmentController'
     }

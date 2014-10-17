@@ -5,7 +5,12 @@ angular.module("adminControllers").controller("adminSegmentsController", ['$scop
 
     $scope.createSegment = function () {
         adminSegmentsResource.save($scope.newSegment).$promise.then(addSegment);
-    }
+    };
+
+    $scope.removeSegment = function(index) {
+        console.log("remove" + index);
+        $scope.segments.splice(index, 1);
+    };
 
     function setSegments(segments) {
         $scope.segments = segments;

@@ -27,6 +27,16 @@ describe('adminSegmentsController', function () {
         expect($scope.segments).toEqual(["segment"]);
     });
 
+    describe("removeSegment", function () {
+        it('removes a segment', function () {
+            $scope.segments = ["A", "B", "C", "D"];
+
+            $scope.removeSegment(2);
+
+            expect($scope.segments).toEqual(["A", "B", "D"]);
+        });
+    });
+
     describe("createSegment", function () {
         it('creates a segment', function () {
             expect($scope.newSegment).toEqual({});

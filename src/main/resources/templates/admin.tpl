@@ -37,7 +37,7 @@ html {
                 }
 
                 div("ng-controller": "adminSegmentsController", "class": "col-lg-6") {
-                    "admin-segment-panel"("ng-repeat": "segment in segments", "segment": "segment") {}
+                    "admin-segment-panel"("ng-repeat": "segment in segments", "segment": "segment", "delete-callback": "removeSegment", "delete-callback-argument": "\$index") {}
 
                     div("class": "panel panel-default") {
                         div("class": "panel-body") {
