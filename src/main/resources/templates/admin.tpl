@@ -38,6 +38,18 @@ html {
 
                 div("ng-controller": "adminSegmentsController", "class": "col-lg-6") {
                     "admin-segment-panel"("ng-repeat": "segment in segments", "segment": "segment") {}
+
+                    div("class": "panel panel-default") {
+                        div("class": "panel-body") {
+                            form("ng-submit": "createSegment()") {
+                                div("class": "form-group") {
+                                    label("for": "remoteid") { yield "Strava ID" }
+                                    input("id": "remoteid", "name": "remoteid", "ng-model": "newSegment.remoteid", "required": null, "class": "form-control") {}
+                                }
+                                input("type": "submit", "value": "Create Segment", "class": "btn btn-success")
+                            }
+                        }
+                    }
                 }
             }
         }
