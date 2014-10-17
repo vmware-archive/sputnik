@@ -35,6 +35,10 @@ html {
                         }
                     }
                 }
+
+                div("ng-controller": "adminSegmentsController", "class": "col-lg-6") {
+                    "admin-segment-panel"("ng-repeat": "segment in segments", "segment": "segment") {}
+                }
             }
         }
 

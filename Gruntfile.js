@@ -18,7 +18,7 @@ module.exports = function(grunt) {
                         'src/main/webapp/js/base.js',
                         'src/main/webapp/js/**/*.js',
                         '!src/main/webapp/js/admin.js',
-                        '!src/main/webapp/js/admin/*'
+                        '!src/main/webapp/js/admin/**/*'
 
                     ])
                 }
@@ -28,7 +28,8 @@ module.exports = function(grunt) {
                     'src/main/webapp/resources/js/admin.min.js': jsLibraries.concat([
                         'src/main/webapp/js/admin.js',
                         'src/main/webapp/js/navbar/*.js',
-                        'src/main/webapp/js/admin/*.js'
+                        'src/main/webapp/js/segment/*.js',
+                        'src/main/webapp/js/admin/**/*.js'
                     ])
                 }
             },
