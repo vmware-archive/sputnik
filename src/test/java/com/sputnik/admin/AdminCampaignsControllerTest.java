@@ -56,7 +56,7 @@ public class AdminCampaignsControllerTest {
 
         mockMvc.perform(get("/admin/campaigns"))
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
-                .andExpect(content().string("[{\"id\":0,\"segmentEntities\":null,\"title\":\"Lyons\",\"description\":\"Flood recovery\"}]"));
+                .andExpect(content().string("[{\"id\":0,\"title\":\"Lyons\",\"description\":\"Flood recovery\"}]"));
     }
 
     @Test
@@ -70,7 +70,7 @@ public class AdminCampaignsControllerTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
-                .andExpect(content().string("{\"id\":0,\"segmentEntities\":null,\"title\":\"Boulder\",\"description\":\"Flood damage\"}"));
+                .andExpect(content().string("{\"id\":0,\"title\":\"Boulder\",\"description\":\"Flood damage\"}"));
 
         ArgumentCaptor<Campaign> campaignCaptor = ArgumentCaptor.forClass(Campaign.class);
         verify(campaignService).create(campaignCaptor.capture());
@@ -92,7 +92,7 @@ public class AdminCampaignsControllerTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isAccepted())
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
-                .andExpect(content().string("{\"id\":0,\"segmentEntities\":null,\"title\":\"Boulder\",\"description\":\"Flood damage\"}"));
+                .andExpect(content().string("{\"id\":0,\"title\":\"Boulder\",\"description\":\"Flood damage\"}"));
 
         ArgumentCaptor<Campaign> campaignCaptor = ArgumentCaptor.forClass(Campaign.class);
         ArgumentCaptor<Long> idCaptor = ArgumentCaptor.forClass(Long.class);
@@ -105,5 +105,4 @@ public class AdminCampaignsControllerTest {
         assertEquals("Longmont", capturedCampaign.getTitle());
         assertEquals("Damage", capturedCampaign.getDescription());
     }
-
 }

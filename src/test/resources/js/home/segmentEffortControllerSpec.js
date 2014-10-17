@@ -1,20 +1,20 @@
 describe('segmentEffortController', function () {
-    var $scope, segmentResource, segmentDeferred;
+    var $scope, stravaSegmentResource, segmentDeferred;
 
     beforeEach(module('sputnikControllers'));
 
-    beforeEach(inject(function ($rootScope, $q, $controller, _segmentResource_) {
+    beforeEach(inject(function ($rootScope, $q, $controller, _stravaSegmentResource_) {
         $scope = $rootScope.$new();
-        segmentResource = _segmentResource_;
+        stravaSegmentResource = _stravaSegmentResource_;
 
         segmentDeferred = $q.defer();
         $scope.segmentEffort = {segmentId: 17};
 
-        spyOn(segmentResource, "get").and.returnValue({$promise: segmentDeferred.promise});
+        spyOn(stravaSegmentResource, "get").and.returnValue({$promise: segmentDeferred.promise});
 
         $controller('segmentEffortController', {
             $scope: $scope,
-            segmentResource: segmentResource
+            stravaSegmentResource: stravaSegmentResource
         });
     }));
 
@@ -22,7 +22,7 @@ describe('segmentEffortController', function () {
         segmentDeferred.resolve("segment");
         $scope.$apply();
 
-        expect(segmentResource.get).toHaveBeenCalledWith({segmentId: 17});
+        expect(stravaSegmentResource.get).toHaveBeenCalledWith({segmentId: 17});
         expect($scope.segment).toEqual("segment");
     });
 });

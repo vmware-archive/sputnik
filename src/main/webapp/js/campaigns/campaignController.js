@@ -1,12 +1,10 @@
-angular.module("sputnikControllers").controller("campaignController", ['$scope', '$routeParams', '$q', 'campaignsResource', 'segmentResource', function ($scope, $routeParams, $q, campaignsResource, segmentResource) {
+angular.module("sputnikControllers").controller("campaignController", ['$scope', '$routeParams', '$q', 'campaignsResource', 'stravaSegmentResource', 'segmentResource', function ($scope, $routeParams, $q, campaignsResource, stravaSegmentResource, segmentResource) {
     var campaignId = $routeParams.campaignId;
 
     setInitialDonation();
 
-    var campaignPromise = campaignsResource.get({campaignId: campaignId}).$promise;
-
-    campaignPromise.then(setCampaign);
-    campaignPromise.then(fetchSegments);
+    campaignsResource.get({campaignId: campaignId}).$promise.then(setCampaign);
+    segmentResource.query().$promise.then(fetchSegments);
 
     $scope.donate = function () {
         campaignsResource.donate({campaignId: campaignId}, $scope.donation).$promise.then(confirmDonation, handleError);
@@ -16,14 +14,20 @@ angular.module("sputnikControllers").controller("campaignController", ['$scope',
         $scope.campaign = campaign;
     }
 
-    function fetchSegments() {
+    function fetchSegments(segmentEntities) {
         var promises = [];
 
-        $scope.campaign.segmentEntities.forEach(function (entity) {
-            promises.push(segmentResource.get({segmentId: entity.remoteid}).$promise);
+        segmentEntities.filter(belongsToCampaign).forEach(function (entity) {
+            promises.push(stravaSegmentResource.get({segmentId: entity.remoteid}).$promise);
         });
 
         $q.all(promises).then(setPolylines);
+    }
+
+    function belongsToCampaign(segmentEntity) {
+        return segmentEntity.campaigns.some(function (campaign) {
+            return campaign.id == campaignId;
+        })
     }
 
     function setPolylines(segments) {

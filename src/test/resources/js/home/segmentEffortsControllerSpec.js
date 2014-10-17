@@ -1,10 +1,15 @@
 describe('segmentEffortsController', function () {
-    var $scope;
+    var $scope, segmentResource, segmentsDeferred;
 
     beforeEach(module('sputnikControllers'));
 
-    beforeEach(inject(function ($rootScope, $q, $controller) {
+    beforeEach(inject(function ($rootScope, $q, $controller, _segmentResource_) {
+        segmentResource = _segmentResource_;
         $scope = $rootScope.$new();
+
+        segmentsDeferred = $q.defer();
+
+        spyOn(segmentResource, "query").and.returnValue({$promise: segmentsDeferred.promise});
 
         $scope.segmentEfforts = [
             {segmentId: 17},
@@ -14,24 +19,40 @@ describe('segmentEffortsController', function () {
         ];
 
         $controller('segmentEffortsController', {
-            $scope: $scope
+            $scope: $scope,
+            segmentResource: segmentResource
         });
     }));
 
     it('sets the appropriate segment efforts', function () {
-        $scope.campaigns = [
-            {title: 'Lyons', description: 'flood', segmentEntities: [{id: 1, remoteid: 17},{id: 2, remoteid: 18}]},
-            {title: 'Jamestown', description: 'flood', segmentEntities: [{id: 3, remoteid: 19},{id: 2, remoteid: 18}]}
-        ];
         expect($scope.filteredSegmentEfforts).toEqual([]);
 
+        segmentsDeferred.resolve([
+            {id: 1, remoteid: 17, campaigns: [
+                {title: 'Lyons', description: 'flood'}
+            ]},
+            {id: 2, remoteid: 18, campaigns: [
+                {title: 'Lyons', description: 'flood'},
+                {title: 'Jamestown', description: 'flood'}
+            ]},
+            {id: 3, remoteid: 19, campaigns: [
+                {title: 'Jamestown', description: 'flood'}
+            ]}
+        ]);
 
         $scope.$apply();
 
         expect($scope.filteredSegmentEfforts).toEqual([
-            {segmentId: 17, campaigns: [{title: 'Lyons', description: 'flood', segmentEntities: [{id: 1, remoteid: 17},{id: 2, remoteid: 18}]}]},
-            {segmentId: 18, campaigns: [{title: 'Lyons', description: 'flood', segmentEntities: [{id: 1, remoteid: 17},{id: 2, remoteid: 18}]}, {title: 'Jamestown', description: 'flood', segmentEntities: [{id: 3, remoteid: 19},{id: 2, remoteid: 18}]}]},
-            {segmentId: 19, campaigns: [{title: 'Jamestown', description: 'flood', segmentEntities: [{id: 3, remoteid: 19},{id: 2, remoteid: 18}]}]}
+            {segmentId: 17, campaigns: [
+                {title: 'Lyons', description: 'flood'}
+            ]},
+            {segmentId: 18, campaigns: [
+                {title: 'Lyons', description: 'flood'},
+                {title: 'Jamestown', description: 'flood'}
+            ]},
+            {segmentId: 19, campaigns: [
+                {title: 'Jamestown', description: 'flood'}
+            ]}
         ]);
     });
 });

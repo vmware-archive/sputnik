@@ -3,8 +3,7 @@ angular.module("sputnikDirectives").directive("sputnikSegmentEfforts", function 
         templateUrl: 'resources/partials/segmentEfforts.html',
         restrict: 'E',
         scope: {
-            segmentEfforts: "=",
-            campaigns: "="
+            segmentEfforts: "="
         },
         controller: "segmentEffortsController"
     }

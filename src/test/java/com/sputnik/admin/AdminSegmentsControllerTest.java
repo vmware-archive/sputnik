@@ -52,7 +52,7 @@ public class AdminSegmentsControllerTest {
 
         mockMvc.perform(get("/admin/segments"))
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
-                .andExpect(content().string("[{\"id\":0,\"remoteid\":123456}]"));
+                .andExpect(content().string("[{\"id\":0,\"campaigns\":null,\"remoteid\":123456}]"));
     }
 
     @Test
@@ -66,7 +66,7 @@ public class AdminSegmentsControllerTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
-                .andExpect(content().string("{\"id\":0,\"remoteid\":123456}"));
+                .andExpect(content().string("{\"id\":0,\"campaigns\":null,\"remoteid\":123456}"));
 
         ArgumentCaptor<SegmentEntity> segmentCaptor = ArgumentCaptor.forClass(SegmentEntity.class);
         verify(segmentService).create(segmentCaptor.capture());
@@ -83,5 +83,4 @@ public class AdminSegmentsControllerTest {
 
         verify(segmentService).delete(7L);
     }
-
 }

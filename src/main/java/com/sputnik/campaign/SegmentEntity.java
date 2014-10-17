@@ -36,4 +36,8 @@ public class SegmentEntity implements Serializable {
     public long getRemoteid() {
         return remoteid;
     }
+
+    public Collection<Campaign> getCampaigns() {
+        return campaigns;
+    }
 }

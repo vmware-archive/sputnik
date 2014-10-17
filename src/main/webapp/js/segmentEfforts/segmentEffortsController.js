@@ -1,35 +1,27 @@
-angular.module("sputnikControllers").controller("segmentEffortsController", ['$scope', function ($scope) {
+angular.module("sputnikControllers").controller("segmentEffortsController", ['$scope', 'segmentResource', function ($scope, segmentResource) {
     $scope.filteredSegmentEfforts = [];
 
-    $scope.$watchCollection('[campaigns, segmentEfforts]', assignCampaigns);
+    $scope.$watch('segmentEfforts', assignCampaigns);
 
     function assignCampaigns() {
-        if ($scope.campaigns === undefined || $scope.segmentEfforts === undefined) {
+        if ($scope.segmentEfforts === undefined) {
             $scope.filteredSegmentEfforts = [];
             return;
         }
 
-        $scope.filteredSegmentEfforts = $scope.segmentEfforts.filter(addCampaigns);
+        segmentResource.query().$promise.then(function (segmentEntities) {
+            $scope.filteredSegmentEfforts = $scope.segmentEfforts.filter(addCampaigns, segmentEntities);
+        });
     }
 
     function addCampaigns(segmentEffort) {
-        segmentEffort.campaigns = [];
+        this.some(function (segmentEntity) {
+            if (segmentEntity.remoteid == segmentEffort.segmentId) {
+                segmentEffort.campaigns = segmentEntity.campaigns;
+                return true
+            }
+        });
 
-        $scope.campaigns.forEach(assignCampaign, segmentEffort);
-
-        return segmentEffort.campaigns.length > 0;
+        return segmentEffort.campaigns !== undefined;
     }
-
-    function assignCampaign(campaign) {
-        var matchingEntities = campaign.segmentEntities.filter(sameSegment, this);
-
-        if (matchingEntities.length > 0) {
-            this.campaigns.push(campaign);
-        }
-    }
-
-    function sameSegment(segmentEntity) {
-        return segmentEntity.remoteid === this.segmentId;
-    }
-
 }]);

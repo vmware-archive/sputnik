@@ -1,18 +1,18 @@
 describe('segmentController', function () {
-    var $scope, segmentResource, adminSegmentsResource, segmentDeferred, deleteDeferred, deleteCallback;
+    var $scope, stravaSegmentResource, adminSegmentsResource, segmentDeferred, deleteDeferred, deleteCallback;
 
     beforeEach(module('adminControllers'));
 
-    beforeEach(inject(function ($rootScope, $q, $controller, _segmentResource_, _adminSegmentsResource_) {
+    beforeEach(inject(function ($rootScope, $q, $controller, _stravaSegmentResource_, _adminSegmentsResource_) {
         $scope = $rootScope.$new();
-        segmentResource = _segmentResource_;
+        stravaSegmentResource = _stravaSegmentResource_;
         adminSegmentsResource = _adminSegmentsResource_;
 
         segmentDeferred = $q.defer();
         deleteDeferred = $q.defer();
         deleteCallback = jasmine.createSpy();
 
-        spyOn(segmentResource, "get").and.returnValue({$promise: segmentDeferred.promise});
+        spyOn(stravaSegmentResource, "get").and.returnValue({$promise: segmentDeferred.promise});
         spyOn(adminSegmentsResource, "delete").and.returnValue({$promise: deleteDeferred.promise});
 
         $scope.segment = {id: 5, remoteid: 8};
@@ -20,7 +20,7 @@ describe('segmentController', function () {
 
         $controller('adminSegmentController', {
             $scope: $scope,
-            segmentResource: segmentResource,
+            stravaSegmentResource: stravaSegmentResource,
             adminSegmentsResource: adminSegmentsResource,
         });
     }));
@@ -30,7 +30,7 @@ describe('segmentController', function () {
         segmentDeferred.resolve({name: "Pearl Street", other: "attribute"});
         $scope.$apply();
 
-        expect(segmentResource.get).toHaveBeenCalledWith({segmentId: 8});
+        expect(stravaSegmentResource.get).toHaveBeenCalledWith({segmentId: 8});
         expect($scope.segment).toEqual({id: 5, remoteid: 8, name: "Pearl Street"})
     });
 
