@@ -101,12 +101,18 @@ button.login-strava-small {
     background: rgba(46,102,44,0.8);;
 }
 
-input.form-control {
+.form-control {
     border: 1px solid white;
     background: none;
     box-shadow: none;
     color: white;
     font-size: 22px;
+}
+
+textarea.form-control {
+    height: 138px;
+}
+input.form-control {
     height: 46px;
 }
 

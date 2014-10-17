@@ -16,8 +16,24 @@ html {
 
         div("class": "container") {
             div("class": "row") {
-                div("ng-controller": "campaignsController", "class": "col-lg-6") {
+                div("ng-controller": "adminCampaignsController", "class": "col-lg-6") {
                     "admin-campaign-panel"("ng-repeat": "campaign in campaigns", "campaign": "campaign") {}
+
+                    div("class": "panel panel-default") {
+                        div("class": "panel-body") {
+                            form("ng-submit": "createCampaign()") {
+                                div("class": "form-group") {
+                                    label("for": "title") { yield "Title" }
+                                    input("id": "title", "name": "title", "ng-model": "newCampaign.title", "required": null, "class": "form-control") {}
+                                }
+                                div("class": "form-group") {
+                                    label("for": "description") { yield "Description" }
+                                    textarea("id": "description", "name": "description", "ng-model": "newCampaign.description", "class": "form-control") {}
+                                }
+                                input("type": "submit", "value": "Create Campaign", "class": "btn btn-primary")
+                            }
+                        }
+                    }
                 }
             }
         }

@@ -27,10 +27,8 @@ module.exports = function(grunt) {
                 files: {
                     'src/main/webapp/resources/js/admin.min.js': jsLibraries.concat([
                         'src/main/webapp/js/admin.js',
-                        'src/main/webapp/js/navbar/navbarDirective.js',
-                        'src/main/webapp/js/navbar/navbarController.js',
-                        'src/main/webapp/js/profile/profileRepository.js',
-                        'src/main/webapp/js/admin/*'
+                        'src/main/webapp/js/navbar/*.js',
+                        'src/main/webapp/js/admin/*.js'
                     ])
                 }
             },

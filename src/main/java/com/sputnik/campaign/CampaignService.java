@@ -36,4 +36,8 @@ public class CampaignService {
     public Campaign findById(long id) {
         return campaignRepository.findOne(id);
     }
+
+    public Campaign create(Campaign campaign) {
+        return campaignRepository.save(campaign);
+    }
 }
