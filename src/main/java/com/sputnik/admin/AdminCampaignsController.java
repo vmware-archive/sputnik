@@ -23,7 +23,7 @@ public class AdminCampaignsController {
     @RequestMapping(method = RequestMethod.POST, value = "/admin/campaigns")
     public
     @ResponseBody
-    ResponseEntity<Campaign> donateToCampaign(
+    ResponseEntity<Campaign> createCampaign(
             @RequestBody(required=true) Campaign campaign
     ) {
         Campaign createdCampaign = campaignService.create(campaign);
@@ -38,7 +38,7 @@ public class AdminCampaignsController {
     @RequestMapping(method = RequestMethod.PATCH, value = "/admin/campaigns/{id}")
     public
     @ResponseBody
-    ResponseEntity<Campaign> donateToCampaign(
+    ResponseEntity<Campaign> updateCampaign(
             @PathVariable long id,
             @RequestBody(required=true) Campaign campaign
     ) {
