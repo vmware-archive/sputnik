@@ -16,7 +16,7 @@ html {
 
         div("class": "container") {
             div("class": "row") {
-                div("ng-controller": "adminCampaignsController", "class": "col-lg-6") {
+                div("ng-controller": "adminCampaignsController", "class": "col-lg-4") {
                     "admin-campaign-panel"("ng-repeat": "campaign in campaigns", "campaign": "campaign") {}
 
                     div("class": "panel panel-default") {
@@ -36,7 +36,7 @@ html {
                     }
                 }
 
-                div("ng-controller": "adminSegmentsController", "class": "col-lg-6") {
+                div("ng-controller": "adminSegmentsController", "class": "col-lg-8") {
                     "admin-segment-panel"("ng-repeat": "segment in segments", "segment": "segment", "delete-callback": "removeSegment", "delete-callback-argument": "\$index") {}
 
                     div("class": "panel panel-default") {

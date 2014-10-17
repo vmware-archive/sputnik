@@ -2,7 +2,14 @@
     <div class="panel-body">
         <h3 class="media-heading">{{segment.name}}</h3>
 
-        <div>{{segment.remoteid}}</div>
-        <button class="btn btn-danger btn-sm" ng-click="destroy()">Delete</button>
+        <div class="row">
+            <div class="col-lg-5">
+                <div>{{segment.remoteid}}</div>
+                <button class="btn btn-danger btn-sm" ng-click="destroy()">Delete</button>
+            </div>
+            <div class="col-lg-7">
+                <div class="btn btn-info btn-xs delete" ng-repeat="campaign in segment.campaigns">{{campaign.title}}</div>
+            </div>
+        </div>
     </div>
 </div>
