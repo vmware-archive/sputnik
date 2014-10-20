@@ -29,6 +29,18 @@ button.login-strava-small {
     border-radius: 4px;
 }
 
+.inline {
+    display: inline-block;
+}
+
+.strava {
+    color: rgb(251,51,0);
+}
+
+.strava:hover {
+    color: #fc4c02;
+}
+
 .navbar-inverse {
     background-color: #272822;
 }

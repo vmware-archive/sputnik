@@ -4,11 +4,17 @@
             <a class="pull-left">
                 <sputnik-map polyline="segment.mapPolyline" size="64"></sputnik-map>
             </a>
+
             <div class="media-body">
-                <h4 class="media-heading">{{segmentEffort.name}}</h4>
+                <h4 class="media-heading inline">{{segmentEffort.name}}</h4>
+                <a href="http://www.strava.com/activities/{{segmentEffort.activityId}}/segments/{{segmentEffort.id}}" class="strava">View
+                    on Strava</a>
+
+                <div>
                 <span ng-repeat="campaign in segmentEffort.campaigns">
                     <a class="btn btn-success btn-sm" ng-href="/#/campaigns/{{campaign.id}}">{{campaign.title}}</a>
                 </span>
+                </div>
             </div>
         </div>
     </div>

@@ -9,6 +9,7 @@
                         </div>
                         <div class="col-sm-3">
                             <h3>{{activity.name}}</h3>
+                            <a href="http://www.strava.com/activities/{{activity.id}}" class="strava">View on Strava</a>
                             <div>Distance: {{activity.distance}}m</div>
                             <div>Date: {{activity.date | date : 'short'}}</div>
                             <div>Elapsed Time: {{activity.elapsedTime}}s</div>

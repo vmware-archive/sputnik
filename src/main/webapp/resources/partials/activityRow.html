@@ -10,6 +10,7 @@
                     <span ng-hide="campaignsPresent">{{activity.name}}</span>
                 </h3>
                 <span>{{activity.date | date : 'short'}}</span>
+                <a href="http://www.strava.com/activities/{{activity.id}}" class="strava" ng-show="campaignsPresent">View on Strava</a>
             </div>
         </div>
     </div>
