@@ -2,6 +2,7 @@ angular.module("sputnikControllers").controller("campaignController", ['$scope',
     var campaignId = $routeParams.campaignId;
 
     setInitialDonation();
+    getTotalDonations();
 
     campaignsResource.get({campaignId: campaignId}).$promise.then(setCampaign);
     segmentResource.query().$promise.then(fetchSegments);
@@ -12,6 +13,14 @@ angular.module("sputnikControllers").controller("campaignController", ['$scope',
 
     function setCampaign(campaign) {
         $scope.campaign = campaign;
+    }
+
+    function getTotalDonations() {
+        campaignsResource.totalDonations({campaignId: campaignId}).$promise.then(setTotalDonations);
+    }
+
+    function setTotalDonations(result) {
+        $scope.totalDonations = result.amount / 100;
     }
 
     function fetchSegments(segmentEntities) {
@@ -39,7 +48,9 @@ angular.module("sputnikControllers").controller("campaignController", ['$scope',
     function confirmDonation(result) {
         $scope.errorMessage = undefined;
         $scope.successMessage = 'Your donation of $' + (result.amount / 100) + ' has been accepted. Thanks for donating!';
+
         setInitialDonation();
+        getTotalDonations();
     }
 
     function handleError() {

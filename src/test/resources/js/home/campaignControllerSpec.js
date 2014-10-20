@@ -1,5 +1,5 @@
 describe('campaignController', function () {
-    var $scope, campaignsResource, stravaSegmentResource, segmentResource, campaignsDeferred, donateDeferred, stravaSegmentDeferrals, segmentDeferred;
+    var $scope, campaignsResource, stravaSegmentResource, segmentResource, campaignsDeferred, donateDeferred, stravaSegmentDeferrals, segmentDeferred, totalDonationsDeferred ;
 
     beforeEach(module('sputnikControllers'));
 
@@ -13,9 +13,11 @@ describe('campaignController', function () {
         donateDeferred = $q.defer();
         segmentDeferred = $q.defer();
         stravaSegmentDeferrals = [];
+        totalDonationsDeferred = $q.defer();
 
         spyOn(campaignsResource, "get").and.returnValue({$promise: campaignsDeferred.promise});
         spyOn(campaignsResource, "donate").and.returnValue({$promise: donateDeferred.promise});
+        spyOn(campaignsResource, "totalDonations").and.returnValue({$promise: totalDonationsDeferred.promise});
         spyOn(segmentResource, "query").and.returnValue({$promise: segmentDeferred.promise});
 
         spyOn(stravaSegmentResource, "get").and.callFake(function () {
@@ -44,7 +46,18 @@ describe('campaignController', function () {
 
     it('sets the polylines', function () {
         expect($scope.polylines).toEqual(undefined);
-        segmentDeferred.resolve([{remoteid: 1234, campaigns: [{id: 17},{id: 19}]}, {remoteid: 6789, campaigns: [{id: 17}]}, {remoteid: 1111, campaigns: [{id: 19}]}]);
+        segmentDeferred.resolve([
+            {remoteid: 1234, campaigns: [
+                {id: 17},
+                {id: 19}
+            ]},
+            {remoteid: 6789, campaigns: [
+                {id: 17}
+            ]},
+            {remoteid: 1111, campaigns: [
+                {id: 19}
+            ]}
+        ]);
         $scope.$apply();
 
         stravaSegmentDeferrals[0].resolve({mapPolyline: "ABC1"});
@@ -60,6 +73,16 @@ describe('campaignController', function () {
         expect(stravaSegmentResource.get.calls.count()).toEqual(2);
 
         expect($scope.polylines).toEqual(["ABC1", "ABC2"]);
+    });
+
+    it('gets the total donations for the campaign', function () {
+        expect($scope.totalDonations).toBeUndefined();
+
+        totalDonationsDeferred.resolve({amount: 10000});
+
+        $scope.$apply();
+
+        expect($scope.totalDonations).toEqual(100);
     });
 
     describe('donate', function () {
@@ -108,4 +131,5 @@ describe('campaignController', function () {
 
         });
     });
+
 });

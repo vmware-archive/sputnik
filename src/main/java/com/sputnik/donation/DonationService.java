@@ -24,4 +24,8 @@ public class DonationService {
 
         return new DonationResponse(charge.getAmount(), pendingDonation.getCampaignId());
     }
+
+    public long getDonationTotal(long campaignId) {
+        return donationRepository.findTotalForCampaign(campaignId);
+    }
 }

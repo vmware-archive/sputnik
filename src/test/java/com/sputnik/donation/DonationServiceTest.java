@@ -62,4 +62,13 @@ public class DonationServiceTest extends TestCase {
 
         verifyZeroInteractions(donationRepository);
     }
+
+    @Test
+    public void testGetDonationTotal() throws Exception {
+        doReturn(100L).when(donationRepository).findTotalForCampaign(10L);
+
+        long result = donationService.getDonationTotal(10L);
+
+        assertEquals(100L, result);
+    }
 }

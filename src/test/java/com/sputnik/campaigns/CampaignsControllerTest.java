@@ -132,4 +132,14 @@ public class CampaignsControllerTest {
                 .principal(principal))
                 .andExpect(status().isBadRequest());
     }
+
+    @Test
+    public void testGetDonationTotal() throws Exception {
+        doReturn(100L).when(donationService).getDonationTotal(1L);
+
+        mockMvc.perform(get("/campaigns/1/donate"))
+                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andExpect(content().string("100"));
+    }
+
 }

@@ -58,4 +58,12 @@ public class CampaignsController {
 
         return new ResponseEntity<>(donationResponse, HttpStatus.CREATED);
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/campaigns/{id}/donate")
+    public
+    @ResponseBody
+    long getDonationTotal(@PathVariable long id) {
+        return donationService.getDonationTotal(id);
+    }
+
 }
