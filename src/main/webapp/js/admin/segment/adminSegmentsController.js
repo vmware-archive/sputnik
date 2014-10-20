@@ -8,7 +8,6 @@ angular.module("adminControllers").controller("adminSegmentsController", ['$scop
     };
 
     $scope.removeSegment = function(index) {
-        console.log("remove" + index);
         $scope.segments.splice(index, 1);
     };
 
