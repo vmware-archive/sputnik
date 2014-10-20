@@ -4,6 +4,7 @@ angular.module("navbar").directive("adminSegmentPanel", function () {
         restrict: 'E',
         scope: {
             segment: "=",
+            campaigns: "=",
             deleteCallback: "=",
             deleteCallbackArgument: "="
         },

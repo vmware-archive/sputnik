@@ -14,7 +14,18 @@ angular.module("adminControllers").controller("adminSegmentController", ['$scope
                 return campaign.id != campaignId;
             });
         });
+    };
 
+    $scope.addCampaign = function (campaign) {
+        adminCampaignSegmentsResource.save({segmentId: $scope.segment.id, campaignId: campaign.id}).$promise.then(function () {
+            $scope.segment.campaigns.push(campaign);
+        });
+    };
+
+    $scope.containsCampaign = function (campaign) {
+        return $scope.segment.campaigns.some(function (c) {
+            return c.id === campaign.id;
+        });
     };
 
     function setSegmentName(response) {

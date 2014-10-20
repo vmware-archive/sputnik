@@ -1,4 +1,4 @@
-<admin-segment-panel ng-repeat="segment in segments" segment="segment" delete-callback="removeSegment" delete-callback-argument="$index"></admin-segment-panel>
+<admin-segment-panel ng-repeat="segment in segments" segment="segment" delete-callback="removeSegment" delete-callback-argument="$index" campaigns="campaigns"></admin-segment-panel>
 <div class="panel panel-default">
     <div class="panel-body">
         <form ng-submit="createSegment()">

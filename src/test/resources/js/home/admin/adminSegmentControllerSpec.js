@@ -1,5 +1,5 @@
 describe('segmentController', function () {
-    var $scope, stravaSegmentResource, adminSegmentsResource, adminCampaignSegmentsResource, segmentDeferred, removeCampaignSegmentDeferred, deleteDeferred, deleteCallback;
+    var $scope, stravaSegmentResource, adminSegmentsResource, adminCampaignSegmentsResource, segmentDeferred, removeCampaignSegmentDeferred, createCampaignSegmentDeferred, deleteDeferred, deleteCallback;
 
     beforeEach(module('adminControllers'));
 
@@ -12,11 +12,13 @@ describe('segmentController', function () {
         segmentDeferred = $q.defer();
         deleteDeferred = $q.defer();
         removeCampaignSegmentDeferred = $q.defer();
+        createCampaignSegmentDeferred = $q.defer();
         deleteCallback = jasmine.createSpy();
 
         spyOn(stravaSegmentResource, "get").and.returnValue({$promise: segmentDeferred.promise});
         spyOn(adminSegmentsResource, "delete").and.returnValue({$promise: deleteDeferred.promise});
         spyOn(adminCampaignSegmentsResource, "delete").and.returnValue({$promise: removeCampaignSegmentDeferred.promise});
+        spyOn(adminCampaignSegmentsResource, "save").and.returnValue({$promise: createCampaignSegmentDeferred.promise});
 
         $scope.segment = {id: 5, remoteid: 8};
         $scope.deleteCallback = deleteCallback;
@@ -68,8 +70,31 @@ describe('segmentController', function () {
             $scope.$apply();
 
             expect($scope.segment).toEqual({id: 5, remoteid: 8, campaigns: [{id: 9, title: 'Lyons'}]})
-
         });
-    })
+    });
+
+    describe('add campaign', function () {
+        it('adds the campaign', function () {
+            $scope.segment = {id: 5, remoteid: 8, campaigns: [{id: 9, title: 'Lyons'}]};
+
+            $scope.addCampaign({id: 7, title: 'Boulder'});
+
+            expect(adminCampaignSegmentsResource.save).toHaveBeenCalledWith({segmentId: 5, campaignId: 7});
+
+            createCampaignSegmentDeferred.resolve();
+            $scope.$apply();
+
+            expect($scope.segment).toEqual({id: 5, remoteid: 8, campaigns: [{id: 9, title: 'Lyons'}, {id: 7, title: 'Boulder'}]})
+        });
+    });
+
+    describe('containsCampaign', function () {
+        it('returns whether or not the segment contains the campaign', function () {
+            $scope.segment = {id: 5, remoteid: 8, campaigns: [{id: 9, title: 'Lyons'}]};
+
+            expect($scope.containsCampaign({id: 9, title: 'Lyons'})).toEqual(true);
+            expect($scope.containsCampaign({id: 8, title: 'Boulder'})).toEqual(false);
+        });
+    });
 
 });

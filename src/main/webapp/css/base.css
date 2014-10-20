@@ -78,21 +78,40 @@ button.login-strava-small {
     margin-bottom: 10px;
 }
 
-.btn.delete {
+.btn.delete, .btn.add {
     padding-right: 20px;
     margin-right: 10px;
     position: relative;
 }
 
-.btn.delete:after {
+.btn.delete:after, .btn.add:after {
     position: absolute;
     right: 6px;
+}
+
+.btn.add:after {
+    content: '+';
+}
+
+.btn.delete:after {
     content: '×';
 }
 
 .btn.delete:hover {
     background-color: #d9534f;
     border-color: #d43f3a;
+}
+
+.btn-default {
+    color: white;
+    background: none;
+    border-color: white;
+}
+
+.btn-default:hover {
+    color: white;
+    border-color: white;
+    background-color: rgba(255,255,255,.2);
 }
 
 .panel {

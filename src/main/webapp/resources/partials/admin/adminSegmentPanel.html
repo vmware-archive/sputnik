@@ -8,7 +8,10 @@
                 <button class="btn btn-danger btn-sm" ng-click="destroy()">Delete</button>
             </div>
             <div class="col-lg-7">
-                <div class="btn btn-info btn-xs delete" ng-repeat="campaign in segment.campaigns" ng-click="removeCampaign(campaign.id)">{{campaign.title}}</div>
+                <span ng-repeat="campaign in campaigns">
+                    <div class="btn btn-success btn-xs delete" ng-click="removeCampaign(campaign.id)" ng-show="containsCampaign(campaign)">{{campaign.title}}</div>
+                    <div class="btn btn-default btn-xs add"  ng-click="addCampaign(campaign)" ng-hide="containsCampaign(campaign)">{{campaign.title}}</div>
+                </span>
             </div>
         </div>
     </div>
