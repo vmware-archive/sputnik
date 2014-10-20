@@ -15,8 +15,8 @@ html {
         div("sputnik-navbar": null) {}
 
         div("class": "container") {
-            div("class": "row") {
-                div("ng-controller": "adminCampaignsController", "class": "col-lg-4") {
+            div("ng-controller": "adminCampaignsController", "class": "row") {
+                div("class": "col-lg-4") {
                     "admin-campaign-panel"("ng-repeat": "campaign in campaigns", "campaign": "campaign") {}
 
                     div("class": "panel panel-default") {
@@ -36,20 +36,8 @@ html {
                     }
                 }
 
-                div("ng-controller": "adminSegmentsController", "class": "col-lg-8") {
-                    "admin-segment-panel"("ng-repeat": "segment in segments", "segment": "segment", "delete-callback": "removeSegment", "delete-callback-argument": "\$index") {}
-
-                    div("class": "panel panel-default") {
-                        div("class": "panel-body") {
-                            form("ng-submit": "createSegment()") {
-                                div("class": "form-group") {
-                                    label("for": "remoteid") { yield "Strava ID" }
-                                    input("id": "remoteid", "name": "remoteid", "ng-model": "newSegment.remoteid", "required": null, "class": "form-control") {}
-                                }
-                                input("type": "submit", "value": "Create Segment", "class": "btn btn-success")
-                            }
-                        }
-                    }
+                div("class": "col-lg-8") {
+                    "admin-segments"("campaigns": "campaigns") {}
                 }
             }
         }

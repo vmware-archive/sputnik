@@ -1,0 +1,14 @@
+<admin-segment-panel ng-repeat="segment in segments" segment="segment" delete-callback="removeSegment" delete-callback-argument="$index"></admin-segment-panel>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form ng-submit="createSegment()">
+            <div class="form-group">
+                <label for="remoteid">
+                    Strava ID
+                </label>
+                <input id="remoteid" name="remoteid" ng-model="newSegment.remoteid" required class="form-control">
+            </div>
+            <input type="submit" value="Create Segment" class="btn btn-success">
+        </form>
+    </div>
+</div>
