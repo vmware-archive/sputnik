@@ -2,6 +2,7 @@ package com.sputnik.campaign;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
@@ -14,19 +15,21 @@ public class SegmentEntity implements Serializable {
     private long id;
 
     @ManyToMany
-    @JoinTable(name="campaignsegments",
-            joinColumns=@JoinColumn(name="segmentid"),
-            inverseJoinColumns=@JoinColumn(name="campaignid"))
+    @JoinTable(name = "campaignsegments",
+            joinColumns = @JoinColumn(name = "segmentid"),
+            inverseJoinColumns = @JoinColumn(name = "campaignid"))
     Collection<Campaign> campaigns;
 
     @Column
     private long remoteid;
 
     public SegmentEntity(long remoteid) {
+        campaigns = new ArrayList<>();
         this.remoteid = remoteid;
     }
 
     public SegmentEntity() {
+        campaigns = new ArrayList<>();
     }
 
     public long getId() {
@@ -40,4 +43,13 @@ public class SegmentEntity implements Serializable {
     public Collection<Campaign> getCampaigns() {
         return campaigns;
     }
+
+    public void addCampaign(Campaign campaign) {
+        campaigns.add(campaign);
+    }
+
+    public void removeCampaign(long campaignId) {
+        campaigns.removeIf(c -> c.getId() == campaignId);
+    }
+
 }

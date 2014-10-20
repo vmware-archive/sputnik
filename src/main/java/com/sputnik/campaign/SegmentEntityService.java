@@ -9,6 +9,9 @@ public class SegmentEntityService {
     @Autowired
     SegmentRepository segmentRepository;
 
+    @Autowired
+    CampaignRepository campaignRepository;
+
     public Iterable<SegmentEntity> findAll() {
         return segmentRepository.findAll();
     }
@@ -19,5 +22,20 @@ public class SegmentEntityService {
 
     public void delete(long id) {
         segmentRepository.delete(id);
+    }
+
+    public void addCampaign(long segmentEntityId, long campaignId) {
+        SegmentEntity segmentEntity = segmentRepository.findOne(segmentEntityId);
+        Campaign campaign = campaignRepository.findOne(campaignId);
+
+        segmentEntity.addCampaign(campaign);
+        segmentRepository.save(segmentEntity);
+    }
+
+    public void removeCampaign(long segmentEntityId, long campaignId) {
+        SegmentEntity segmentEntity = segmentRepository.findOne(segmentEntityId);
+
+        segmentEntity.removeCampaign(campaignId);
+        segmentRepository.save(segmentEntity);
     }
 }

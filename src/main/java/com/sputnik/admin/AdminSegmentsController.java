@@ -24,11 +24,11 @@ public class AdminSegmentsController {
     public
     @ResponseBody
     ResponseEntity<SegmentEntity> createSegment(
-            @RequestBody(required=true) SegmentEntity segment
+            @RequestBody(required = true) SegmentEntity segment
     ) {
         SegmentEntity createdSegment = segmentService.create(segment);
 
-        if(createdSegment == null) {
+        if (createdSegment == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
@@ -43,4 +43,27 @@ public class AdminSegmentsController {
     ) {
         segmentService.delete(id);
     }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/admin/segments/{id}/campaigns/{campaignId}")
+    public
+    @ResponseBody
+    ResponseEntity<String> addCampaign(
+            @PathVariable long id,
+            @PathVariable long campaignId
+    ) {
+        segmentService.addCampaign(id, campaignId);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/admin/segments/{id}/campaigns/{campaignId}")
+    public
+    @ResponseBody
+    void removeCampaign(
+            @PathVariable long id,
+            @PathVariable long campaignId
+    ) {
+        segmentService.removeCampaign(id, campaignId);
+    }
+
 }
