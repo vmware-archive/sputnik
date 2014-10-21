@@ -1,5 +1,5 @@
 describe('campaignController', function () {
-    var $scope, campaignsResource, stravaSegmentResource, segmentResource, campaignsDeferred, donateDeferred, stravaSegmentDeferrals, segmentDeferred, totalDonationsDeferred ;
+    var $scope, campaignsResource, stravaSegmentResource, segmentResource, campaignsDeferred, stravaSegmentDeferrals, segmentDeferred, totalDonationsDeferred ;
 
     beforeEach(module('sputnikControllers'));
 
@@ -10,13 +10,11 @@ describe('campaignController', function () {
         segmentResource = _segmentResource_;
 
         campaignsDeferred = $q.defer();
-        donateDeferred = $q.defer();
         segmentDeferred = $q.defer();
         stravaSegmentDeferrals = [];
         totalDonationsDeferred = $q.defer();
 
         spyOn(campaignsResource, "get").and.returnValue({$promise: campaignsDeferred.promise});
-        spyOn(campaignsResource, "donate").and.returnValue({$promise: donateDeferred.promise});
         spyOn(campaignsResource, "totalDonations").and.returnValue({$promise: totalDonationsDeferred.promise});
         spyOn(segmentResource, "query").and.returnValue({$promise: segmentDeferred.promise});
 
@@ -35,7 +33,6 @@ describe('campaignController', function () {
     }));
 
     it('sets the campaigns', function () {
-        expect($scope.donation).toEqual({});
         campaignsDeferred.resolve("campaign");
 
         $scope.$apply();
@@ -84,52 +81,4 @@ describe('campaignController', function () {
 
         expect($scope.totalDonations).toEqual(100);
     });
-
-    describe('donate', function () {
-        beforeEach(function () {
-            $scope.donation = {
-                amount: '100',
-                cardNumber: '4242424242424242',
-                cardExpirationMonth: '08',
-                cardExpirationYear: '2015'
-            };
-        });
-
-        it('submits the donation to the campaignResource', function () {
-            $scope.donate();
-
-            donateDeferred.resolve({amount: 200});
-            $scope.$apply();
-
-            expect(campaignsResource.donate).toHaveBeenCalledWith(
-                {campaignId: '17'},
-                {
-                    amount: '100',
-                    cardNumber: '4242424242424242',
-                    cardExpirationMonth: '08',
-                    cardExpirationYear: '2015'
-                }
-            );
-
-            expect($scope.successMessage).toEqual('Your donation of $2 has been accepted. Thanks for donating!');
-            expect($scope.donation).toEqual({});
-        });
-
-        it('shows a message when something goes wrong', function () {
-            $scope.donate();
-
-            donateDeferred.reject();
-            $scope.$apply();
-
-            expect($scope.errorMessage).toEqual('Something went wrong. Please review your credit card information.');
-            expect($scope.donation).toEqual({
-                amount: '100',
-                cardNumber: '4242424242424242',
-                cardExpirationMonth: '08',
-                cardExpirationYear: '2015'
-            });
-
-        });
-    });
-
 });
