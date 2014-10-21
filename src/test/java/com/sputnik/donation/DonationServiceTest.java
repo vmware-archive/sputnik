@@ -1,8 +1,13 @@
 package com.sputnik.donation;
 
+import com.sputnik.campaign.Campaign;
+import com.sputnik.campaign.CampaignService;
+import com.sputnik.persistence.User;
+import com.sputnik.persistence.UserRepository;
 import com.stripe.model.Charge;
 import junit.framework.TestCase;
 import org.junit.Test;
+import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
@@ -21,10 +26,29 @@ public class DonationServiceTest extends TestCase {
     DonationRepository donationRepository;
 
     @Mock
+    UserRepository userRepository;
+
+    @Mock
+    CampaignService campaignService;
+
+    @Mock
     StripeService stripeService;
 
     @InjectMocks
     DonationService donationService;
+
+    User user;
+
+    Campaign campaign;
+
+    @Before
+    public void setup() {
+        user = mock(User.class);
+        doReturn(user).when(userRepository).findOne(87L);
+
+        campaign = mock(Campaign.class);
+        doReturn(campaign).when(campaignService).findById(45L);
+    }
 
     @Test
     public void testCreate() throws Exception {
@@ -37,7 +61,7 @@ public class DonationServiceTest extends TestCase {
 
         PendingDonation pendingDonation = new PendingDonation(234, "4242424242424242", "08", "2012", 45, 87);
 
-        doReturn(charge).when(stripeService).createCharge(pendingDonation);
+        doReturn(charge).when(stripeService).createCharge(pendingDonation, user, campaign);
 
         DonationResponse response = donationService.create(pendingDonation);
 
@@ -58,7 +82,7 @@ public class DonationServiceTest extends TestCase {
     public void testCreateFailure() throws Exception {
         PendingDonation pendingDonation = new PendingDonation(234, "4242424242424242", "08", "2012", 45, 87);
 
-        doReturn(null).when(stripeService).createCharge(pendingDonation);
+        doReturn(null).when(stripeService).createCharge(pendingDonation, user, campaign);
 
         DonationResponse response = donationService.create(pendingDonation);
 

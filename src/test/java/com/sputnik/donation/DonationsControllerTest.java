@@ -1,6 +1,6 @@
 package com.sputnik.donation;
 
-import org.junit.Before;
+import org.junit.Before;import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -19,7 +19,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class DonationsControllerTest{
-
 
     @Mock
     DonationService donationService;
@@ -48,5 +47,4 @@ public class DonationsControllerTest{
                 .andExpect(status().isOk())
                 .andExpect(content().string("[{\"amount\":999900,\"campaign\":null,\"createdAt\":null}]"));
     }
-
 }
