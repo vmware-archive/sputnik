@@ -44,3 +44,5 @@ create table donations (
 );
 
 alter table users add column admin boolean default false;
+
+alter table donations add column createdat timestamp;
