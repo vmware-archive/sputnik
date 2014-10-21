@@ -11,4 +11,6 @@ public interface DonationRepository extends CrudRepository<DonationEntity, Long>
     @Query("select coalesce(sum(d.amount), 0) as amount from DonationEntity d where d.campaignId = :campaignId")
     public long findTotalForCampaign(@Param("campaignId") long campaignId);
 
+    @Query("select d from DonationEntity d where d.userId = :userId order by d.createdAt desc")
+    public Iterable<DonationEntity> findForUser(@Param("userId") long userId);
 }

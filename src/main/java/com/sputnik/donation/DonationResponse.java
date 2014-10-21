@@ -1,19 +1,29 @@
 package com.sputnik.donation;
 
+import com.sputnik.campaign.Campaign;
+
+import java.util.Date;
+
 public class DonationResponse {
     private long amount;
-    private long campaignId;
+    private Campaign campaign;
+    private Date createdAt;
 
-    public DonationResponse(long amount, long campaignId) {
+    public DonationResponse(long amount, Campaign campaign, Date createdAt) {
         this.amount = amount;
-        this.campaignId = campaignId;
+        this.campaign = campaign;
+        this.createdAt = createdAt;
     }
 
     public long getAmount() {
         return amount;
     }
 
-    public long getCampaignId() {
-        return campaignId;
+    public Campaign getCampaign() {
+        return campaign;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
     }
 }

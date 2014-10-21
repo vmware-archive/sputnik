@@ -1,5 +1,6 @@
 angular.module("navbar", ["ngResource"]);
 angular.module("segmentServices", ['ngResource']);
+angular.module("sputnikFilters", []);
 angular.module("sputnikServices", ['ngResource']);
 angular.module("sputnikControllers", ['sputnikServices', 'segmentServices', 'constants']);
 angular.module("sputnikDirectives", ['sputnikControllers']);
@@ -9,6 +10,7 @@ var sputnikApp = angular.module("sputnikApp", [
     'ngRoute',
     'sputnikControllers',
     'sputnikDirectives',
+    'sputnikFilters',
     'navbar'
 ]);
 

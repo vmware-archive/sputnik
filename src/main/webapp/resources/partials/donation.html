@@ -1,0 +1,13 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="media">
+            <span class="pull-left amount">{{donation.amount | money}}</span>
+
+            <div class="media-body">
+                <h3 class="media-heading">{{donation.campaign.title}}</h3>
+                <span>{{donation.createdAt | date : 'shortDate'}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+

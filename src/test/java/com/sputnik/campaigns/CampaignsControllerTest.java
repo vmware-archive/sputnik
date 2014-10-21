@@ -91,7 +91,9 @@ public class CampaignsControllerTest {
 
     @Test
     public void testDonateToCampaign() throws Exception {
-        DonationResponse donationResponse = new DonationResponse(100, 5);
+        Campaign campaign = new Campaign("Lyons", "Flood recovery");
+
+        DonationResponse donationResponse = new DonationResponse(100, campaign, null);
 
         doReturn(donationResponse).when(donationService).create(any(PendingDonation.class));
 
@@ -104,7 +106,7 @@ public class CampaignsControllerTest {
                 .principal(principal))
                 .andExpect(status().isCreated())
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
-                .andExpect(content().string("{\"amount\":100,\"campaignId\":5}"));
+                .andExpect(content().string("{\"amount\":100,\"campaign\":{\"id\":0,\"title\":\"Lyons\",\"description\":\"Flood recovery\"},\"createdAt\":null}"));
 
         ArgumentCaptor<PendingDonation> pendingDonationCaptor = ArgumentCaptor.forClass(PendingDonation.class);
         verify(donationService).create(pendingDonationCaptor.capture());

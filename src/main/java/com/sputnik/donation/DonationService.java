@@ -20,12 +20,14 @@ public class DonationService {
         }
 
         DonationEntity donationEntity = new DonationEntity(charge.getAmount(), pendingDonation.getUserId(), pendingDonation.getCampaignId(), charge.getId());
-        donationRepository.save(donationEntity);
+        donationEntity = donationRepository.save(donationEntity);
 
-        return new DonationResponse(charge.getAmount(), pendingDonation.getCampaignId());
+        return new DonationResponse(charge.getAmount(), donationEntity.getCampaign(), donationEntity.getCreatedAt());
     }
 
     public long getDonationTotal(long campaignId) {
         return donationRepository.findTotalForCampaign(campaignId);
     }
+
+    public Iterable<DonationEntity> getDonationsForUser(long userId) { return donationRepository.findForUser(userId); }
 }

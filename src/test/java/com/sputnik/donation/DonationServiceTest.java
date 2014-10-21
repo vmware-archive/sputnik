@@ -9,6 +9,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import static java.util.Arrays.asList;
+import java.util.List;
+
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -26,9 +29,11 @@ public class DonationServiceTest extends TestCase {
     @Test
     public void testCreate() throws Exception {
         Charge charge = mock(Charge.class);
+        DonationEntity donation = new DonationEntity(234, 87L, 45L, "REMOTE-ID-123");
 
         doReturn(123).when(charge).getAmount();
         doReturn("REMOTE-ID-123").when(charge).getId();
+        doReturn(donation).when(donationRepository).save(any(DonationEntity.class));
 
         PendingDonation pendingDonation = new PendingDonation(234, "4242424242424242", "08", "2012", 45, 87);
 
@@ -37,7 +42,6 @@ public class DonationServiceTest extends TestCase {
         DonationResponse response = donationService.create(pendingDonation);
 
         assertEquals(123, response.getAmount());
-        assertEquals(45, response.getCampaignId());
 
         ArgumentCaptor<DonationEntity> donationEntityCaptor = ArgumentCaptor.forClass(DonationEntity.class);
         verify(donationRepository).save(donationEntityCaptor.capture());
@@ -70,5 +74,17 @@ public class DonationServiceTest extends TestCase {
         long result = donationService.getDonationTotal(10L);
 
         assertEquals(100L, result);
+    }
+
+    @Test
+    public void testGetDonationsForUser() throws Exception {
+
+        List<DonationEntity> donations = asList(mock(DonationEntity.class));
+
+        doReturn(donations).when(donationRepository).findForUser(10L);
+
+        Iterable<DonationEntity> result = donationService.getDonationsForUser(10L);
+
+        assertEquals(donations, result);
     }
 }

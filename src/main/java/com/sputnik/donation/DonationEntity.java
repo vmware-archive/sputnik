@@ -1,5 +1,7 @@
 package com.sputnik.donation;
 
+import com.sputnik.campaign.Campaign;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -28,6 +30,10 @@ public class DonationEntity implements Serializable {
     @Column(name="createdat", nullable=false)
     @Temporal(TemporalType.TIMESTAMP)
     public Date createdAt;
+
+    @ManyToOne(optional=false)
+    @JoinColumn(name="campaignid",referencedColumnName="id", insertable = false, updatable = false)
+    private Campaign campaign;
 
     public DonationEntity(long amount, long userId, long campaignId, String remoteId) {
         this.amount = amount;
@@ -66,5 +72,9 @@ public class DonationEntity implements Serializable {
 
     public Date getCreatedAt() {
         return createdAt;
+    }
+
+    public Campaign getCampaign() {
+        return campaign;
     }
 }

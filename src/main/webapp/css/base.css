@@ -182,3 +182,8 @@ input.form-control {
     border: none;
     padding-left: 27px;
 }
+
+.amount {
+    color: #5cb85c;
+    font-size: 36px;
+}
