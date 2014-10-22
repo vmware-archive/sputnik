@@ -1,3 +1,5 @@
-angular.module('donations').factory('stripe', function () {
-    return Stripe;
-});
+(function () {
+    angular.module('donations').factory('stripe', function () {
+        return Stripe;
+    });
+})();

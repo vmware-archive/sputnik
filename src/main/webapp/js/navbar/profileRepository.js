@@ -1,3 +1,5 @@
-angular.module("navbar").factory('profileRepository', ['$resource', function ($resource) {
-    return $resource('/strava/profile');
-}]);
+(function () {
+    angular.module("navbar").factory('profileRepository', ['$resource', function ($resource) {
+        return $resource('/strava/profile');
+    }]);
+})();

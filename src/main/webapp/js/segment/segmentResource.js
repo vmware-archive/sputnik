@@ -1,3 +1,5 @@
-angular.module("segmentServices").factory('segmentResource', ['$resource', function ($resource) {
-    return $resource('/segments', {});
-}]);
+(function () {
+    angular.module("segmentServices").factory('segmentResource', ['$resource', function ($resource) {
+        return $resource('/segments', {});
+    }]);
+})();
