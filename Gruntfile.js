@@ -16,20 +16,7 @@ module.exports = function(grunt) {
                 files: {
                     'src/main/webapp/resources/js/sputnik.min.js': jsLibraries.concat([
                         'src/main/webapp/js/base.js',
-                        'src/main/webapp/js/**/*.js',
-                        '!src/main/webapp/js/admin.js',
-                        '!src/main/webapp/js/admin/**/*'
-
-                    ])
-                }
-            },
-            admin: {
-                files: {
-                    'src/main/webapp/resources/js/admin.min.js': jsLibraries.concat([
-                        'src/main/webapp/js/admin.js',
-                        'src/main/webapp/js/navbar/*.js',
-                        'src/main/webapp/js/segment/*.js',
-                        'src/main/webapp/js/admin/**/*.js'
+                        'src/main/webapp/js/**/*.js'
                     ])
                 }
             },
@@ -107,9 +94,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-ng-constant');
     grunt.loadNpmTasks('grunt-ng-annotate');
 
-    grunt.registerTask('js', ['ngAnnotate:csrf-interceptor', 'ngconstant', 'uglify:sputnik', 'uglify:admin', 'notify:completed']);
+    grunt.registerTask('js', ['ngAnnotate:csrf-interceptor', 'ngconstant', 'uglify:sputnik', 'notify:completed']);
     grunt.registerTask('css', ['cssmin', 'notify:completed']);
 
     // Default task(s).
-    grunt.registerTask('default', ['ngAnnotate:csrf-interceptor', 'ngconstant', 'uglify:sputnik', 'uglify:admin', 'cssmin', 'notify:completed']);
+    grunt.registerTask('default', ['ngAnnotate:csrf-interceptor', 'ngconstant', 'uglify:sputnik', 'cssmin', 'notify:completed']);
 };

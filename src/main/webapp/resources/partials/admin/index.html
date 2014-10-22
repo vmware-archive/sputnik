@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4">
+            <admin-campaign-panel ng-repeat="campaign in campaigns" campaign="campaign"></admin-campaign-panel>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form ng-submit="createCampaign()">
+                        <div class="form-group">
+                            <label for="title">Title</label>
+                            <input class="form-control" id="title" type="text" ng-model="newCampaign.title" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea class="form-control" id="description" ng-model="newCampaign.description" required/>
+                        </div>
+                        <input class="btn btn-success" type="submit" value="Create Campaign"/>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+        <div class="col-lg-8">
+            <admin-segments campaigns="campaigns"></admin-segments>
+        </div>
+    </div>
+</div>
