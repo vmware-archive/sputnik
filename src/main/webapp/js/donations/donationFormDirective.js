@@ -1,4 +1,4 @@
-angular.module("sputnikDirectives").directive("sputnikDonationForm", function () {
+angular.module("donations").directive("sputnikDonationForm", function () {
     return {
         templateUrl: 'resources/partials/donationForm.html',
         restrict: 'E',

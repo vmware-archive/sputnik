@@ -1,4 +1,4 @@
-angular.module("sputnikControllers").controller("donationFormController", ['$scope', '$q', 'campaignsResource', 'stripeService', function ($scope, $q, campaignsResource, stripeService) {
+angular.module("donations").controller("donationFormController", ['$scope', '$q', 'campaignsResource', 'stripeService', function ($scope, $q, campaignsResource, stripeService) {
     setInitialDonation();
 
     $scope.donate = function () {

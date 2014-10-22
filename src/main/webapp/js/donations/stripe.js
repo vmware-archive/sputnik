@@ -1,3 +1,3 @@
-angular.module('sputnikServices').factory('stripe', function () {
+angular.module('donations').factory('stripe', function () {
     return Stripe;
 });

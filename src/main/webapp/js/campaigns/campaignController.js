@@ -1,4 +1,4 @@
-angular.module("sputnikControllers").controller("campaignController", ['$scope', '$routeParams', '$q', 'campaignsResource', 'stravaSegmentResource', 'segmentResource', function ($scope, $routeParams, $q, campaignsResource, stravaSegmentResource, segmentResource) {
+angular.module("campaigns").controller("campaignController", ['$scope', '$routeParams', '$q', 'campaignsResource', 'stravaSegmentResource', 'segmentResource', function ($scope, $routeParams, $q, campaignsResource, stravaSegmentResource, segmentResource) {
     var campaignId = $routeParams.campaignId;
 
     $scope.message = {};

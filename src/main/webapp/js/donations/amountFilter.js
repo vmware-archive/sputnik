@@ -1,4 +1,4 @@
-angular.module('sputnikFilters', []).filter('money', function () {
+angular.module('donations', []).filter('money', function () {
     return function (input) {
         return '$' + (input / 100);
     };
