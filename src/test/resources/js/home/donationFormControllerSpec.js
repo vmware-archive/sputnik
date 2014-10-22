@@ -1,38 +1,39 @@
 describe('donationFormController', function () {
-    var $scope, campaignsResource, donateDeferred;
+    var $scope, campaignsResource, stripeService, donateDeferred, stripeDeferred;
 
     beforeEach(module('sputnikControllers'));
 
-    beforeEach(inject(function ($rootScope, $q, $controller, _campaignsResource_) {
+    beforeEach(inject(function ($rootScope, $q, $controller, _campaignsResource_, _stripeService_) {
         $scope = $rootScope.$new();
         campaignsResource = _campaignsResource_;
+        stripeService = _stripeService_;
 
         donateDeferred = $q.defer();
+        stripeDeferred = $q.defer();
 
         spyOn(campaignsResource, "donate").and.returnValue({$promise: donateDeferred.promise});
+        spyOn(stripeService, "getToken").and.returnValue(stripeDeferred.promise);
 
         $scope.campaign = {id: '17'};
         $scope.callback = jasmine.createSpy("successCallback");
 
         $controller('donationFormController', {
             $scope: $scope,
-            campaignsResource: campaignsResource
+            campaignsResource: campaignsResource,
+            stripeService: stripeService
         });
     }));
 
     describe('donate', function () {
         beforeEach(function () {
-            $scope.donation = {
-                amount: '100',
-                cardNumber: '4242424242424242',
-                cardExpirationMonth: '08',
-                cardExpirationYear: '2015'
-            };
+            $scope.amount = '100';
+            $scope.card = { sensitive: 'information' };
         });
 
         it('submits the donation to the campaignResource', function () {
             $scope.donate();
 
+            stripeDeferred.resolve('token1234');
             donateDeferred.resolve({amount: 200});
             $scope.$apply();
 
@@ -40,32 +41,34 @@ describe('donationFormController', function () {
                 {campaignId: '17'},
                 {
                     amount: '100',
-                    cardNumber: '4242424242424242',
-                    cardExpirationMonth: '08',
-                    cardExpirationYear: '2015'
+                    token: 'token1234'
                 }
             );
 
             expect($scope.message.success).toEqual('Your donation of $2 has been accepted. Thanks for donating!');
-            expect($scope.donation).toEqual({});
+            expect($scope.amount).toEqual(undefined);
             expect($scope.callback).toHaveBeenCalled();
         });
 
         it('shows a message when something goes wrong', function () {
             $scope.donate();
 
+            stripeDeferred.resolve('token1234');
             donateDeferred.reject();
             $scope.$apply();
 
             expect($scope.message.error).toEqual('Something went wrong. Please review your credit card information.');
-            expect($scope.donation).toEqual({
-                amount: '100',
-                cardNumber: '4242424242424242',
-                cardExpirationMonth: '08',
-                cardExpirationYear: '2015'
-            });
+            expect($scope.amount).toEqual('100');
+        });
 
+        it('shows a message when something goes wrong', function () {
+            $scope.donate();
+
+            stripeDeferred.reject('Stripe error message');
+            $scope.$apply();
+
+            expect($scope.message.error).toEqual('Something went wrong. Please review your credit card information.');
+            expect($scope.amount).toEqual('100');
         });
     });
-
 });

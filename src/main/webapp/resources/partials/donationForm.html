@@ -14,9 +14,9 @@
                         <label for="amount">Amount</label>
 
                         <div class="money">
-                            <input ng-model="donation.amount" id="amount" name="amount"
-                                   type="number"
-                                   min="1" required class="form-control money">
+                            <input ng-model="amount" id="amount" name="amount"
+                                   required type="number" min="1"
+                                   class="form-control money">
                         </div>
                     </div>
                 </div>
@@ -26,27 +26,26 @@
                 <div class="col-md-12 col-lg-6">
                     <div class="form-group">
                         <label for="cardNumber">Card Number</label>
-                        <input ng-model="donation.cardNumber" id="cardNumber"
-                               name="cardNumber"
-                               required class="form-control">
+                        <input ng-model="card.number" id="cardNumber"
+                               required
+                               class="form-control">
                     </div>
                 </div>
                 <div class="col-xs-6 col-lg-2">
                     <div class="form-group">
                         <label for="cardExpirationMonth">Exp. Month</label>
-                        <input ng-model="donation.cardExpirationMonth"
+                        <input ng-model="card.exp_month"
                                id="cardExpirationMonth"
-                               required name="cardExpirationMonth" type="number" min="1"
-                               max="12"
+                               required type="number" min="1" max="12"
                                class="form-control">
                     </div>
                 </div>
                 <div class="col-xs-6 col-lg-2">
                     <div class="form-group">
                         <label for="cardExpirationYear">Exp. Year</label>
-                        <input ng-model="donation.cardExpirationYear"
+                        <input ng-model="card.exp_year"
                                id="cardExpirationYear"
-                               required name="cardExpirationYear" type="number"
+                               required type="number"
                                class="form-control">
                     </div>
                 </div>

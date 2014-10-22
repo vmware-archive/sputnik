@@ -7,6 +7,7 @@ html {
         meta(charset: "utf-8")
         meta(name: "viewport", content: "width=device-width, minimum-scale=1.0")
 
+        script(src: "https://js.stripe.com/v2/") {}
         script(src: "/resources/js/sputnik.min.js") {}
         link(rel: "stylesheet", href: "/resources/css/sputnik.css")
     }

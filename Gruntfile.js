@@ -82,7 +82,8 @@ module.exports = function(grunt) {
                     name: 'constants'
                 },
                 constants: {
-                    mapsApiKey: process.env.MAPS_API_KEY
+                    mapsApiKey: process.env.MAPS_API_KEY,
+                    stripePublicKey: process.env.STRIPE_PUBLIC_KEY
                 }
             }
         },

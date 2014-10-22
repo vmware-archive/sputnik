@@ -15,6 +15,7 @@ module.exports = function (config) {
 
         // list of files / patterns to load in the browser
         files: [
+            'src/test/resources/js/helper.js',
             'src/main/webapp/components/angular/angular.js',
             'src/main/webapp/components/angular/angular.js',
             'src/main/webapp/components/angular-resource/angular-resource.js',

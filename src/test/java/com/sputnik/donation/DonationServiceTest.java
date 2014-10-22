@@ -59,7 +59,7 @@ public class DonationServiceTest extends TestCase {
         doReturn("REMOTE-ID-123").when(charge).getId();
         doReturn(donation).when(donationRepository).save(any(DonationEntity.class));
 
-        PendingDonation pendingDonation = new PendingDonation(234, "4242424242424242", "08", "2012", 45, 87);
+        PendingDonation pendingDonation = new PendingDonation(234, "123TOKEN123", 45, 87);
 
         doReturn(charge).when(stripeService).createCharge(pendingDonation, user, campaign);
 
@@ -80,7 +80,7 @@ public class DonationServiceTest extends TestCase {
 
     @Test
     public void testCreateFailure() throws Exception {
-        PendingDonation pendingDonation = new PendingDonation(234, "4242424242424242", "08", "2012", 45, 87);
+        PendingDonation pendingDonation = new PendingDonation(234, "123TOKEN123", 45, 87);
 
         doReturn(null).when(stripeService).createCharge(pendingDonation, user, campaign);
 

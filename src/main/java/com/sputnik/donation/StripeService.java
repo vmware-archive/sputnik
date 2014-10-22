@@ -25,17 +25,12 @@ public class StripeService {
         chargeMap.put("currency", "usd");
         chargeMap.put("receipt_email", user.getEmail());
         chargeMap.put("statement_description", campaign.getTitle());
+        chargeMap.put("card",  pendingDonation.getToken());
 
         Map<String, Object> metadata = new HashMap<>();
         metadata.put("user_id", pendingDonation.getUserId());
         metadata.put("campaign_id", pendingDonation.getCampaignId());
         chargeMap.put("metadata", metadata);
-
-        Map<String, Object> cardMap = new HashMap<>();
-        cardMap.put("number", pendingDonation.getCardNumber());
-        cardMap.put("exp_month", pendingDonation.getCardExpirationMonth());
-        cardMap.put("exp_year", pendingDonation.getCardExpirationYear());
-        chargeMap.put("card", cardMap);
 
         try {
             Charge charge = Charge.create(chargeMap);

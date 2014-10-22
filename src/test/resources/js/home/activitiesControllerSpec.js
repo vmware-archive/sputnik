@@ -1,5 +1,5 @@
 describe('activitiesController', function () {
-    var activitiesResource, activitiesDeferred, donationsResource, donationsDeferred;
+    var $scope, activitiesResource, activitiesDeferred, donationsResource, donationsDeferred;
 
     beforeEach(module('sputnikControllers'));
 

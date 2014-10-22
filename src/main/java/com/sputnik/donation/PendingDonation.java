@@ -2,17 +2,13 @@ package com.sputnik.donation;
 
 public class PendingDonation {
     private long amount;
-    private String cardNumber;
-    private String cardExpirationMonth;
-    private String cardExpirationYear;
+    private String token;
     private long campaignId;
     private long userId;
 
-    public PendingDonation(long amount, String cardNumber, String cardExpirationMonth, String cardExpirationYear, long campaignId, long userId) {
+    public PendingDonation(long amount, String token, long campaignId, long userId) {
         this.amount = amount;
-        this.cardNumber = cardNumber;
-        this.cardExpirationMonth = cardExpirationMonth;
-        this.cardExpirationYear = cardExpirationYear;
+        this.token = token;
         this.campaignId = campaignId;
         this.userId = userId;
     }
@@ -27,16 +23,8 @@ public class PendingDonation {
         return amount * 100;
     }
 
-    public String getCardNumber() {
-        return cardNumber;
-    }
-
-    public String getCardExpirationMonth() {
-        return cardExpirationMonth;
-    }
-
-    public String getCardExpirationYear() {
-        return cardExpirationYear;
+    public String getToken() {
+        return token;
     }
 
     public long getCampaignId() {

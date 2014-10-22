@@ -1,9 +1,16 @@
-angular.module("sputnikControllers").controller("donationFormController", ['$scope', '$q', 'campaignsResource', function ($scope, $q, campaignsResource) {
+angular.module("sputnikControllers").controller("donationFormController", ['$scope', '$q', 'campaignsResource', 'stripeService', function ($scope, $q, campaignsResource, stripeService) {
     setInitialDonation();
 
     $scope.donate = function () {
-        campaignsResource.donate({campaignId: $scope.campaign.id}, $scope.donation).$promise.then(confirmDonation, handleError);
+        stripeService.getToken($scope.card).then(processDonation, handleError);
     };
+
+    function processDonation(token) {
+        campaignsResource.donate(
+            { campaignId: $scope.campaign.id },
+            { amount: $scope.amount, token: token }
+        ).$promise.then(confirmDonation, handleError);
+    }
 
     function confirmDonation(result) {
         $scope.message = {success: 'Your donation of $' + (result.amount / 100) + ' has been accepted. Thanks for donating!'};
@@ -17,6 +24,7 @@ angular.module("sputnikControllers").controller("donationFormController", ['$sco
     }
 
     function setInitialDonation() {
-        $scope.donation = {};
+        $scope.amount = undefined;
+        $scope.card = {};
     }
 }]);

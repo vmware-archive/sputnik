@@ -101,7 +101,7 @@ public class CampaignsControllerTest {
         doReturn("47").when(principal).getName();
 
         mockMvc.perform(post("/campaigns/8/donate")
-                .content("{\"amount\": \"100\", \"cardNumber\": \"4242424242424242\", \"cardExpirationMonth\": \"08\", \"cardExpirationYear\": \"2015\"}")
+                .content("{\"amount\": \"100\", \"token\": \"123TOKEN123\"}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .principal(principal))
                 .andExpect(status().isCreated())
@@ -114,9 +114,7 @@ public class CampaignsControllerTest {
         PendingDonation capturedPendingDonation = pendingDonationCaptor.getValue();
 
         assertEquals(100, capturedPendingDonation.getAmount());
-        assertEquals("4242424242424242", capturedPendingDonation.getCardNumber());
-        assertEquals("08", capturedPendingDonation.getCardExpirationMonth());
-        assertEquals("2015", capturedPendingDonation.getCardExpirationYear());
+        assertEquals("123TOKEN123", capturedPendingDonation.getToken());
         assertEquals(8, capturedPendingDonation.getCampaignId());
         assertEquals(47, capturedPendingDonation.getUserId());
     }
@@ -129,7 +127,7 @@ public class CampaignsControllerTest {
         doReturn("47").when(principal).getName();
 
         mockMvc.perform(post("/campaigns/8/donate")
-                .content("{\"amount\": \"100\", \"cardNumber\": \"4242424242424242\", \"cardExpirationMonth\": \"08\", \"cardExpirationYear\": \"2015\"}")
+                .content("{\"amount\": \"100\", \"token\": \"123TOKEN123\"}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .principal(principal))
                 .andExpect(status().isBadRequest());
