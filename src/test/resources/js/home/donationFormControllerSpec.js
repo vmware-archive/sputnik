@@ -1,25 +1,25 @@
 describe('donationFormController', function () {
-    var $scope, campaignsResource, stripeService, donateDeferred, stripeDeferred;
+    var $scope, donationEventsResource, stripeService, donateDeferred, stripeDeferred;
 
-    beforeEach(module('sputnikControllers'));
+    beforeEach(module('donationEvents'));
 
-    beforeEach(inject(function ($rootScope, $q, $controller, _campaignsResource_, _stripeService_) {
+    beforeEach(inject(function ($rootScope, $q, $controller, _donationEventsResource_, _stripeService_) {
         $scope = $rootScope.$new();
-        campaignsResource = _campaignsResource_;
+        donationEventsResource = _donationEventsResource_;
         stripeService = _stripeService_;
 
         donateDeferred = $q.defer();
         stripeDeferred = $q.defer();
 
-        spyOn(campaignsResource, "donate").and.returnValue({$promise: donateDeferred.promise});
+        spyOn(donationEventsResource, "donate").and.returnValue({$promise: donateDeferred.promise});
         spyOn(stripeService, "getToken").and.returnValue(stripeDeferred.promise);
 
-        $scope.campaign = {id: '17'};
+        $scope.donationEvent = {id: '99'};
         $scope.callback = jasmine.createSpy("successCallback");
 
         $controller('donationFormController', {
             $scope: $scope,
-            campaignsResource: campaignsResource,
+            donationEventsResource: donationEventsResource,
             stripeService: stripeService
         });
     }));
@@ -30,15 +30,15 @@ describe('donationFormController', function () {
             $scope.card = { sensitive: 'information' };
         });
 
-        it('submits the donation to the campaignResource', function () {
+        it('submits the donation to the donationEventsResource', function () {
             $scope.donate();
 
             stripeDeferred.resolve('token1234');
             donateDeferred.resolve({amount: 200});
             $scope.$apply();
 
-            expect(campaignsResource.donate).toHaveBeenCalledWith(
-                {campaignId: '17'},
+            expect(donationEventsResource.donate).toHaveBeenCalledWith(
+                {donationEventId: '99'},
                 {
                     amount: '100',
                     token: 'token1234'
@@ -61,7 +61,7 @@ describe('donationFormController', function () {
             expect($scope.amount).toEqual('100');
         });
 
-        it('shows a message when something goes wrong', function () {
+        it('shows another message when something goes wrong', function () {
             $scope.donate();
 
             stripeDeferred.reject('Stripe error message');

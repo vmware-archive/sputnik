@@ -4,7 +4,8 @@
             templateUrl: 'resources/partials/segmentEfforts.html',
             restrict: 'E',
             scope: {
-                segmentEfforts: "="
+                segmentEfforts: "=",
+                activity: "="
             },
             controller: "segmentEffortsController"
         }

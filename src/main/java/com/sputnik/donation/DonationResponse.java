@@ -1,17 +1,15 @@
 package com.sputnik.donation;
 
-import com.sputnik.campaign.Campaign;
-
 import java.util.Date;
 
 public class DonationResponse {
     private long amount;
-    private Campaign campaign;
+    private DonationEvent donationEvent;
     private Date createdAt;
 
-    public DonationResponse(long amount, Campaign campaign, Date createdAt) {
+    public DonationResponse(long amount, DonationEvent donationEvent, Date createdAt) {
         this.amount = amount;
-        this.campaign = campaign;
+        this.donationEvent = donationEvent;
         this.createdAt = createdAt;
     }
 
@@ -19,8 +17,8 @@ public class DonationResponse {
         return amount;
     }
 
-    public Campaign getCampaign() {
-        return campaign;
+    public DonationEvent getDonationEvent() {
+        return donationEvent;
     }
 
     public Date getCreatedAt() {

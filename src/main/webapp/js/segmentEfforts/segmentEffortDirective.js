@@ -4,7 +4,8 @@
             templateUrl: 'resources/partials/segmentEffort.html',
             restrict: 'A',
             scope: {
-                segmentEffort: "=sputnikSegmentEffort"
+                segmentEffort: "=sputnikSegmentEffort",
+                activity: "="
             },
             controller: "segmentEffortController"
         }

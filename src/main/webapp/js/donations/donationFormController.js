@@ -1,5 +1,5 @@
 (function () {
-    angular.module("donations").controller("donationFormController", ['$scope', '$q', 'campaignsResource', 'stripeService', function ($scope, $q, campaignsResource, stripeService) {
+    angular.module("donationEvents").controller("donationFormController", ['$scope', '$q', 'donationEventsResource', 'stripeService', function ($scope, $q, donationEventsResource, stripeService) {
         setInitialDonation();
 
         $scope.donate = function () {
@@ -7,8 +7,8 @@
         };
 
         function processDonation(token) {
-            campaignsResource.donate(
-                { campaignId: $scope.campaign.id },
+            donationEventsResource.donate(
+                { donationEventId: $scope.donationEvent.id },
                 { amount: $scope.amount, token: token }
             ).$promise.then(confirmDonation, handleError);
         }

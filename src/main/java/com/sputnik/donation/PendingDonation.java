@@ -3,13 +3,13 @@ package com.sputnik.donation;
 public class PendingDonation {
     private long amount;
     private String token;
-    private long campaignId;
+    private long donationEventId;
     private long userId;
 
-    public PendingDonation(long amount, String token, long campaignId, long userId) {
+    public PendingDonation(long amount, String token, long donationEventId, long userId) {
         this.amount = amount;
         this.token = token;
-        this.campaignId = campaignId;
+        this.donationEventId = donationEventId;
         this.userId = userId;
     }
 
@@ -27,16 +27,16 @@ public class PendingDonation {
         return token;
     }
 
-    public long getCampaignId() {
-        return campaignId;
+    public long getDonationEventId() {
+        return donationEventId;
     }
 
     public long getUserId() {
         return userId;
     }
 
-    public void setCampaignId(long campaignId) {
-        this.campaignId = campaignId;
+    public void setDonationEventId(long donationEventId) {
+        this.donationEventId = donationEventId;
     }
 
     public void setUserId(long userId) {

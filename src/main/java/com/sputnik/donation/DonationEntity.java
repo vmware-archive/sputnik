@@ -1,7 +1,5 @@
 package com.sputnik.donation;
 
-import com.sputnik.campaign.Campaign;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -21,8 +19,8 @@ public class DonationEntity implements Serializable {
     @Column(name="userid")
     private long userId;
 
-    @Column(name="campaignid")
-    private long campaignId;
+    @Column(name="donationeventid")
+    private long donationEventId;
 
     @Column(name="remoteid")
     private String remoteId;
@@ -32,13 +30,13 @@ public class DonationEntity implements Serializable {
     public Date createdAt;
 
     @ManyToOne(optional=false)
-    @JoinColumn(name="campaignid",referencedColumnName="id", insertable = false, updatable = false)
-    private Campaign campaign;
+    @JoinColumn(name="donationeventid",referencedColumnName="id", insertable = false, updatable = false)
+    private DonationEvent donationEvent;
 
-    public DonationEntity(long amount, long userId, long campaignId, String remoteId) {
+    public DonationEntity(long amount, long userId, long donationEventId, String remoteId) {
         this.amount = amount;
         this.userId = userId;
-        this.campaignId = campaignId;
+        this.donationEventId = donationEventId;
         this.remoteId = remoteId;
     }
 
@@ -62,9 +60,7 @@ public class DonationEntity implements Serializable {
         return userId;
     }
 
-    public long getCampaignId() {
-        return campaignId;
-    }
+    public long getDonationEventId() { return donationEventId; }
 
     public String getRemoteId() {
         return remoteId;
@@ -74,7 +70,7 @@ public class DonationEntity implements Serializable {
         return createdAt;
     }
 
-    public Campaign getCampaign() {
-        return campaign;
+    public DonationEvent getDonationEvent() {
+        return donationEvent;
     }
 }

@@ -1,5 +1,5 @@
 (function () {
-    angular.module('donations').factory('stripe', function () {
+    angular.module('donationEvents').factory('stripe', function () {
         return Stripe;
     });
 })();

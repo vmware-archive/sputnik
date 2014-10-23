@@ -3,30 +3,21 @@ package com.sputnik.campaigns;
 import com.sputnik.campaign.Campaign;
 import com.sputnik.campaign.CampaignService;
 import com.sputnik.campaign.CampaignsController;
-import com.sputnik.donation.DonationResponse;
-import com.sputnik.donation.DonationService;
-import com.sputnik.donation.PendingDonation;
+import com.sputnik.donation.*;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.security.Principal;
 import java.util.List;
 
 import static java.util.Arrays.asList;
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -90,50 +81,6 @@ public class CampaignsControllerTest {
     }
 
     @Test
-    public void testDonateToCampaign() throws Exception {
-        Campaign campaign = new Campaign("Lyons", "Flood recovery");
-
-        DonationResponse donationResponse = new DonationResponse(100, campaign, null);
-
-        doReturn(donationResponse).when(donationService).create(any(PendingDonation.class));
-
-        Principal principal = mock(Principal.class);
-        doReturn("47").when(principal).getName();
-
-        mockMvc.perform(post("/campaigns/8/donate")
-                .content("{\"amount\": \"100\", \"token\": \"123TOKEN123\"}")
-                .contentType(MediaType.APPLICATION_JSON)
-                .principal(principal))
-                .andExpect(status().isCreated())
-                .andExpect(content().contentType("application/json;charset=UTF-8"))
-                .andExpect(content().string("{\"amount\":100,\"campaign\":{\"id\":0,\"title\":\"Lyons\",\"description\":\"Flood recovery\"},\"createdAt\":null}"));
-
-        ArgumentCaptor<PendingDonation> pendingDonationCaptor = ArgumentCaptor.forClass(PendingDonation.class);
-        verify(donationService).create(pendingDonationCaptor.capture());
-
-        PendingDonation capturedPendingDonation = pendingDonationCaptor.getValue();
-
-        assertEquals(100, capturedPendingDonation.getAmount());
-        assertEquals("123TOKEN123", capturedPendingDonation.getToken());
-        assertEquals(8, capturedPendingDonation.getCampaignId());
-        assertEquals(47, capturedPendingDonation.getUserId());
-    }
-
-    @Test
-    public void testDonateToCampaignFailure() throws Exception {
-        doReturn(null).when(donationService).create(any(PendingDonation.class));
-
-        Principal principal = mock(Principal.class);
-        doReturn("47").when(principal).getName();
-
-        mockMvc.perform(post("/campaigns/8/donate")
-                .content("{\"amount\": \"100\", \"token\": \"123TOKEN123\"}")
-                .contentType(MediaType.APPLICATION_JSON)
-                .principal(principal))
-                .andExpect(status().isBadRequest());
-    }
-
-    @Test
     public void testGetDonationTotal() throws Exception {
         doReturn(100L).when(donationService).getDonationTotal(1L);
 
@@ -141,5 +88,4 @@ public class CampaignsControllerTest {
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
                 .andExpect(content().string("100"));
     }
-
 }

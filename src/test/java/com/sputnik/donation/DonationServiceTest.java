@@ -29,7 +29,7 @@ public class DonationServiceTest extends TestCase {
     UserRepository userRepository;
 
     @Mock
-    CampaignService campaignService;
+    DonationEventService donationEventService;
 
     @Mock
     StripeService stripeService;
@@ -38,16 +38,19 @@ public class DonationServiceTest extends TestCase {
     DonationService donationService;
 
     User user;
-
     Campaign campaign;
+    DonationEvent donationEvent;
 
     @Before
     public void setup() {
         user = mock(User.class);
         doReturn(user).when(userRepository).findOne(87L);
 
+        donationEvent = mock(DonationEvent.class);
         campaign = mock(Campaign.class);
-        doReturn(campaign).when(campaignService).findById(45L);
+
+        doReturn(donationEvent).when(donationEventService).findById(45L);
+        doReturn(campaign).when(donationEvent).getCampaign();
     }
 
     @Test
@@ -74,7 +77,7 @@ public class DonationServiceTest extends TestCase {
 
         assertEquals(123, donationEntity.getAmount());
         assertEquals("REMOTE-ID-123", donationEntity.getRemoteId());
-        assertEquals(45, donationEntity.getCampaignId());
+        assertEquals(45, donationEntity.getDonationEventId());
         assertEquals(87, donationEntity.getUserId());
     }
 

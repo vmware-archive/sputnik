@@ -17,7 +17,7 @@
                         <div class="col-sm-3">
                             <h3>Campaigns</h3>
                             <div ng-repeat="campaign in campaigns">
-                                <a class="btn btn-success btn-lg" ng-href="/#/campaigns/{{campaign.id}}">{{campaign.title}}</a>
+                                <sputnik-donation-event-button campaign="campaign" activity="activity" button-class="btn-lg"></sputnik-donation-event-button>
                             </div>
                         </div>
                     </div>
@@ -26,5 +26,5 @@
         </div>
     </div>
 
-    <sputnik-segment-efforts segment-efforts="activity.segmentEfforts"></sputnik-segment-efforts>
+    <sputnik-segment-efforts segment-efforts="activity.segmentEfforts" activity="activity"></sputnik-segment-efforts>
 </div>

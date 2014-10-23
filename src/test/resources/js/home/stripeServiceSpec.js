@@ -2,7 +2,7 @@ describe('stripeService', function () {
     var stripe, stripeService, tokenDeferred, stripeResult;
 
     beforeEach(function () {
-        module('donations', function ($provide) {
+        module('donationEvents', function ($provide) {
             $provide.constant('stripePublicKey', '123ABC');
         });
 

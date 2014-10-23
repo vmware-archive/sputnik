@@ -4,7 +4,7 @@
             templateUrl: 'resources/partials/donationForm.html',
             restrict: 'E',
             scope: {
-                campaign: "=",
+                donationEvent: "=",
                 message: "=",
                 callback: "="
             },

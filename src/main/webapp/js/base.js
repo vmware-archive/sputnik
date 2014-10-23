@@ -1,9 +1,12 @@
 (function () {
+
     angular.module("security", ["ngRoute"]);
     angular.module("navbar", ["ngResource"]);
     angular.module("segmentServices", ['ngResource']);
-    angular.module("campaigns", ['segmentServices']);
-    angular.module("donations", ['campaigns', 'ngResource', 'constants']);
+
+    angular.module('donationEvents', ['ngResource', 'campaigns', 'constants']);
+    angular.module("donations", ['ngResource','sputnikServices', 'segmentServices', 'constants', 'campaigns']);
+    angular.module("campaigns", ['ngResource', 'segmentServices']);
 
     angular.module("adminServices", ["ngResource"]);
     angular.module("adminControllers", ["adminServices", "segmentServices"]);
@@ -21,7 +24,8 @@
         'donations',
         'campaigns',
         'adminControllers',
-        'security'
+        'security',
+        'donationEvents'
     ]);
 
     sputnikApp.config(['$routeProvider', '$httpProvider',
@@ -33,9 +37,9 @@
                 }).when('/activities/:activityId', {
                     templateUrl: 'resources/partials/activity.html',
                     controller: 'activityController'
-                }).when('/campaigns/:campaignId', {
-                    templateUrl: 'resources/partials/campaign.html',
-                    controller: 'campaignController'
+                }).when('/donationEvents/:donationEventId', {
+                    templateUrl: 'resources/partials/donationEvent.html',
+                    controller: 'donationEventController'
                 }).when('/admin', {
                     templateUrl: 'resources/partials/admin/index.html',
                     controller: 'adminCampaignsController'

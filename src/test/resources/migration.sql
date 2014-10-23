@@ -46,3 +46,15 @@ create table donations (
 alter table users add column admin boolean default false;
 
 alter table donations add column createdat timestamp;
+
+create table donationevents (
+  id serial primary key,
+  athleteId int not null,
+  activityId int not null,
+  campaignId int not null,
+  polyline varchar(255) not null
+);
+
+alter table donations drop column campaignid;
+
+alter table donations add column donationeventid int;

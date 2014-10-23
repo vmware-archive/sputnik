@@ -12,7 +12,7 @@
 
                 <div>
                 <span ng-repeat="campaign in segmentEffort.campaigns">
-                    <a class="btn btn-success btn-sm" ng-href="/#/campaigns/{{campaign.id}}">{{campaign.title}}</a>
+                    <sputnik-donation-event-button campaign="campaign" activity="activity" button-class="btn-sm"></sputnik-donation-event-button>
                 </span>
                 </div>
             </div>

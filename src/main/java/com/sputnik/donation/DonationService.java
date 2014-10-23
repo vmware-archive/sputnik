@@ -1,7 +1,5 @@
 package com.sputnik.donation;
 
-import com.sputnik.campaign.Campaign;
-import com.sputnik.campaign.CampaignService;
 import com.sputnik.persistence.User;
 import com.sputnik.persistence.UserRepository;
 import com.stripe.model.Charge;
@@ -17,25 +15,25 @@ public class DonationService {
     UserRepository userRepository;
 
     @Autowired
-    CampaignService campaignService;
+    DonationEventService donationEventService;
 
     @Autowired
     DonationRepository donationRepository;
 
     public DonationResponse create(PendingDonation pendingDonation) {
         User user = userRepository.findOne(pendingDonation.getUserId());
-        Campaign campaign = campaignService.findById(pendingDonation.getCampaignId());
+        DonationEvent donationEvent = donationEventService.findById(pendingDonation.getDonationEventId());
 
-        Charge charge = stripeService.createCharge(pendingDonation, user, campaign);
+        Charge charge = stripeService.createCharge(pendingDonation, user, donationEvent.getCampaign());
 
         if(charge == null) {
             return null;
         }
 
-        DonationEntity donationEntity = new DonationEntity(charge.getAmount(), pendingDonation.getUserId(), pendingDonation.getCampaignId(), charge.getId());
+        DonationEntity donationEntity = new DonationEntity(charge.getAmount(), pendingDonation.getUserId(), pendingDonation.getDonationEventId(), charge.getId());
         donationEntity = donationRepository.save(donationEntity);
 
-        return new DonationResponse(charge.getAmount(), donationEntity.getCampaign(), donationEntity.getCreatedAt());
+        return new DonationResponse(charge.getAmount(), donationEntity.getDonationEvent(), donationEntity.getCreatedAt());
     }
 
     public long getDonationTotal(long campaignId) {

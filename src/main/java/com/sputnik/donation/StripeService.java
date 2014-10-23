@@ -29,7 +29,8 @@ public class StripeService {
 
         Map<String, Object> metadata = new HashMap<>();
         metadata.put("user_id", pendingDonation.getUserId());
-        metadata.put("campaign_id", pendingDonation.getCampaignId());
+        metadata.put("campaign_id", campaign.getId());
+        metadata.put("donation_event_id", pendingDonation.getDonationEventId());
         chargeMap.put("metadata", metadata);
 
         try {

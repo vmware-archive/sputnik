@@ -1,5 +1,5 @@
 (function () {
-    angular.module('donations').service('stripeService', ['$q', 'stripePublicKey', 'stripe', function ($q, stripePublicKey, stripe) {
+    angular.module('donationEvents').service('stripeService', ['$q', 'stripePublicKey', 'stripe', function ($q, stripePublicKey, stripe) {
         stripe.setPublishableKey(stripePublicKey);
 
         this.getToken = function (cardData) {
