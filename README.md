@@ -49,7 +49,7 @@ Your timezone must be set in `application.properties` (ex: `timezone: America/De
 ### Strava
 
 The app requires a Client ID (`stravaClientId`) and a Client Secret (`stravaClientSecret`). To obtain these visit the 
-(Strava API page)[http://www.strava.com/developers] and click on **Create your Application**. The website and 
+[Strava API page](http://www.strava.com/developers) and click on **Create your Application**. The website and 
 callback domain should be the same as your `base url`.
 
 ### Postgresql
