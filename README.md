@@ -1,5 +1,7 @@
 # Sputnik
 
+Sputnik serves as a front end for collecting donations based on Strava activity. 
+
 ## Development
 
 ### Local Development Environment Setup
