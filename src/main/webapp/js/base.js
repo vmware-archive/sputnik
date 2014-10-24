@@ -5,7 +5,7 @@
     angular.module("segmentServices", ['ngResource']);
 
     angular.module('donationEvents', ['ngResource', 'campaigns', 'constants']);
-    angular.module("donations", ['ngResource','sputnikServices', 'segmentServices', 'constants', 'campaigns']);
+    angular.module("donations", ['ngResource', 'sputnikServices', 'segmentServices', 'constants', 'campaigns']);
     angular.module("campaigns", ['ngResource', 'segmentServices']);
 
     angular.module("adminServices", ["ngResource"]);
@@ -43,11 +43,19 @@
                 }).when('/admin', {
                     templateUrl: 'resources/partials/admin/index.html',
                     controller: 'adminCampaignsController'
-                }).
-                otherwise({
-                    redirectTo: '/activities'
+                }).otherwise({
+                    redirectTo: getOriginalPath
                 });
 
             $httpProvider.interceptors.push('authorizationInterceptor');
         }]);
+
+    function getOriginalPath() {
+        var originalPath = localStorage.getItem('originalPath');
+        localStorage.removeItem('originalPath');
+
+        if (originalPath === undefined || originalPath === null || originalPath === "") return '/activities';
+
+        return originalPath;
+    }
 })();

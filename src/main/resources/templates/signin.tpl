@@ -8,6 +8,9 @@ html {
         meta(name: "viewport", content: "width=device-width, minimum-scale=1.0")
 
         link(rel: "stylesheet", href: "/resources/css/sputnik.css")
+        script {
+            yieldUnescaped "localStorage.setItem('originalPath', location.hash.slice(1));"
+        }
     }
 
     body {
